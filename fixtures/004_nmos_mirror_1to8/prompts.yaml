@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a 1 to 8 NMOS current mirror."
+  - id: verbose
+    text: "Design a 1:8 NMOS current mirror: a diode-connected reference transistor that sets the bias for an output transistor scaled to deliver eight times the reference current, both referenced to ground."
+  - id: spec
+    text: "Design a 1 to 8 NMOS current mirror. Use exactly two transistors: M1 is an NMOS transistor with drain at iref, gate at iref, source to ground, bulk to ground. M2 is an NMOS transistor with drain at iout, gate at iref, source to ground, bulk to ground."

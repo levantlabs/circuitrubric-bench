@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a PMOS differential amplifier with resistor loads and a current-mirror tail bias."
+  - id: verbose
+    text: "Design a PMOS differential amplifier with resistor loads and a current-mirror tail bias: a resistor-loaded PMOS input pair whose tail current is set by a PMOS current mirror referenced through a bias resistor to ground."
+  - id: spec
+    text: "Design a PMOS differential amplifier with resistor loads and a current-mirror tail bias. Use exactly four transistors and three resistors: M1 is a PMOS transistor with drain at voutn, gate at vinp, source at ntail, bulk to VDD. M2 is a PMOS transistor with drain at voutp, gate at vinn, source at ntail, bulk to VDD. R1 is a resistor between voutn and ground. R2 is a resistor between voutp and ground. M3 is a PMOS transistor with drain at ntail, gate at pmir, source at VDD, bulk to VDD. M4 is a PMOS transistor with drain at pmir, gate at pmir, source at VDD, bulk to VDD. Rbias is a resistor between pmir and ground."

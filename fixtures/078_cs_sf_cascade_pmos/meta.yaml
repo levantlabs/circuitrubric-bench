@@ -1,0 +1,6 @@
+id: "078_cs_sf_cascade_pmos"
+category: "Amplifier"
+family: "cascade"
+variant: "pmos_cs_then_sf"
+source: "hand_authored"
+attribution: null

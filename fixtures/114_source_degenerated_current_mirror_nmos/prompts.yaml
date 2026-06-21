@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a source-degenerated NMOS current mirror."
+  - id: verbose
+    text: "Design a source-degenerated NMOS current mirror: a diode-connected reference device and a matched output device, each with a degeneration resistor to ground to improve matching and output impedance."
+  - id: spec
+    text: "Design a source-degenerated NMOS current mirror. Use exactly two transistors and two resistors: M1 is an NMOS transistor with drain at iref, gate at iref, source at ns1, bulk to ground. R1 is a resistor between ns1 and ground. M2 is an NMOS transistor with drain at iout, gate at iref, source at ns2, bulk to ground. R2 is a resistor between ns2 and ground."

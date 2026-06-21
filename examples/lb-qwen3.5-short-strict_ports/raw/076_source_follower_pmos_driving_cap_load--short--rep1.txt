@@ -1,0 +1,10 @@
+```spice
+* PMOS Source Follower with Current-Source Bias and Capacitive Output Load
+* Active Devices: M1 (PMOS Amplifier), M2 (NMOS Current Source Load)
+
+M1 out in source1 pmos W=10u L=1u
+M2 source1 0 0 nmos W=10u L=1u
+
+.MODEL pmos pmos (VTO=-0.4 KP=50u CGDO=0 CGSO=0)
+.MODEL nmos nmos (VTO=0.4 KP=50u CGDO=0 CGSO=0)
+```

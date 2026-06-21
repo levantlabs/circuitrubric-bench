@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design an NMOS common-gate amplifier with a resistor load."
+  - id: verbose
+    text: "Design an NMOS common-gate amplifier with a resistor load: a fixed-bias common-gate transistor taking its input at the source, with a resistor load from the output to the supply."
+  - id: spec
+    text: "Design an NMOS common-gate amplifier with a resistor load. Use exactly one transistor and one resistor: M1 is an NMOS transistor with drain at vout, gate at vbias, source at vin, bulk to ground. R1 is a resistor between vout and vdd."

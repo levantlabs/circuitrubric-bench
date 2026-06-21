@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a cascoded NMOS common-source amplifier with a cascoded PMOS current-source load."
+  - id: verbose
+    text: "Design a cascoded NMOS common-source amplifier with a cascoded PMOS current-source load: a common-source input device under an NMOS cascode, actively loaded by a stacked pair of PMOS cascode current sources from the supply."
+  - id: spec
+    text: "Design a cascoded NMOS common-source amplifier with a cascoded PMOS current-source load. Use exactly four transistors: M1 is an NMOS transistor with drain at mid_n, gate at vin, source to ground, bulk to ground. M2 is an NMOS transistor with drain at vout, gate at vbn, source at mid_n, bulk to ground. M3 is a PMOS transistor with drain at vout, gate at vbp, source at mid_p, bulk to VDD. M4 is a PMOS transistor with drain at mid_p, gate at vbp2, source at VDD, bulk to VDD."

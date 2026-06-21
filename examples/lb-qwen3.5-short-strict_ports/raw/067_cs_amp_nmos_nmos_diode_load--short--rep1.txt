@@ -1,0 +1,10 @@
+```spice
+* NMOS Common-Source Amplifier with NMOS Diode-Connected Load
+* Note: This topology requires the load device to be sized smaller (higher W/L) 
+* than the amplifying device to establish a valid DC operating point where Vout > Vin.
+
+M1 drain gate source bulk CSAMP nmos_cs
+M2 drain gate source bulk CDAMP nmos_cd
+.MODEL nmos_cs NMOS (LEVEL=1 VTO=0.4 KP=100u GAMMA=0.6 LAMBDA=0.05)
+.MODEL nmos_cd NMOS (LEVEL=1 VTO=0.4 KP=100u GAMMA=0.6 LAMBDA=0.05)
+```

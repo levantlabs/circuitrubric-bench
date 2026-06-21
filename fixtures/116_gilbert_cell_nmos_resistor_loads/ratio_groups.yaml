@@ -1,0 +1,9 @@
+groups:
+  - devices: [M1, M2, M3, M4]   # matched top switching quad
+    ratio_W: [1, 1, 1, 1]
+    ratio_L: [1, 1, 1, 1]
+  - devices: [M5, M6]           # matched bottom transconductor pair
+    ratio_W: [1, 1]
+    ratio_L: [1, 1]
+  - devices: [R1, R2]           # matched resistor loads
+    ratio_value: [1, 1]

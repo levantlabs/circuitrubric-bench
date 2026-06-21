@@ -1,0 +1,6 @@
+id: "022_cs_amp_pmos_nmos_current_source_load"
+category: "Amplifier"
+family: "common_source"
+variant: "pmos_nmos_current_source_load"
+source: "hand_authored"
+attribution: null

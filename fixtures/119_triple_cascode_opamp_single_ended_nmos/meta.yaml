@@ -1,0 +1,6 @@
+id: "119_triple_cascode_opamp_single_ended_nmos"
+category: "OTA"
+family: "triple_cascode_opamp"
+variant: "nmos_input_single_ended"
+source: "hand_authored"
+attribution: null

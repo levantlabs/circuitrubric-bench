@@ -1,0 +1,9 @@
+groups:
+  - devices: [M1, M2, M4, M5, M7, M8]   # all diff-pair devices matched across stages
+    ratio_W: [1, 1, 1, 1, 1, 1]
+    ratio_L: [1, 1, 1, 1, 1, 1]
+  - devices: [M3, M6, M9]               # all tail devices matched across stages
+    ratio_W: [1, 1, 1]
+    ratio_L: [1, 1, 1]
+  - devices: [R1, R2, R3, R4, R5, R6]   # all resistor loads matched
+    ratio_value: [1, 1, 1, 1, 1, 1]

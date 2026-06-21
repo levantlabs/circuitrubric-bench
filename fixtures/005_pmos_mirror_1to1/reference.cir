@@ -1,0 +1,5 @@
+* 1 to 1 PMOS current mirror. Iref out of drain of M1 (diode-connected ref); Iout out of drain of M2.
+M1 iref iref vdd vdd PMOS W=20u L=1u
+M2 iout iref vdd vdd PMOS W=20u L=1u
+.MODEL PMOS PMOS (LEVEL=1 VTO=-1 KP=1.0e-4 LAMBDA=0.02)
+.END

@@ -1,0 +1,87 @@
+```spice
+* Stage 1: PMOS Differential Pair with Resistor Loads
+M1A out1 in1 in1 vdd pmos_diff W=10u L=1u M=1
+M1B out1 in2 in2 vdd pmos_diff W=10u L=1u M=1
+Rload1A out1 out1 10k
+Rload1B out1 out1 10k
+
+* Stage 2: PMOS Differential Pair with Resistor Loads (DC Coupled to Stage 1)
+M2A out2 out1 in3 vdd pmos_diff W=10u L=1u M=1
+M2B out2 out1 in4 vdd pmos_diff W=10u L=1u M=1
+Rload2A out2 out2 10k
+Rload2B out2 out2 10k
+
+* Stage 3: PMOS Differential Pair with Resistor Loads (DC Coupled to Stage 2)
+M3A out3 out2 in5 vdd pmos_diff W=10u L=1u M=1
+M3B out3 out2 in6 vdd pmos_diff W=10u L=1u M=1
+Rload3A out3 out3 10k
+Rload3B out3 out3 10k
+
+* Cross-coupling for Oscillation (Connecting Stage 3 Output to Stage 1 Inputs)
+* Note: In a ring oscillator, the output of the last stage feeds back to the input of the first.
+* Assuming differential inputs are driven by previous stages or external logic not shown here.
+* To form a closed loop ring oscillator, we connect the outputs of stage 3 back to the gates of stage 1.
+* However, standard ring oscillators use inverting stages. A PMOS diff pair with resistive loads is non-inverting (common mode gain ~0, differential gain negative? No, common source is inverting).
+* Correction: A single-ended common-source (or half-diff pair) is inverting. 
+* If we treat the differential pair as two common-source amplifiers driving a load, each half is inverting.
+* Let's assume the topology implies standard cross-coupling for oscillation.
+* We will connect the output of Stage 3 directly to the input gates of Stage 1 to close the loop.
+* Since the prompt asks for a "differential ring oscillator", we assume the inputs (in1..in6) are connected appropriately or this is the core block.
+* To make it oscillate, we need odd number of inversions. 
+* If M1A/M1B are common-source halves: Gate -> Drain is Inverting.
+* Stage 1 Output (out1) goes to Stage 2 Input. Stage 2 Output (out2) goes to Stage 3 Input. Stage 3 Output (out3) goes back to Stage 1 Input.
+* We need to connect out3 to in1 and in2? Or split? 
+* Standard Ring Oscillator: Out of stage N drives Gate of Stage 1.
+* Let's connect out3 to in1 and in2 for feedback, but typically one output drives the next differential pair's gates differentially or we assume a specific cross-coupled latch structure.
+* Given the constraint "PMOS differential amplifiers", let's assume the outputs are single-ended nodes (out1, out2, out3) and they feed the next stage.
+* For oscillation, we connect out3 to in1 and in2? No, usually one output drives the gate of the next stage. 
+* If it's a 3-stage ring, Stage 3 Output -> Stage 1 Input.
+* Let's assume single-ended feedback for simplicity in netlist construction, or differential feedback if implied.
+* Standard practice: Connect out3 to in1 and in2? No, that shorts inputs. 
+* Let's assume the outputs of stage 3 drive the gates of stage 1 differentially (out3 -> in1, and maybe a complementary node not shown, OR simply out3 drives both if it's a specific topology).
+* Actually, a 3-stage ring oscillator usually consists of 3 inverters. A differential pair with resistive load acts as an inverter if we take one output.
+* Let's connect out3 to in1 and in2? No. 
+* Let's assume the standard connection: The single-ended output of stage 3 drives the gates of stage 1. Since it's a differential pair, we might need two outputs or split the signal.
+* However, without complementary outputs specified, let's assume out3 drives in1 and we assume symmetry or that this is a simplified representation.
+* Better approach for "Ring Oscillator": Connect out3 to in1 and in2? No. 
+* Let's assume the output node 'out3' connects to 'in1' and 'in2' is grounded or biased? No, that breaks differential operation.
+* Alternative interpretation: The "differential amplifier" here refers to the cell, and we connect the single-ended outputs (drains) to the gates of the next stage.
+* To close the loop for a 3-stage ring: out3 -> in1. What about in2? 
+* Perhaps the prompt implies a cross-coupled differential pair where the output is taken from one drain, and that drives the next.
+* Let's add connections to close the loop: out3 connects to in1. We need another path for in2? 
+* Maybe the user expects a specific cross-coupling where out3 drives in1 and a mirrored node (not shown) drives in2? 
+* Or, simpler: Connect out3 to in1 and assume in2 is driven by an external source or this is just the gain block.
+* BUT, "Ring Oscillator" implies feedback. 
+* Let's assume the standard 3-inverter ring topology mapped to diff pairs:
+* Stage 1 Out (out1) -> Stage 2 In (in3, in4). Wait, a diff pair needs two inputs.
+* If we use out1 to drive both in3 and in4? No, that's not differential.
+* Correct Topology for Diff Ring Oscillator: 
+* Stage 1 has inputs in1, in2. Outputs at drains of M1A/M1B (let's say we take the drain of M1A as out1).
+* Stage 2 takes out1 and drives in3, in4? No, usually one output drives the gate of the next stage. 
+* If it's a differential ring, Stage 1 Output A -> Stage 2 Input A, Stage 1 Output B -> Stage 2 Input B.
+* But we only have one output node per side if we don't define both drains as outputs.
+* Let's assume M1A drain is out1 and M1B drain is out1_bar (not defined). 
+* To keep it simple and valid SPICE: Define two outputs per stage? Or just use the single-ended output of one half?
+* Let's assume we take the output from the drain of M1A as 'out1' and M1B drain is connected to 'out1' (tied together)? No, that's not a diff pair.
+* Standard Diff Pair: Two drains. Let's call them out1a and out1b.
+* But the prompt says "PMOS differential amplifiers". Usually implies taking one output or using both.
+* Let's assume we use the drain of M1A as the output for the next stage, and M1B is just there? 
+* No, a diff amp has two outputs. For a ring oscillator, we need to drive the next stage differentially.
+* So: Stage 1 Drains -> out1, out2. Stage 2 Inputs <- out1, out2.
+* Let's redefine nodes: 
+* Stage 1: M1A drain = node A1, M1B drain = node B1.
+* Stage 2: M2A gate = node A1, M2B gate = node B1.
+* Stage 3: M3A drain = node A3, M3B drain = node B3.
+* Feedback: Node A3 -> M1A gate (in1), Node B3 -> M1B gate (in2).
+* This forms a closed loop with 3 stages of inversion (assuming common source action).
+* Wait, Common Source is inverting. 
+* Stage 1: Input diff -> Output diff (Inverting? Vout = -gm*Rd * Vin_diff/2). Yes, differential gain is negative.
+* Total loop gain phase shift: 3 stages * 180 deg = 540 deg = 180 deg. 
+* Barkhausen criterion met for oscillation.
+* So we need two output nodes per stage.
+
+* Revised Netlist Plan:
+* Define two outputs per stage to drive the next differential pair differentially.
+* Stage 1: M1A, M1B. Drains connected to VDD? No, drains are outputs. Sources to GND (NMOS) or VDD (PMOS)?
+* Prompt: "PMOS differential amplifiers". 
+* PMOS Source -> V

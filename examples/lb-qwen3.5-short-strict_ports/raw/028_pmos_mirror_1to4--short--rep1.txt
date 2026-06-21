@@ -1,0 +1,12 @@
+```spice
+* 1-to-4 PMOS Current Mirror
+* Active Devices: M1 (Reference), M2, M3, M4 (Outputs)
+* Load: Implicit VDD connection for PMOS sources; Bulk tied to Source per convention.
+
+M1 out_ref in_ref in_ref pmos_wl
+M2 out_1 in_ref in_ref pmos_wl
+M3 out_2 in_ref in_ref pmos_wl
+M4 out_3 in_ref in_ref pmos_wl
+
+.MODEL pmos_wl P (LEVEL=1 VTO=-0.7 KP=50u GAMMA=0.5 LAMBDA=0.05)
+```

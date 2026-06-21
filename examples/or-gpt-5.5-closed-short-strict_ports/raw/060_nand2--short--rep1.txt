@@ -1,0 +1,12 @@
+```spice
+* Two-input CMOS NAND gate
+
+MPA y a vdd vdd PMOS W=2u L=180n
+MPB y b vdd vdd PMOS W=2u L=180n
+
+MNA y a nint 0 NMOS W=2u L=180n
+MNB nint b 0 0 NMOS W=2u L=180n
+
+.MODEL NMOS NMOS (LEVEL=1 VTO=0.5 KP=200u LAMBDA=0.02)
+.MODEL PMOS PMOS (LEVEL=1 VTO=-0.5 KP=100u LAMBDA=0.02)
+```

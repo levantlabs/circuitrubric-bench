@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a source-degenerated PMOS current mirror."
+  - id: verbose
+    text: "Design a source-degenerated PMOS current mirror: a diode-connected reference device and a matched output device, each with a degeneration resistor to the supply to improve matching and output impedance."
+  - id: spec
+    text: "Design a source-degenerated PMOS current mirror. Use exactly two transistors and two resistors: M1 is a PMOS transistor with drain at iref, gate at iref, source at ps1, bulk to VDD. R1 is a resistor between vdd and ps1. M2 is a PMOS transistor with drain at iout, gate at iref, source at ps2, bulk to VDD. R2 is a resistor between vdd and ps2."

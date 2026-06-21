@@ -1,0 +1,28 @@
+```spice
+* NMOS-input Triple-Cascode OpAmp (Single-Ended Output)
+* Topology: Differential Pair -> Cascode Stage -> Active Cascode Stage -> PMOS Current Source Load
+
+* --- Device Definitions ---
+
+* Input Differential Pair (NMOS)
+M1 out1 in1 in2 0 nmos_diff W=10u L=1u
+M2 out2 in3 in4 0 nmos_diff W=10u L=1u
+
+* First Cascode Stage (NMOS) - Connected to drains of M1/M2
+M3 out3 out1 out2 0 nmos_cas1 W=10u L=1u
+M4 out4 out5 out6 0 nmos_cas1 W=10u L=1u
+
+* Second Cascode Stage (NMOS) - Active Cascode for higher output impedance
+M5 out5 out3 out4 0 nmos_cas2 W=10u L=1u
+M6 out6 out7 out8 0 nmos_cas2 W=10u L=1u
+
+* Output Load (PMOS Current Source) - Sourcing current from VDD
+Mload out7 out9 out10 vdd pmos_load W=50u L=1u
+
+* --- Model Definitions ---
+
+.model nmos_diff nmos (LEVEL=1 VTO=0.4 KP=110u GAMMA=0.6 LAMBDA=0.02 CGSO=2f CGDO=2f)
+.model nmos_cas1 nmos (LEVEL=1 VTO=0.4 KP=110u GAMMA=0.6 LAMBDA=0.01 CGSO=2f CGDO=2f)
+.model nmos_cas2 nmos (LEVEL=1 VTO=0.4 KP=110u GAMMA=0.6 LAMBDA=0.005 CGSO=2f CGDO=2f)
+.model pmos_load pmos (LEVEL=1 VTO=-0.4 KP=50u GAMMA=0.6 LAMBDA=0.02 CGSO=2f CGDO=2f)
+```

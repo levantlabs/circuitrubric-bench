@@ -1,0 +1,14 @@
+```spice
+* PMOS Common-Gate Amplifier with NMOS Current-Source Load
+* Topology: Input at Source of M1 (PMOS), Output at Drain of M1/M2, Gate of M1 grounded (AC ground)
+* Load: NMOS M2 acting as a current sink to ground
+
+M1 drain_out gate_in source_in bulk_p VDD PMOS_WL
+M2 drain_out gate_bias source_gnd bulk_n GND NMOS_WL
+
+.MODEL PMOS_WL PMOS (LEVEL=1 VTO=-0.5 KP=50u CGDO=1p CGSO=1p CGBD=1p)
+.MODEL NMOS_WL NMOS (LEVEL=1 VTO=0.5 KP=50u CGDO=1p CGSO=1p CGBD=1p)
+
+* Note: Gate bias for M2 (gate_bias) and Input drive for M1 (source_in) are external.
+* Bulk terminals are tied to their respective supply rails as per convention.
+```

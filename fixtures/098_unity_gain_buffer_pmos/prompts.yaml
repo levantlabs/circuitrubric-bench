@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a unity-gain buffer based on the PMOS-input 5T OTA."
+  - id: verbose
+    text: "Design a unity-gain buffer based on the PMOS-input 5T OTA: a single-stage PMOS-input OTA with its output fed directly back to the inverting input, forming a unity-gain follower."
+  - id: spec
+    text: "Design a unity-gain buffer based on the PMOS-input 5T OTA. Use exactly five transistors: M1 is a PMOS transistor with drain at voutn, gate at vinp, source at ntail, bulk to VDD. M2 is a PMOS transistor with drain at vout, gate at vout, source at ntail, bulk to VDD. M3 is an NMOS transistor with drain at voutn, gate at voutn, source to ground, bulk to ground. M4 is an NMOS transistor with drain at vout, gate at voutn, source to ground, bulk to ground. M5 is a PMOS transistor with drain at ntail, gate at vbias, source at VDD, bulk to VDD."

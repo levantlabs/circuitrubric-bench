@@ -1,0 +1,13 @@
+* PMOS differential amplifier, resistor loads, tail biased by a current mirror.
+* Alt: the mirror reference current is set by an ideal current source Iref
+* (sinking from the mirror node to ground) instead of a bias resistor.
+M1 voutn vinp  ntail vdd PMOS W=40u L=1u
+M2 voutp vinn  ntail vdd PMOS W=40u L=1u
+R1 voutn 0     10k
+R2 voutp 0     10k
+M3 ntail pmir  vdd vdd PMOS W=80u L=1u
+M4 pmir  pmir  vdd vdd PMOS W=80u L=1u
+Iref pmir 0    10u
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.MODEL PMOS PMOS (LEVEL=1 VTO=-1 KP=1.0e-4 LAMBDA=0.02)
+.END

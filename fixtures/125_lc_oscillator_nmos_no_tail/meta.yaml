@@ -1,0 +1,6 @@
+id: "125_lc_oscillator_nmos_no_tail"
+category: "Oscillator"
+family: "lc_oscillator"
+variant: "nmos_cross_coupled_no_tail"
+source: "hand_authored"
+attribution: null

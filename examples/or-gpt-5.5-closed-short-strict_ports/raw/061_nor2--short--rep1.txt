@@ -1,0 +1,12 @@
+```spice
+* Two-input CMOS NOR gate
+
+MPA npu A VDD VDD PMOS W=4u L=0.18u
+MPB Y   B npu VDD PMOS W=4u L=0.18u
+
+MNA Y   A 0   0   NMOS W=1u L=0.18u
+MNB Y   B 0   0   NMOS W=1u L=0.18u
+
+.MODEL NMOS NMOS (LEVEL=1 VTO=0.5 KP=200u)
+.MODEL PMOS PMOS (LEVEL=1 VTO=-0.5 KP=100u)
+```

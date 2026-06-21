@@ -1,0 +1,15 @@
+```spice
+* Improved 4-Transistor Wilson Current Mirror (NMOS)
+* Topology: Two input transistors (M1, M2), two cascode/output transistors (M3, M4).
+* M1/M2 form the basic mirror pair. M3 is the cascode for the reference branch.
+* M4 is the high-output-impedance output transistor.
+* Note: In a standard 4-transistor Wilson, M3 and M4 are often identical to M1/M2 
+* but biased differently. Here we define them with explicit W/L ratios relative to M1.
+
+M1 out1 in1 in2 bulk1 w=10u l=1u
+M2 out2 in2 in1 bulk2 w=10u l=1u
+M3 out1 in3 out2 bulk3 w=5u l=1u
+M4 out2 in4 out1 bulk4 w=5u l=1u
+
+.MODEL NMOS NMOS (LEVEL=1 VTO=0.7 KP=100u GAMMA=0.6 LAMBDA=0.05)
+```

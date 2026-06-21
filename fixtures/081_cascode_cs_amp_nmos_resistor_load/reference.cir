@@ -1,0 +1,7 @@
+* Cascoded NMOS common-source amplifier with resistor load.
+* M1 is the CS input device, M2 is the cascode, R1 is the drain load.
+M1 mid  vin   0   0 NMOS W=20u L=1u
+M2 vout vbias mid 0 NMOS W=20u L=1u
+R1 vdd  vout  10k
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.END

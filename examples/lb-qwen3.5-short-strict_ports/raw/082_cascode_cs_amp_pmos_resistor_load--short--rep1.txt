@@ -1,0 +1,12 @@
+```spice
+* Cascoded PMOS Common-Source Amplifier with Resistor Load
+* Topology: Input at Gate of M1 (PMOS), Source of M1 connected to Drain of M2 (PMOS Cascode).
+* Load: Resistor Rload connected between VDD and Drain of M1.
+* Biasing: External DC sources assumed for VG1, VG2, and VDD.
+
+M1 drain=drain_M1 gate=input source=source_M1 bulk=bulk_pmos model=pmos W=10u L=1u M=1
+M2 drain=drain_M2 gate=gate_cascode source=source_M2 bulk=bulk_pmos model=pmos W=10u L=1u M=1
+Rload name=Rload node1=VDD node2=drain_M1 value=10k
+
+.model pmos pmos (level=1 vto=-0.7 kp=50u lambda=0.1 cgdo=0 cgd=0)
+```

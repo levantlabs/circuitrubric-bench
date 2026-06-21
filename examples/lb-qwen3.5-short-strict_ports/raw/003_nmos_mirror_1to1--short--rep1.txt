@@ -1,0 +1,5 @@
+```spice
+M1 out gate gate out nmos W=10u L=1u M=1
+M2 out gate gate out nmos W=10u L=1u M=1
+.MODEL nmos level=1 VTO=0.7 KP=100u GAMMA=0.6 LAMBDA=0.05 CGSO=2f CGDO=2f CGBO=0 CJSW=0 CJSW=0 PB=0.5
+```

@@ -1,0 +1,126 @@
+```spice
+* 1-to-2 Cascode NMOS Current Mirror
+* Amplifying/Reference Device: M1 (Diode-connected)
+* Cascode Device: M2 (Stacked on M1)
+* Output Device: M3 (Cascode stack), M4 (Output transistor)
+
+M1 drain=IN gate=IN source=GND bulk=GND model=MOS_WL
+M2 drain=OUT cascode_gate=cascode_gate_1 source=GND bulk=GND model=MOS_WL
+M3 drain=OUT cascode_gate=cascode_gate_2 source=OUT cascode_source=OUT bulk=GND model=MOS_WL
+M4 drain=OUT gate=IN source=GND bulk=GND model=MOS_WL
+
+* Note: In a standard 1-to-2 cascode mirror, the reference current flows through M1 and M2.
+* The output current is mirrored by M3 and M4. 
+* To ensure proper operation, cascode_gate_1 and cascode_gate_2 are typically biased by external sources.
+* For this netlist to be fully specified as a topology block without test bench:
+* We assume cascode_gate_1 and cascode_gate_2 are driven by ideal voltage sources or bias networks not included per instructions.
+* However, to make the netlist simulatable with defined nodes for the cascode gates (as requested "Wire every terminal"), 
+* we define them as floating nodes in the schematic logic but physically they require bias. 
+* Strictly following "no gate bias networks", we leave the gate terminals connected to specific node names that imply external connection.
+* To satisfy "Wire every terminal exactly as specified", we must assign a name. 
+* Let's assume a standard topology where M2 and M4 are the cascode devices for the reference and output branches respectively? 
+* Correction: A 1-to-2 cascode mirror usually has:
+   Branch 1 (Ref): M_ref (diode), M_cas_ref (cascode).
+   Branch 2 (Out): M_out (cascode), M_load_mirror (output).
+   
+   Let's refine the topology for a standard "Cascode Current Mirror":
+   Input Current I_in enters node IN.
+   M1: Diode connected (Gate=Drain=IN, Source=GND).
+   M2: Cascode device on top of M1? No, usually M1 is bottom, M2 is top cascode.
+   Output branch: M3 (bottom), M4 (top cascode).
+   
+   Wait, the prompt asks for "1 to 2". This implies one reference branch and two output devices? Or a mirror ratio of 1:2? 
+   Usually "1-to-2" means Reference Current : Output Current = 1:2. This requires W_out = 2 * W_ref.
+   
+   Let's design a standard Cascode Current Mirror with Ratio 1:2.
+   Branch 1 (Ref): M1 (NMOS, diode), M2 (NMOS, cascode).
+   Branch 2 (Out): M3 (NMOS, output), M4 (NMOS, cascode).
+   
+   To get I_out = 2 * I_ref, we set W(M3) = 2*W(M1) and W(M4) = 2*W(M2).
+   
+   Since the prompt forbids bias networks, the gates of the cascode devices (M2, M4) must be connected to nodes that represent external bias voltages. 
+   I will name these nodes `Vcas_ref` and `Vcas_out`.
+   
+   Re-reading constraints: "Wire every terminal exactly as specified".
+   If I leave them floating or unconnected in the netlist text, it's an error.
+   I will connect them to specific node names representing the external bias.
+   
+   Let's define the devices clearly.
+   M1: Ref transistor (bottom)
+   M2: Cascode for Ref (top) -> Drain connected to VDD? No, usually current mirror loads are PMOS or current sources. 
+   But the prompt says "Design a 1 to 2 cascode NMOS current mirror". This implies the active devices are NMOS. 
+   The load is typically a PMOS current source or resistor, but those are excluded unless specified.
+   However, for a current mirror block, we define the transistors that perform the mirroring function.
+   
+   Topology:
+   Node IN: Input current injection point (or voltage input if diode connected).
+   Node OUT: Output current extraction point.
+   
+   Structure:
+   Ref Branch: M1 (Source=GND, Drain/Gate=IN), M2 (Source=Drain(M1), Gate=Bias_Ref, Drain=VDD_or_Load).
+   Out Branch: M3 (Source=GND, Drain/Gate=OUT), M4 (Source=Drain(M3), Gate=Bias_Out, Drain=VDD_or_Load).
+   
+   Wait, standard cascode mirror has the cascode device on top. 
+   If we are just defining the "gain stage" or "function block", we define the transistors.
+   The drain of the top NMOS (M2/M4) would connect to a PMOS load or VDD. Since no load is specified, I will leave the drains connected to a node `VDD` which represents the supply rail connection, or simply leave them as open if it's strictly the mirror core? 
+   Constraint: "Wire every terminal exactly as specified".
+   If I don't connect M2 drain to anything, it's an error.
+   I will assume a generic supply node `VDD` exists for the drains of the cascode devices, or simply name the node `TOP`.
+   However, usually in these netlists, if the load isn't part of the "active device" definition, we might just connect to a node named `VDD`.
+   
+   Let's assume the standard configuration:
+   M1: Ref (Diode)
+   M2: Cascode Ref
+   M3: Out (Diode-like connection at OUT? No, OUT is the drain of M3).
+   M4: Cascode Out
+   
+   Actually, a "Cascode Current Mirror" typically looks like this:
+   Input current I_in flows into Drain(M1) and Gate(M1).
+   Source(M1) -> GND.
+   Drain(M2) -> Connected to Drain(M1)? No.
+   
+   Correct Topology for Cascode Mirror:
+   Branch 1 (Ref): 
+     M1: Source=GND, Drain=IN, Gate=IN.
+     M2: Source=Drain(M1), Gate=Bias1, Drain=VDD (or Load).
+   Branch 2 (Out):
+     M3: Source=GND, Drain=OUT, Gate=IN (Mirrored gate).
+     M4: Source=Drain(M3), Gate=Bias2, Drain=VDD (or Load).
+   
+   To get 1:2 ratio: W(M3)=2*W(M1), W(M4)=2*W(M2).
+   
+   Since I cannot include bias networks, I will connect the cascode gates to nodes `VG1` and `VG2`.
+   The drains of M2 and M4 will be connected to a node `VDD` (representing the supply/load connection).
+   
+   Let's finalize the model parameters. W=1u, L=1u is standard default if not specified, but prompt says "include explicit W=, L=". I'll use 10u/1u for reasonable sizing.
+   
+   Devices:
+   M1: NMOS, Ref bottom.
+   M2: NMOS, Ref cascode top.
+   M3: NMOS, Out bottom.
+   M4: NMOS, Out cascode top.
+   
+   Model: MOS_WL (Standard NMOS).
+   
+   Wait, if the load is not specified, where do the drains of M2 and M4 go?
+   If I connect them to `VDD`, it implies a connection.
+   If I don't connect them, the netlist is invalid.
+   I will connect them to a node named `VDD`.
+   
+   One detail: "1 to 2". Does this mean 1 input transistor and 2 output transistors? Or ratio 1:2?
+   Standard terminology "1-to-2 current mirror" means Ratio = 2.
+   So W_out = 2 * W_ref.
+   
+   Let's write the lines.
+</think>
+
+```spice
+* 1-to-2 Cascode NMOS Current Mirror Topology
+* Reference Branch: M1 (Diode-connected), M2 (Cascode)
+* Output Branch: M3 (Output transistor), M4 (Cascode)
+* Ratio set by W(M3)=2*W(M1) and W(M4)=2*W(M2)
+* Cascode gates connected to external bias nodes VG1, VG2
+* Drains of cascode devices connected to supply node VDD
+
+M1 drain=IN gate=IN source=GND bulk=GND model=MOS_WL W=10u L=1u
+M2 drain=VDD gate

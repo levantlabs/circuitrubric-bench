@@ -1,0 +1,7 @@
+groups:
+  - devices: [M1, M3]      # top bias pair matched 1:1
+    ratio_W: [1, 1]
+    ratio_L: [1, 1]
+  - devices: [M2, M4]      # cascode pair matched 1:1
+    ratio_W: [1, 1]
+    ratio_L: [1, 1]

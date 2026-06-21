@@ -1,0 +1,10 @@
+* NMOS diff pair, source degeneration via R between input pair sources, with two tail sources.
+M1 voutn vinp ns1 0 NMOS W=20u L=1u
+M2 voutp vinn ns2 0 NMOS W=20u L=1u
+R1 vdd voutn 10k
+R2 vdd voutp 10k
+R3 ns1 ns2 1k
+M3 ns1 vbias 0 0 NMOS W=20u L=1u
+M4 ns2 vbias 0 0 NMOS W=20u L=1u
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.END

@@ -1,0 +1,18 @@
+```spice
+* 1-to-8 PMOS Current Mirror
+* Active Devices: 9 PMOS transistors (1 reference, 8 outputs)
+* Polarity: PMOS sources connected to VDD, bulks tied to sources.
+* Load/Inputs: Externally defined.
+
+MREF drain=VDD gate=VGATE source=VDD bulk=VDD model=PMOS W=10u L=1u M=1
+MP1 drain=out1 gate=VGATE source=VDD bulk=VDD model=PMOS W=80u L=1u M=1
+MP2 drain=out2 gate=VGATE source=VDD bulk=VDD model=PMOS W=80u L=1u M=1
+MP3 drain=out3 gate=VGATE source=VDD bulk=VDD model=PMOS W=80u L=1u M=1
+MP4 drain=out4 gate=VGATE source=VDD bulk=VDD model=PMOS W=80u L=1u M=1
+MP5 drain=out5 gate=VGATE source=VDD bulk=VDD model=PMOS W=80u L=1u M=1
+MP6 drain=out6 gate=VGATE source=VDD bulk=VDD model=PMOS W=80u L=1u M=1
+MP7 drain=out7 gate=VGATE source=VDD bulk=VDD model=PMOS W=80u L=1u M=1
+MP8 drain=out8 gate=VGATE source=VDD bulk=VDD model=PMOS W=80u L=1u M=1
+
+.model PMOS pmos (level=1)
+```

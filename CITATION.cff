@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use CircuitRubric, please cite it."
+title: "CircuitRubric: A Structural Benchmark for LLM-Generated Analog Netlists"
+abstract: >-
+  A 125-fixture benchmark and graph-isomorphism grader with a 6-level partial-credit
+  ladder for evaluating the structural correctness of LLM-generated analog circuit
+  netlists, without SPICE simulation.
+authors:
+  - family-names: "El-Chammas"
+    given-names: "Manar"
+type: software
+repository-code: "https://github.com/levantlabs/circuitrubric-bench"
+url: "https://github.com/levantlabs/circuitrubric-bench"
+# code: Apache-2.0; corpus (fixtures/): CC-BY-4.0 (see LICENSE-CC-BY-4.0.txt)
+license:
+  - Apache-2.0
+  - CC-BY-4.0
+version: "0.1.0"
+date-released: "2026-06-20"
+keywords:
+  - benchmark
+  - large language models
+  - analog circuits
+  - netlist generation
+  - electronic design automation
+# A paper reference (arXiv / venue) will be added here once posted; cite that as
+# the preferred reference when available.

@@ -1,0 +1,81 @@
+```spice
+* Two-Stage Miller-Compensated Op-Amp
+* Inputs: PMOS (Common Gate/Source configuration implied by "PMOS input" usually meaning PMOS differential pair, 
+         but for a minimal netlist defining the topology block, we assume a standard 2-stage structure:
+         Stage 1: PMOS Differential Pair (simplified to one half or full with current mirror load) -> Single Ended Output
+         Stage 2: Common Source NMOS with Active Load
+         
+         However, the prompt asks for "PMOS inputs". A standard 2-stage op-amp has a differential input stage.
+         To define the topology minimally while respecting "PMOS inputs", we model the first stage as a PMOS 
+         common-source (or half of a diff pair) driving a second stage. 
+         
+         Standard Topology:
+         Stage 1: PMOS Input Transistor (M1) with an NMOS Current Source Load (M2).
+         Output of Stage 1 connects to Gate of Stage 2.
+         Stage 2: NMOS Common Source (M3) with a PMOS Current Source Load (M4).
+         Miller Compensation Capacitor (Ccomp) from Output of Stage 2 to Input of Stage 2.
+
+* Note: A full differential pair requires tail current and two input devices. 
+        The prompt asks for the "minimum set of devices". We will implement one half of the differential input 
+        stage connected to a single-ended output, or assume the user provides the other side.
+        Strictly speaking, a "PMOS input" stage implies the input transistors are PMOS.
+        
+        Let's build the canonical 2-stage block:
+        M1: PMOS Input (Source to VDD)
+        M2: NMOS Load for Stage 1 (Sinking current from M1 to node OUT1)
+        M3: NMOS Second Stage Driver (Gate connected to OUT1, Source to Ground)
+        M4: PMOS Load for Stage 2 (Sourcing current from VDD to OUT2)
+        Ccomp: Miller Capacitor between OUT2 and Gate of M3.
+
+* Device Models
+.model MPMOS PMOS (LEVEL=1 VTO=0.7 CGSO=0 CGDO=0 CJ=0 CJSW=0)
+.model MNMOS NMOS (LEVEL=1 VTO=-0.7 CGSO=0 CGDO=0 CJ=0 CJSW=0)
+
+* Sizing: 
+* M1 (PMOS Input): W=10u L=1u
+* M2 (NMOS Load Stage 1): W=5u L=1u (Current source load)
+* M3 (NMOS Driver Stage 2): W=10u L=1u
+* M4 (PMOS Load Stage 2): W=5u L=1u
+
+* Netlist
+M1 D1 G1 S1 B1 MPMOS W=10u L=1u
+M2 D1 G2 S2 MNMOS W=5u L=1u
+M3 D2 G2 S3 B3 MNMOS W=10u L=1u
+M4 D2 G4 S4 B4 MPMOS W=5u L=1u
+
+* Connections implied by node names:
+* M1: Drain=D1, Gate=G1 (Input), Source=S1 (Output of Stage 1)
+* M2: Drain=D1 (connected to M1 Drain? No, standard topology: M1 Source is VDD, M1 Drain is OUT1. 
+      Wait, PMOS Input: Source to VDD. Drain is Output. Load is NMOS sinking from Output to GND.
+      Correction on M1/M2 connection:
+      M1 (PMOS): Source=S1(VDD), Drain=D1(OUT1), Gate=G1(Input). Bulk=B1(VDD).
+      M2 (NMOS Load): Drain=D1(OUT1), Gate=G2(Bias), Source=S2(GND). Bulk=S2.
+      
+      Re-evaluating standard SPICE netlist order: M<name> <drain> <gate> <source> <bulk> <model>
+      
+      Corrected Topology Logic:
+      Stage 1 (PMOS Input): 
+        M_INP: Source to VDD, Drain is OUT1. Gate is Input.
+        M_LOAD1: NMOS Current Source. Drain connected to OUT1, Source to GND.
+        
+      Stage 2 (NMOS Driver):
+        M_DRV: Source to GND, Drain is OUT2. Gate is OUT1.
+        M_LOAD2: PMOS Current Source. Drain connected to OUT2, Source to VDD.
+        
+      Miller Cap:
+        C_COMP between OUT2 and Gate of M_DRV (OUT1).
+
+* Let's refine the node names for clarity in the netlist below.
+* Nodes: 
+  * VDD, GND
+  * IN (Input)
+  * OUT1 (Output of Stage 1 / Input to Stage 2)
+  * OUT2 (Final Output)
+  * Bias nodes for current sources (G2, G4) are external inputs.
+
+M_INP D_OUT1 G_IN S_VDD B_VDD MPMOS W=10u L=1u
+M_LOAD1 D_OUT1 G_BIAS1 S_GND B_GND MNMOS W=5u L=1u
+M_DRV D_OUT2 G_OUT1 S_GND B_GND MNMOS W=10u L=1u
+M_LOAD2 D_OUT2 G_BIAS2 S_VDD B_VDD MPMOS W=5u L=1u
+C_COMP D_OUT2 G_OUT1 1pF
+```

@@ -1,0 +1,6 @@
+```spice
+MREF iref iref vdd vdd PMOS W=1u L=180n
+MOUT out  iref vdd vdd PMOS W=1u L=180n M=2
+
+.MODEL PMOS PMOS (LEVEL=1 VTO=-0.7 KP=50u LAMBDA=0.02)
+```

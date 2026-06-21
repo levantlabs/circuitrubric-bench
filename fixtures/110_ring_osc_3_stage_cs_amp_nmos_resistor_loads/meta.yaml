@@ -1,0 +1,6 @@
+id: "110_ring_osc_3_stage_cs_amp_nmos_resistor_loads"
+category: "Oscillator"
+family: "ring_osc_cs_amp"
+variant: "nmos_3_stage_resistor_loads"
+source: "hand_authored"
+attribution: null

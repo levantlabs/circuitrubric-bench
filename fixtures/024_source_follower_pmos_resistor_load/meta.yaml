@@ -1,0 +1,6 @@
+id: "024_source_follower_pmos_resistor_load"
+category: "Amplifier"
+family: "source_follower"
+variant: "pmos_resistor_load"
+source: "hand_authored"
+attribution: null

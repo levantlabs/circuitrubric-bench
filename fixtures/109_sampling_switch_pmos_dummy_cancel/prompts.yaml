@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a PMOS sampling switch with dummy-device charge-injection cancellation."
+  - id: verbose
+    text: "Design a PMOS sampling switch with dummy-device charge-injection cancellation: a main PMOS pass transistor charging a hold capacitor, plus a dummy PMOS device at the output clocked oppositely to absorb the injected charge."
+  - id: spec
+    text: "Design a PMOS sampling switch with dummy-device charge-injection cancellation. Use exactly two transistors and one capacitor: M1 is a PMOS transistor with drain at vout, gate at clk, source at vin, bulk to VDD. M2 is a PMOS transistor with drain at vout, gate at clkb, source at vout, bulk to VDD. Ch is a capacitor between vout and ground."

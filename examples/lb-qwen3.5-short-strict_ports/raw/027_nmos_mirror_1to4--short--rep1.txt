@@ -1,0 +1,15 @@
+```spice
+* 1-to-4 NMOS Current Mirror
+* Active devices only: M1 (reference), M2-M5 (outputs)
+* Bulk terminals connected to Source (NMOS convention)
+
+M1 out1 in ref out1 nmos W=10u L=1u M=1
+M2 out2 in ref out2 nmos W=40u L=1u M=1
+M3 out3 in ref out3 nmos W=40u L=1u M=1
+M4 out4 in ref out4 nmos W=40u L=1u M=1
+
+* Optional: Simple current source load for the reference branch to establish bias
+* (Not strictly part of the mirror topology, but required for simulation convergence)
+Vref 0 ref DC=1.0
+Rload ref 0 10k
+```

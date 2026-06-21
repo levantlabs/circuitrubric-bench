@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a cascoded PMOS common-source amplifier with a resistor load."
+  - id: verbose
+    text: "Design a cascoded PMOS common-source amplifier with a resistor load: a common-source input device stacked under a PMOS cascode device, with a resistor load from the output to ground."
+  - id: spec
+    text: "Design a cascoded PMOS common-source amplifier with a resistor load. Use exactly two transistors and one resistor: M1 is a PMOS transistor with drain at mid, gate at vin, source at VDD, bulk to VDD. M2 is a PMOS transistor with drain at vout, gate at vbias, source at mid, bulk to VDD. R1 is a resistor between vout and ground."

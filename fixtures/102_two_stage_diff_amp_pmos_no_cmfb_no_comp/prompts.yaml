@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a two-stage fully differential PMOS-input amplifier with no CMFB and no compensation."
+  - id: verbose
+    text: "Design a two-stage fully differential PMOS-input amplifier with no common-mode feedback and no compensation: a PMOS-input differential first stage with NMOS current-source loads driving a fully differential common-source second stage with current-source loads."
+  - id: spec
+    text: "Design a two-stage fully differential PMOS-input amplifier with no CMFB and no compensation. Use exactly nine transistors: M1 is a PMOS transistor with drain at v1n, gate at vinp, source at ntail, bulk to VDD. M2 is a PMOS transistor with drain at v1p, gate at vinn, source at ntail, bulk to VDD. M3 is an NMOS transistor with drain at v1n, gate at vbn1, source to ground, bulk to ground. M4 is an NMOS transistor with drain at v1p, gate at vbn1, source to ground, bulk to ground. M5 is a PMOS transistor with drain at ntail, gate at vbias, source at VDD, bulk to VDD. M6 is an NMOS transistor with drain at voutp, gate at v1n, source to ground, bulk to ground. M7 is an NMOS transistor with drain at voutn, gate at v1p, source to ground, bulk to ground. M8 is a PMOS transistor with drain at voutp, gate at vbp2, source at VDD, bulk to VDD. M9 is a PMOS transistor with drain at voutn, gate at vbp2, source at VDD, bulk to VDD."

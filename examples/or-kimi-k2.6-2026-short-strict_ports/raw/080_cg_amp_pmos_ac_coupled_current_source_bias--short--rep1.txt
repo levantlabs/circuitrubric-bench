@@ -1,0 +1,14 @@
+```spice
+* PMOS common-gate amplifier
+* AC-coupled input, resistor load, PMOS current-source bias
+
+CIN VIN VS 1p
+
+M1 VOUT VG VS VDD PCH W=10u L=0.18u
+
+RD VOUT GND 10k
+
+M2 VS VB VDD VDD PCH W=5u L=0.36u
+
+.MODEL PCH PMOS (LEVEL=1 VTO=-0.5 KP=50u LAMBDA=0.02)
+```

@@ -1,0 +1,5 @@
+ ```spice
+M1 gate gate VDD VDD PMOS W=2u L=0.5u
+M2 out gate VDD VDD PMOS W=2u L=0.5u M=8
+.MODEL PMOS PMOS (LEVEL=1 VTO=-0.7 KP=50u LAMBDA=0.02)
+```

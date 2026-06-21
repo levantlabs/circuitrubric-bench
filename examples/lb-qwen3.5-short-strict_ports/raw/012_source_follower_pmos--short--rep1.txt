@@ -1,0 +1,21 @@
+```spice
+* PMOS Source Follower with Current-Source Load (NMOS)
+* Topology: PMOS input device (M1) connected to VDD, 
+*          NMOS active load (M2) sinking current to ground.
+* DC coupled: Output of M1 is the drain of M2 and gate of M1.
+
+VDD vdd 0 DC 5.0
+VIN vin 0 DC 0
+
+* PMOS Amplifying Device (Source Follower)
+* Source connected to VDD, Gate is input, Drain is output
+M1 out vin vdd vdd pmos W=10u L=1u M=1
+
+* NMOS Current-Source Load
+* Drain connected to Output, Source to Ground, Gate biased externally
+M2 out 0 0 0 nmos W=10u L=1u M=1
+
+* Device Models
+.model pmos pm (LEVEL=1 VTO=-0.5 KP=50u GAMMA=0.5 LAMBDA=0.1)
+.model nmos nm (LEVEL=1 VTO=0.5 KP=100u GAMMA=0.5 LAMBDA=0.1)
+```

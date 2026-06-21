@@ -1,0 +1,65 @@
+```spice
+* 1-to-8 Cascode NMOS Current Mirror
+* Amplifying/Reference Branch: M1 (Ref), M2 (Cascode Ref)
+* Output Branch: M3 (Out), M4 (Cascode Out 1), ... M9 (Cascode Out 8)
+* Note: To achieve a 1-to-8 ratio, the reference current must be set by an external source.
+* The output branch consists of 8 parallel cascoded pairs to multiply the current by 8.
+
+* --- Reference Branch (1x Current) ---
+M1 out_ref gate_ref source_ref bulk_nmos M_REF
+M2 out_ref gate_ref drain_cas_ref source_ref bulk_nmos M_CASREF
+
+* --- Output Branch (8x Current) ---
+* We use 8 parallel cascoded pairs. 
+* Each pair consists of a bottom transistor (M3..M10) and a top cascode (M11..M18).
+* To get 8x current, the W/L of the output devices must be 8x the reference device.
+
+* Pair 1
+M3 out1 gate_out source_out bulk_nmos M_OUT
+M4 out1 gate_out drain_cas1 source_out bulk_nmos M_CASOUT
+
+* Pair 2
+M5 out2 gate_out source_out bulk_nmos M_OUT
+M6 out2 gate_out drain_cas2 source_out bulk_nmos M_CASOUT
+
+* Pair 3
+M7 out3 gate_out source_out bulk_nmos M_OUT
+M8 out3 gate_out drain_cas3 source_out bulk_nmos M_CASOUT
+
+* Pair 4
+M9 out4 gate_out source_out bulk_nmos M_OUT
+M10 out4 gate_out drain_cas4 source_out bulk_nmos M_CASOUT
+
+* Pair 5
+M11 out5 gate_out source_out bulk_nmos M_OUT
+M12 out5 gate_out drain_cas5 source_out bulk_nmos M_CASOUT
+
+* Pair 6
+M13 out6 gate_out source_out bulk_nmos M_OUT
+M14 out6 gate_out drain_cas6 source_out bulk_nmos M_CASOUT
+
+* Pair 7
+M15 out7 gate_out source_out bulk_nmos M_OUT
+M16 out7 gate_out drain_cas7 source_out bulk_nmos M_CASOUT
+
+* Pair 8
+M17 out8 gate_out source_out bulk_nmos M_OUT
+M18 out8 gate_out drain_cas8 source_out bulk_nmos M_CASOUT
+
+* --- Models ---
+* Reference Device (e.g., W=1u, L=1u)
+.MODEL M_REF NMOS (LEVEL=1 VTO=0.7 KP=100u GAMMA=0.5 LAMBDA=0.05)
+
+* Cascode Reference Device (Same W/L as Ref for matching)
+.MODEL M_CASREF NMOS (LEVEL=1 VTO=0.7 KP=100u GAMMA=0.5 LAMBDA=0.05)
+
+* Output Devices (W=8u, L=1u to achieve 8x current ratio)
+.MODEL M_OUT NMOS (LEVEL=1 VTO=0.7 KP=100u GAMMA=0.5 LAMBDA=0.05)
+
+* Cascode Output Devices (Same W/L as Ref for matching)
+.MODEL M_CASOUT NMOS (LEVEL=1 VTO=0.7 KP=100u GAMMA=0.5 LAMBDA=0.05)
+
+* Bulk Connections (All NMOS bulks tied to Source/Ground)
+* Note: In a real IC, bulk is usually common substrate (GND). 
+* Here we explicitly tie source and bulk for each device to ensure correct polarity per prompt rules.
+```

@@ -1,0 +1,10 @@
+```spice
+* CMOS Transmission Gate Topology
+* Active devices: NMOS (M1) and PMOS (M2) in parallel
+* Control nodes: CG (Gate of NMOS), CP (Gate of PMOS)
+* Input/Output nodes: IN, OUT
+* Bulk terminals connected to their respective supply rails
+
+M1 drain=IN gate=CG source=OUT bulk=0 model=nmos W=10u L=1u M=1
+M2 drain=IN gate=CP source=OUT bulk=vdd model=pmos W=10u L=1u M=1
+```

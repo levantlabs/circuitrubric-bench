@@ -1,0 +1,6 @@
+id: "094_diff_amp_pmos_current_mirror_bias_resistor_loads"
+category: "Amplifier"
+family: "diff_amp"
+variant: "pmos_current_mirror_bias_resistor_loads"
+source: "hand_authored"
+attribution: null

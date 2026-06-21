@@ -1,0 +1,6 @@
+id: "012_source_follower_pmos"
+category: "Amplifier"
+family: "source_follower"
+variant: "pmos_current_source_load"
+source: "hand_authored"
+attribution: null

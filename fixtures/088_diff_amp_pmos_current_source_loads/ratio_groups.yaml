@@ -1,0 +1,7 @@
+groups:
+  - devices: [M1, M2]      # matched PMOS input pair
+    ratio_W: [1, 1]
+    ratio_L: [1, 1]
+  - devices: [M3, M4]      # matched NMOS current-source loads
+    ratio_W: [1, 1]
+    ratio_L: [1, 1]

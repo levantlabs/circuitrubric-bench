@@ -1,0 +1,8 @@
+* Cascoded PMOS common-source amplifier with resistor load.
+* M1 is the PMOS CS input device, M2 is the PMOS cascode, R1 is the drain load.
+M1 mid  vin   vdd vdd PMOS W=20u L=1u
+M2 vout vbias mid vdd PMOS W=20u L=1u
+R1 vout 0     10k
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.MODEL PMOS PMOS (LEVEL=1 VTO=-1 KP=1.0e-4 LAMBDA=0.02)
+.END

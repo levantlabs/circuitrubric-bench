@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design an NMOS common-source amplifier with a resistor load and resistive feedback from output to input."
+  - id: verbose
+    text: "Design an NMOS common-source amplifier with a resistor load and resistive feedback: a common-source transistor with a resistor load to the supply and a feedback resistor from the output back to the input."
+  - id: spec
+    text: "Design an NMOS common-source amplifier with a resistor load and resistive feedback from output to input. Use exactly one transistor and two resistors: M1 is an NMOS transistor with drain at vout, gate at vin, source to ground, bulk to ground. Rd is a resistor between vdd and vout. Rf is a resistor between vout and vin."

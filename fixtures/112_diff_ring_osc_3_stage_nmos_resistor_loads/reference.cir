@@ -1,0 +1,26 @@
+* 3-stage differential ring oscillator (NMOS diff amps with resistor loads).
+* Each stage is a 5T differential amp; three stages in a loop.
+
+* Stage 1: inputs from stage 3 (voutn -> M1.gate, voutp -> M2.gate)
+M1 v1n  voutn nt1 0 NMOS W=20u L=1u
+M2 v1p  voutp nt1 0 NMOS W=20u L=1u
+R1 vdd  v1n   10k
+R2 vdd  v1p   10k
+M3 nt1  vbias 0   0 NMOS W=40u L=1u
+
+* Stage 2: inputs from stage 1 (v1n, v1p)
+M4 v2n  v1n   nt2 0 NMOS W=20u L=1u
+M5 v2p  v1p   nt2 0 NMOS W=20u L=1u
+R3 vdd  v2n   10k
+R4 vdd  v2p   10k
+M6 nt2  vbias 0   0 NMOS W=40u L=1u
+
+* Stage 3: inputs from stage 2 (v2n, v2p); outputs (voutn, voutp) close the ring
+M7 voutn v2n  nt3 0 NMOS W=20u L=1u
+M8 voutp v2p  nt3 0 NMOS W=20u L=1u
+R5 vdd  voutn 10k
+R6 vdd  voutp 10k
+M9 nt3  vbias 0   0 NMOS W=40u L=1u
+
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.END

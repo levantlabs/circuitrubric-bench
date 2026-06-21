@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a PMOS common-gate amplifier with a resistor load, an AC-coupled input, and a current-source bias."
+  - id: verbose
+    text: "Design a PMOS common-gate amplifier with a resistor load and an AC-coupled input: a fixed-bias common-gate transistor whose source is set by a PMOS current source and fed the input through a coupling capacitor, with a resistor load to ground."
+  - id: spec
+    text: "Design a PMOS common-gate amplifier with a resistor load, an AC-coupled input, and a current-source bias. Use exactly two transistors, one resistor, and one capacitor: M1 is a PMOS transistor with drain at vout, gate at vbias, source at vs, bulk to VDD. RL is a resistor between vout and ground. Cin is a capacitor between vin and vs. M2 is a PMOS transistor with drain at vs, gate at vbp, source at VDD, bulk to VDD."

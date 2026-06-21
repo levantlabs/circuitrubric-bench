@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a cascade of two PMOS common-source amplifiers with resistor loads."
+  - id: verbose
+    text: "Design a cascade of two PMOS common-source amplifiers with resistor loads: a first resistor-loaded common-source stage driving a second resistor-loaded common-source stage."
+  - id: spec
+    text: "Design a cascade of two PMOS common-source amplifiers with resistor loads. Use exactly two transistors and two resistors: M1 is a PMOS transistor with drain at n1, gate at vin, source at VDD, bulk to VDD. M2 is a PMOS transistor with drain at vout, gate at n1, source at VDD, bulk to VDD. R1 is a resistor between n1 and 0. R2 is a resistor between vout and 0."

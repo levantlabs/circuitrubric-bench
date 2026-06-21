@@ -1,0 +1,6 @@
+```spice
+M1 out gate out 0 nmos W=10u L=1u M=1
+M2 VDD out VDD VDD pmos W=10u L=1u M=1
+.MODEL nmos NMOS (LEVEL=3)
+.MODEL pmos PMOS (LEVEL=3)
+```

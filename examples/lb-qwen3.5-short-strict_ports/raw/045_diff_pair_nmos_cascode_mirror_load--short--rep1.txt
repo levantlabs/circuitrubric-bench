@@ -1,0 +1,29 @@
+```spice
+* Differential Amplifier: NMOS Inputs, Cascode PMOS Current-Mirror Load, Single-Ended Output
+* Topology: M1/M2 (Input Pair), M3/M4 (Active Load Mirror), M5/M6 (Cascode Load)
+
+* --- Device Definitions ---
+
+* Input Pair (NMOS)
+M1 out_in drain=INP gate=INP source=S bulk=S model=NMOS W=10u L=1u
+M2 out_in drain=INN gate=INN source=S bulk=S model=NMOS W=10u L=1u
+
+* Active Load / Cascode Current Mirror (PMOS)
+* M3/M4 form the basic current mirror load connected to VDD
+M3 out_in drain=VDD gate=M4G source=S_M3 bulk=S_M3 model=PMOS W=10u L=1u
+M4 out_in drain=INN gate=M4G source=S_M4 bulk=S_M4 model=PMOS W=10u L=1u
+
+* Cascode Devices (PMOS) to increase output resistance and bandwidth
+* M5 cascodes M3, M6 cascodes M4
+M5 out_out drain=VDD gate=M5G source=out_in bulk=S_M5 model=PMOS W=10u L=1u
+M6 out_out drain=INN gate=M6G source=out_in bulk=S_M6 model=PMOS W=10u L=1u
+
+* --- Biasing Nodes (External Drive) ---
+* Note: Gate voltages for the mirror and cascode devices (M4G, M5G, M6G) 
+* are assumed to be provided by an external bias circuit not included in this netlist.
+* The bulk terminals of PMOS devices are tied to VDD as per standard IC design.
+
+* --- Model Cards ---
+.model NMOS nmos (LEVEL=1 VTO=0.4 KP=110u GAMMA=0.5 LAMBDA=0.02)
+.model PMOS pmos (LEVEL=1 VTO=-0.4 KP=50u GAMMA=0.5 LAMBDA=0.02)
+```

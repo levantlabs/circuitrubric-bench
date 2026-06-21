@@ -1,0 +1,8 @@
+* PMOS differential pair with resistor loads and PMOS tail current source.
+M1 voutn vinp ntail vdd PMOS W=40u L=1u
+M2 voutp vinn ntail vdd PMOS W=40u L=1u
+R1 voutn 0 10k
+R2 voutp 0 10k
+M3 ntail vbias vdd vdd PMOS W=80u L=1u
+.MODEL PMOS PMOS (LEVEL=1 VTO=-1 KP=1.0e-4 LAMBDA=0.02)
+.END

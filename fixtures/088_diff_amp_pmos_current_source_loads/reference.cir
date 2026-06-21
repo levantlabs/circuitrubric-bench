@@ -1,0 +1,10 @@
+* PMOS differential amplifier with NMOS current-source loads (fully differential).
+* M1/M2 input pair, M3/M4 NMOS current-source loads (no diode, no mirror), M5 tail.
+M1 voutn vinp  ntail vdd PMOS W=40u L=1u
+M2 voutp vinn  ntail vdd PMOS W=40u L=1u
+M3 voutn vbn   0     0   NMOS W=20u L=1u
+M4 voutp vbn   0     0   NMOS W=20u L=1u
+M5 ntail vbias vdd   vdd PMOS W=80u L=1u
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.MODEL PMOS PMOS (LEVEL=1 VTO=-1 KP=1.0e-4 LAMBDA=0.02)
+.END

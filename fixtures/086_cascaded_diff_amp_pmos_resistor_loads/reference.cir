@@ -1,0 +1,15 @@
+* Cascade of two PMOS differential amplifiers, each with resistor loads.
+* Stage 1: M1/M2 pair, R1/R2 loads, M3 tail. Stage 2: M4/M5 pair, R3/R4 loads, M6 tail.
+M1 v1n  vinp  nt1 vdd PMOS W=40u L=1u
+M2 v1p  vinn  nt1 vdd PMOS W=40u L=1u
+R1 v1n  0     10k
+R2 v1p  0     10k
+M3 nt1  vbias vdd vdd PMOS W=80u L=1u
+M4 voutn v1n  nt2 vdd PMOS W=40u L=1u
+M5 voutp v1p  nt2 vdd PMOS W=40u L=1u
+R3 voutn 0    10k
+R4 voutp 0    10k
+M6 nt2  vbias vdd vdd PMOS W=80u L=1u
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.MODEL PMOS PMOS (LEVEL=1 VTO=-1 KP=1.0e-4 LAMBDA=0.02)
+.END

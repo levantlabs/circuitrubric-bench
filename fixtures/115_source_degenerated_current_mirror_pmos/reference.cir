@@ -1,0 +1,10 @@
+* Source-degenerated PMOS current mirror (1:1).
+* Matched degeneration resistors R1 (reference leg) and R2 (output leg)
+* boost output impedance and improve matching.
+M1 iref iref ps1 vdd PMOS W=20u L=1u
+R1 vdd  ps1  1k
+M2 iout iref ps2 vdd PMOS W=20u L=1u
+R2 vdd  ps2  1k
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.MODEL PMOS PMOS (LEVEL=1 VTO=-1 KP=1.0e-4 LAMBDA=0.02)
+.END

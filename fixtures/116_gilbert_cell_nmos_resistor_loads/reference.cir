@@ -1,0 +1,14 @@
+* NMOS Gilbert cell (analog multiplier / mixer) with resistor loads.
+* Bottom pair M5/M6 (vin transconductor) -> internal nodes n_a, n_b.
+* Top quad M1-M4 (vlo switching, cross-coupled drains) -> diff outputs.
+M1 voutp vlop  n_a   0 NMOS W=10u L=1u
+M2 voutn vlon  n_a   0 NMOS W=10u L=1u
+M3 voutn vlop  n_b   0 NMOS W=10u L=1u
+M4 voutp vlon  n_b   0 NMOS W=10u L=1u
+M5 n_a   vinp  ntail 0 NMOS W=20u L=1u
+M6 n_b   vinn  ntail 0 NMOS W=20u L=1u
+M7 ntail vbias 0     0 NMOS W=40u L=1u
+R1 vdd   voutp 10k
+R2 vdd   voutn 10k
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.END

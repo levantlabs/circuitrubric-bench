@@ -1,0 +1,10 @@
+* Two-input CMOS NOR gate.
+* PMOS series stack on pull-up, NMOS parallel pair on pull-down.
+* Inputs: a, b. Output: vout = !(a OR b).
+M1 vout a 0 0 NMOS W=10u L=1u
+M2 vout b 0 0 NMOS W=10u L=1u
+M3 vout a mid vdd PMOS W=40u L=1u
+M4 mid  b vdd vdd PMOS W=40u L=1u
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.MODEL PMOS PMOS (LEVEL=1 VTO=-1 KP=1.0e-4 LAMBDA=0.02)
+.END

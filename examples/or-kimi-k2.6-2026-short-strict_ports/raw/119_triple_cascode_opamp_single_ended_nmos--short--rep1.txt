@@ -1,0 +1,22 @@
+ ```spice
+* NMOS-input triple-cascode telescopic opamp (single-ended)
+M0  tail  Vb_tail  GND  GND  nmos  W=10u  L=1u
+M1  d1    Vin+     tail GND  nmos  W=10u  L=1u
+M2  d4    Vin-     tail GND  nmos  W=10u  L=1u
+M3  d2    Vbn1     d1   GND  nmos  W=10u  L=1u
+M4  d5    Vbn1     d4   GND  nmos  W=10u  L=1u
+M5  d3    Vbn2     d2   GND  nmos  W=10u  L=1u
+M6  d6    Vbn2     d5   GND  nmos  W=10u  L=1u
+M7  NLEFT Vbn3     d3   GND  nmos  W=10u  L=1u
+M8  OUT   Vbn3     d6   GND  nmos  W=10u  L=1u
+M9  dp1   dp1      VDD  VDD  pmos  W=20u  L=1u
+M10 dp4   dp1      VDD  VDD  pmos  W=20u  L=1u
+M11 dp2   Vbp1     dp1  VDD  pmos  W=20u  L=1u
+M12 dp5   Vbp1     dp4  VDD  pmos  W=20u  L=1u
+M13 dp3   Vbp2     dp2  VDD  pmos  W=20u  L=1u
+M14 dp6   Vbp2     dp5  VDD  pmos  W=20u  L=1u
+M15 NLEFT Vbp3     dp3  VDD  pmos  W=20u  L=1u
+M16 OUT   Vbp3     dp6  VDD  pmos  W=20u  L=1u
+.MODEL nmos NMOS (LEVEL=1 VTO=0.7 KP=100U LAMBDA=0.01)
+.MODEL pmos PMOS (LEVEL=1 VTO=-0.7 KP=50U LAMBDA=0.01)
+```

@@ -1,0 +1,6 @@
+id: "025_nmos_mirror_1to2"
+category: "CurrentMirror"
+family: "simple_mirror"
+variant: "nmos_1to2"
+source: "hand_authored"
+attribution: null

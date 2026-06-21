@@ -1,0 +1,6 @@
+id: "014_diff_pair_pmos_resistor_loads"
+category: "Amplifier"
+family: "differential_pair"
+variant: "pmos_resistor_loads"
+source: "hand_authored"
+attribution: null

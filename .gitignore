@@ -1,0 +1,41 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# OS / editor
+.DS_Store
+*.swp
+.idea/
+.vscode/
+
+# Benchmark run outputs + experiment run dirs (raw data archived separately, not in the repo).
+# Anchored to repo root (leading /) so docs/results/ — the PUBLISHED results docs — is NOT ignored.
+/results/
+/results_*/
+out/
+
+# Local sweep config (copy of models.example.yaml with the user's model choices)
+models.yaml
+
+# Ad-hoc experiment drivers / scratch analysis (kept local, not part of the corpus)
+experiments/
+
+# AI agent / local working files — NOT for the public repo
+CLAUDE.md
+STATUS.md
+AGENTS.md
+GEMINI.md
+.claude/
+.cursor/
+.cursorrules
+*.local.md

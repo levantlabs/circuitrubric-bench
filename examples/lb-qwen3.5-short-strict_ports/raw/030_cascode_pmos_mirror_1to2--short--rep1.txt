@@ -1,0 +1,17 @@
+```spice
+* 1-to-2 Cascode PMOS Current Mirror
+* Topology: Input branch (M1, M3) and Output branch (M2, M4).
+* M1/M2 are the main current mirrors. M3/M4 are the cascode devices.
+* Polarity: PMOS devices (Source to VDD, Bulk tied to Source).
+* Load: Explicit resistor Rload connected from Drain of M2 to VDD for biasing context, 
+*       though in a pure mirror this node would connect to the next stage or an external load.
+
+M1 drain=IN_GATE gate=IN_GATE source=VDD bulk=VDD model=PMOS
+M3 drain=CASCODE_OUT_1 gate=IN_GATE source=CASCODE_OUT_1 bulk=VDD model=PMOS
+M2 drain=OUT_DRAIN gate=IN_GATE source=VDD bulk=VDD model=PMOS
+M4 drain=CASCODE_OUT_2 gate=OUT_DRAIN source=CASCODE_OUT_2 bulk=VDD model=PMOS
+
+Rload drain=OUT_DRAIN node=VDD value=10k
+
+.MODEL PMOS P (LEVEL=1 VTO=-0.7 KP=50u CGDO=0f CGSO=0f CGBO=0f)
+```

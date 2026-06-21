@@ -1,0 +1,6 @@
+id: "118_triple_cascode_opamp_diff_out_nmos"
+category: "OTA"
+family: "triple_cascode_opamp"
+variant: "nmos_input_diff_out_no_cmfb"
+source: "hand_authored"
+attribution: null

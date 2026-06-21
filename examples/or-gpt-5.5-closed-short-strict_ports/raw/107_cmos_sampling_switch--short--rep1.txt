@@ -1,0 +1,11 @@
+```spice
+* CMOS transmission-gate sampling switch with hold capacitor
+
+MN_SW hold clk  in   0   NMOS W=1u L=180n
+MP_SW hold clkb in   vdd PMOS W=2u L=180n
+
+CHOLD hold 0 1p
+
+.MODEL NMOS NMOS LEVEL=1 VTO=0.5 KP=200u LAMBDA=0.05
+.MODEL PMOS PMOS LEVEL=1 VTO=-0.5 KP=100u LAMBDA=0.05
+```

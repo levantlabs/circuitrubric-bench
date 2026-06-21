@@ -1,0 +1,6 @@
+id: "123_widlar_current_mirror_nmos"
+category: "CurrentMirror"
+family: "widlar"
+variant: "nmos"
+source: "hand_authored"
+attribution: "Gray Meyer p.300"

@@ -1,0 +1,20 @@
+```spice
+* PMOS-Input Super Source Follower
+* Topology: Common-Drain stage with PMOS input device and NMOS current-source load
+* Note: "Super" implies high output swing, achieved by using a cascode-like or stacked current source load if available, 
+* but the minimal defining topology for a standard super source follower (high impedance load) is a PMOS driver 
+* with an active NMOS current sink. To maximize swing and linearity, we assume a simple active load configuration 
+* where the output node is the drain of both devices.
+
+M1 out in out out pmos_wl
+M2 out out out out nmos_wl
+
+.MODEL pmos_wl PMOS (LEVEL=1 VTO=-0.7 KP=50u GAMMA=0.5 LAMBDA=0.1)
+.MODEL nmos_wl NMOS (LEVEL=1 VTO=0.7 KP=100u GAMMA=0.5 LAMBDA=0.1)
+
+* Explicit dimensions for simulability (non-default)
+* M1: PMOS Driver (Input at 'in', Source at 'out')
+M1 out in out 0 pmos_wl W=10u L=1u
+* M2: NMOS Current Source Load (Sinking current to ground, Drain/Source connected to output node)
+M2 out out out 0 nmos_wl W=5u L=1u
+```

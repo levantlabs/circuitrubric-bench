@@ -1,0 +1,13 @@
+```spice
+* 3-Transistor Wilson Current Mirror (NMOS)
+* Topology: M1/M2 form the input branch, M3 is the output device.
+* M1 and M2 share a gate connection to set reference current.
+* M3 gate connects to the drain of M2.
+* All sources connected to ground (default NMOS bulk).
+
+M1 out1 in1 0 0 w=10u l=1u
+M2 out2 in1 0 0 w=10u l=1u
+M3 out2 in2 0 0 w=10u l=1u
+
+.MODEL NMOS NMOS (LEVEL=1 VTO=0.7 KP=100u GAMMA=0.5 LAMBDA=0.05)
+```

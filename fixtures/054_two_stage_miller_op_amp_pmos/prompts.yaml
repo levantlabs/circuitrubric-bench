@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a two-stage Miller-compensated op-amp with PMOS inputs and single-ended output."
+  - id: verbose
+    text: "Design a two-stage Miller-compensated op-amp with PMOS inputs and single-ended output: a PMOS-input differential first stage with an NMOS current-mirror load, a common-source second stage, and a Miller capacitor across the second stage."
+  - id: spec
+    text: "Design a two-stage Miller-compensated op-amp with PMOS inputs and single-ended output. Use exactly seven transistors and one capacitor: M1 is a PMOS transistor with drain at va, gate at vinp, source at ntail, bulk to VDD. M2 is a PMOS transistor with drain at vb, gate at vinn, source at ntail, bulk to VDD. M3 is an NMOS transistor with drain at va, gate at va, source to ground, bulk to ground. M4 is an NMOS transistor with drain at vb, gate at va, source to ground, bulk to ground. M5 is a PMOS transistor with drain at ntail, gate at vbias, source at VDD, bulk to VDD. M6 is an NMOS transistor with drain at vout, gate at vb, source to ground, bulk to ground. M7 is a PMOS transistor with drain at vout, gate at vbias, source at VDD, bulk to VDD. Cc is a capacitor between vb and vout."

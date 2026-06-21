@@ -1,0 +1,17 @@
+```spice
+* Two cascaded PMOS differential amplifiers with resistor loads
+
+M1P n1p inp tail1 VDD PMOS W=10u L=0.18u
+M1N n1n inn tail1 VDD PMOS W=10u L=0.18u
+M1T tail1 vbias_tail1 VDD VDD PMOS W=20u L=0.18u
+R1P n1p 0 10k
+R1N n1n 0 10k
+
+M2P outp n1p tail2 VDD PMOS W=10u L=0.18u
+M2N outn n1n tail2 VDD PMOS W=10u L=0.18u
+M2T tail2 vbias_tail2 VDD VDD PMOS W=20u L=0.18u
+R2P outp 0 10k
+R2N outn 0 10k
+
+.MODEL PMOS PMOS (LEVEL=1 VTO=-0.7 KP=50u LAMBDA=0.02)
+```

@@ -1,0 +1,13 @@
+```spice
+* 1-to-1 Cascode PMOS Current Mirror
+* Topology: Input branch (M1, M2) and Output branch (M3, M4)
+* M1/M3 are the cascode devices; M2/M4 are the input/output diode-connected devices.
+* Polarity: PMOS devices with sources to VDD and bulks tied to sources.
+
+M1 drain=IN_GATE gate=IN_GATE source=VDD bulk=VDD model=PMOS_WL
+M2 drain=OUT_MIRROR gate=IN_GATE source=VDD bulk=VDD model=PMOS_WL
+M3 drain=OUT_MIRROR gate=OUT_MIRROR source=VDD bulk=VDD model=PMOS_WL
+M4 drain=OUT_MIRROR gate=OUT_MIRROR source=VDD bulk=VDD model=PMOS_WL
+
+.MODEL PMOS_WL pmos (LEVEL=1 VTO=-0.7 KP=50u GAMMA=0.5 LAMBDA=0.1 PHI=0.6)
+```

@@ -1,0 +1,13 @@
+```spice
+* Telescopic cascode OTA – PMOS inputs, single-ended output
+M1  X1    INP     STAIL   VDD  PMOS  W=10U  L=1U
+M2  X2    INN     STAIL   VDD  PMOS  W=10U  L=1U
+M3  OUT   VB1     X1      VDD  PMOS  W=10U  L=1U
+M4  OUT2  VB1     X2      VDD  PMOS  W=10U  L=1U
+M5  OUT   OUT2    GND     GND  NMOS  W=10U  L=1U
+M6  OUT2  OUT2    GND     GND  NMOS  W=10U  L=1U
+M7  STAIL VB_TAIL VDD     VDD  PMOS  W=20U  L=1U
+
+.MODEL NMOS NMOS (LEVEL=1  KP=200U  VTO=0.5   LAMBDA=0.01)
+.MODEL PMOS PMOS (LEVEL=1  KP=100U  VTO=-0.5  LAMBDA=0.01)
+```

@@ -1,0 +1,20 @@
+```spice
+* Cascoded NMOS Common-Source Amplifier with PMOS Current-Source Load
+* Active Devices Only (No bias networks, caps, or simulation directives)
+
+* Amplifying Stage: NMOS Input Transistor (M1)
+M1 drain_in gate_in source_in bulk_n M1_NCH W=10u L=1u
+
+* Cascode Device: NMOS for the first stage (M2)
+M2 drain_out gate_cas1 source_in bulk_n M1_NCH W=10u L=1u
+
+* Load Stage: PMOS Current Source (M3)
+M3 drain_out gate_bias_p source_vdd bulk_p M1_PCH W=50u L=1u
+
+* Cascode Device for Load: PMOS (M4) to increase output impedance of the load
+M4 drain_out gate_cas2 source_vdd bulk_p M1_PCH W=50u L=1u
+
+* Note: 'gate_in', 'drain_in', 'gate_cas1', 'gate_bias_p', 'gate_cas2' are external nodes.
+* 'source_in' connects to ground (NMOS). 'source_vdd' connects to VDD (PMOS).
+* 'bulk_n' and 'bulk_p' connect to their respective supply rails as per convention.
+```

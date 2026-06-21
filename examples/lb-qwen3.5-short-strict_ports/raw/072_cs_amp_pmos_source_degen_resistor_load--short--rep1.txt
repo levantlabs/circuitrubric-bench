@@ -1,0 +1,18 @@
+```spice
+* PMOS Common-Source Amplifier with Source Degeneration and Resistor Load
+* Topology: PMOS active device (source at bottom), NMOS current sink load (optional) or explicit Resistor Load to VDD.
+* Per prompt constraints: "Resistor load" implies a pull-up resistor to VDD.
+* Polarity: PMOS amplifier (Source/Bulk typically to lower potential in this specific degeneration config? 
+* Wait, standard PMOS CS with source degeneration usually has Source at the bottom connected to Degeneration Resistor to Ground, and Drain connected to Load Resistor to VDD.
+* Let's define the topology clearly:
+  * Amplifying Device: PMOS (M1). Gate is input. Source connects to Rdeg (to GND). Drain connects to Rload (to VDD).
+  * Load: Resistor Rload connected between VDD and M1 Drain.
+  * Degeneration: Resistor Rdeg connected between M1 Source and GND.
+  * Note: The prompt asks for "Resistor load", not a current source load.
+
+MAMP_M1 d1 g1 s1 bulk_p PMOS W=10u L=1u
+RLOAD d1 vdd 10k
+RDEG s1 0 1k
+.MODEL PMOS PMOS (LEVEL=1 VTO=-0.7 KP=50u GAMMA=0.5 LAMBDA=0.05)
+.MODEL NMOS NMOS (LEVEL=1 VTO=0.7 KP=50u GAMMA=0.5 LAMBDA=0.05)
+```

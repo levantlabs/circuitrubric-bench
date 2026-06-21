@@ -1,0 +1,6 @@
+id: "109_sampling_switch_pmos_dummy_cancel"
+category: "SampledData"
+family: "sampling_switch"
+variant: "pmos_dummy_cancel"
+source: "hand_authored"
+attribution: null

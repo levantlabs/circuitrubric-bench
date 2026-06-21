@@ -1,0 +1,28 @@
+```spice
+* NMOS-input 5T OTA Non-Inverting Amplifier with Resistor Feedback
+* Topology: Common-Source Input Stage + Active Load (PMOS) + Cascode/Current Mirror Tail
+* Feedback: Resistive divider from Output to Inverting Input
+
+* --- Active Devices ---
+* Input Differential Pair (NMOS)
+M1 out in1 in2 tail NMOS_5T W=10u L=1u
+M2 out in1 in2 tail NMOS_5T W=10u L=1u
+
+* Current Mirror Load (PMOS) - Provides high output impedance
+M3 out vdd vdd PMOS_LOAD W=10u L=1u
+M4 out vdd vdd PMOS_LOAD W=10u L=1u
+
+* Tail Current Source (NMOS) - Sinks current to ground
+M5 tail gnd tail gnd NMOS_TAIL W=20u L=1u
+
+* --- Feedback Network ---
+* Resistor Divider: Rf from Output to Inverting Input (in2)
+* Rg from Inverting Input (in2) to Ground
+Rf in2 out 1Meg
+Rg in2 gnd 100k
+
+* --- Device Models ---
+.MODEL NMOS_5T NMOS (LEVEL=1 VTO=0.7 KP=110u CGDO=0 CGSO=0 CGBO=0)
+.MODEL PMOS_LOAD PMOS (LEVEL=1 VTO=-0.7 KP=30u CGDO=0 CGSO=0 CGBO=0)
+.MODEL NMOS_TAIL NMOS (LEVEL=1 VTO=0.7 KP=110u CGDO=0 CGSO=0 CGBO=0)
+```

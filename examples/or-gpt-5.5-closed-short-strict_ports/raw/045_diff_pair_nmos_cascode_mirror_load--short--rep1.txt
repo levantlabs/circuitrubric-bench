@@ -1,0 +1,15 @@
+```spice
+* NMOS differential pair with cascode PMOS current-mirror load, single-ended output
+
+M1   nleft  INP      ntail  0    NMOS  W=10u L=180n
+M2   OUT    INN      ntail  0    NMOS  W=10u L=180n
+Mtail ntail VBN      0      0    NMOS  W=20u L=180n
+
+M3   pleft  pleft    VDD    VDD  PMOS  W=20u L=180n
+M4   pright pleft    VDD    VDD  PMOS  W=20u L=180n
+M5   nleft  VBP_CAS  pleft  VDD  PMOS  W=20u L=180n
+M6   OUT    VBP_CAS  pright VDD  PMOS  W=20u L=180n
+
+.MODEL NMOS NMOS LEVEL=1 VTO=0.5  KP=200u LAMBDA=0.05
+.MODEL PMOS PMOS LEVEL=1 VTO=-0.5 KP=100u LAMBDA=0.05
+```

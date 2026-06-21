@@ -1,0 +1,6 @@
+```spice
+MPSW vhold phib vin vdd PMOS W=10u L=180n
+CHOLD vhold 0 1p
+
+.MODEL PMOS PMOS (LEVEL=1 VTO=-0.7 KP=50u LAMBDA=0.02)
+```

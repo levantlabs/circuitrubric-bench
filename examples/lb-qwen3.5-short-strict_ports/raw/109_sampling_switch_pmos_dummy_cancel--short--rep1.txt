@@ -1,0 +1,17 @@
+```spice
+* PMOS Sampling Switch with Dummy-Device Charge Injection Cancellation
+* Topology: Main switch (M1) in parallel with a dummy switch (M2).
+* Both share the same Gate control signal to ensure simultaneous turn-on/off.
+* The dummy device is sized smaller (typically 1/4 or 1/8) to cancel charge injection from the main switch's gate-drain overlap capacitance.
+
+* Main PMOS Sampling Switch
+M1 drain node drain node gate node source VDD M_pmos W=10u L=1u M=1
+
+* Dummy PMOS Switch for Charge Injection Cancellation
+* Scaled down (e.g., 1/4th width) to match the charge injection ratio.
+M2 dummy_drain node drain dummy_gate node dummy_source VDD M_pmos W=2.5u L=1u M=1
+
+* Device Models
+* Main PMOS Model
+.MODEL M_pmos PMOS (LEVEL=3 VTO=-0.7 KP=60u GAMMA=0.5 LAMBDA=0.1 PHI=0.6)
+```

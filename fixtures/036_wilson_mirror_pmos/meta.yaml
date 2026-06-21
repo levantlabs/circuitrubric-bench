@@ -1,0 +1,6 @@
+id: "036_wilson_mirror_pmos"
+category: "CurrentMirror"
+family: "wilson_mirror"
+variant: "pmos"
+source: "hand_authored"
+attribution: null

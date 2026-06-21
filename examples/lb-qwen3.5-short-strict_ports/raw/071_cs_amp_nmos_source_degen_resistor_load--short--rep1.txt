@@ -1,0 +1,10 @@
+```spice
+* NMOS Common-Source Amplifier with Source Degeneration and Resistor Load
+* Active devices only; bias networks, capacitors, and stimuli excluded per instructions.
+
+M1 drain gate source bulk CSNMOS
+M2 source degeneration resistor node bulk CSNMOS
+Rload drain VDD 10k
+Rsource source ground 1k
+.MODEL CSNMOS NMOS (LEVEL=1)
+```

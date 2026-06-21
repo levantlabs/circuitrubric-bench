@@ -1,0 +1,20 @@
+```spice
+* 5-Transistor OTA with PMOS Inputs (Active Load)
+* Topology: PMOS Differential Pair + NMOS Current Mirror Load
+* Note: Only the core gain stage is included per constraints.
+* Bias currents are assumed to be provided externally at the drain nodes of M1/M2 and source of M3.
+
+M1 out1 in1 in2 0 pmos_5t
+M2 out2 in1 in2 0 pmos_5t
+M3 out1 out2 0 nmos_5t
+M4 out1 out2 0 nmos_5t
+
+.MODEL pmos_5t PMOS (LEVEL=1 VTO=-0.7 KP=50u GAMMA=0.5 LAMBDA=0.1)
+.MODEL nmos_5t NMOS (LEVEL=1 VTO=0.7 KP=100u GAMMA=0.5 LAMBDA=0.1)
+
+* Explicit dimensions for simulability (non-default values)
+M1 out1 in1 in2 0 W=10u L=1u
+M2 out2 in1 in2 0 W=10u L=1u
+M3 out1 out2 0 W=10u L=1u
+M4 out1 out2 0 W=10u L=1u
+```

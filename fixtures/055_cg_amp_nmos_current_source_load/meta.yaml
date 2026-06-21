@@ -1,0 +1,6 @@
+id: "055_cg_amp_nmos_current_source_load"
+category: "Amplifier"
+family: "common_gate"
+variant: "nmos_current_source_load"
+source: "hand_authored"
+attribution: null

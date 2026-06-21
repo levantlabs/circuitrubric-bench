@@ -1,0 +1,6 @@
+id: "051_folded_cascode_ota_nmos"
+category: "Amplifier"
+family: "folded_cascode_ota"
+variant: "nmos_inputs"
+source: "hand_authored"
+attribution: null

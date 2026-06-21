@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a folded-cascode OTA with NMOS inputs and single-ended output."
+  - id: verbose
+    text: "Design a folded-cascode OTA with NMOS inputs and single-ended output: an NMOS input pair whose currents fold into PMOS cascode devices, with a cascoded NMOS current-mirror load and PMOS current-source branches setting the bias."
+  - id: spec
+    text: "Design a folded-cascode OTA with NMOS inputs and single-ended output. Use exactly eleven transistors: M1 is an NMOS transistor with drain at p1, gate at vinp, source at ntail, bulk to ground. M2 is an NMOS transistor with drain at p2, gate at vinn, source at ntail, bulk to ground. M3 is a PMOS transistor with drain at voutn, gate at vcasc_p, source at p1, bulk to VDD. M4 is a PMOS transistor with drain at voutp, gate at vcasc_p, source at p2, bulk to VDD. M5 is an NMOS transistor with drain at voutn, gate at voutn, source at n_b1, bulk to ground. M6 is an NMOS transistor with drain at voutp, gate at voutn, source at n_b2, bulk to ground. M7 is an NMOS transistor with drain at n_b1, gate at n_b1, source to ground, bulk to ground. M8 is an NMOS transistor with drain at n_b2, gate at n_b1, source to ground, bulk to ground. M9 is a PMOS transistor with drain at p1, gate at vbias_p1, source at VDD, bulk to VDD. M10 is a PMOS transistor with drain at p2, gate at vbias_p1, source at VDD, bulk to VDD. M11 is an NMOS transistor with drain at ntail, gate at vbias, source to ground, bulk to ground."

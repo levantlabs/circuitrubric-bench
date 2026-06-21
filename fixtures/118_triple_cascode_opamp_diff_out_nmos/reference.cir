@@ -1,0 +1,34 @@
+* NMOS-input triple-cascode opamp, differential output, no CMFB. 13T.
+* Per side: 1 input + 2 NMOS cascodes on bottom; 2 PMOS cascodes + 1 PMOS
+* current source on top. All cascode/current-source gates from external bias.
+
+* NMOS input pair
+M1  n_a1  vinp  ntail 0   NMOS W=10u L=1u
+M2  n_a2  vinn  ntail 0   NMOS W=10u L=1u
+
+* NMOS cascode pair (first level)
+M3  n_b1  vcn1  n_a1  0   NMOS W=10u L=1u
+M4  n_b2  vcn1  n_a2  0   NMOS W=10u L=1u
+
+* NMOS cascode pair (second level)
+M5  voutn vcn2  n_b1  0   NMOS W=10u L=1u
+M6  voutp vcn2  n_b2  0   NMOS W=10u L=1u
+
+* PMOS cascode pair (bottom of PMOS stack, closer to outputs)
+M7  voutn vcp2  p_b1  vdd PMOS W=20u L=1u
+M8  voutp vcp2  p_b2  vdd PMOS W=20u L=1u
+
+* PMOS cascode pair (top of PMOS stack)
+M9  p_b1  vcp1  p_a1  vdd PMOS W=20u L=1u
+M10 p_b2  vcp1  p_a2  vdd PMOS W=20u L=1u
+
+* PMOS current source (top, source from VDD)
+M11 p_a1  vbp   vdd   vdd PMOS W=20u L=1u
+M12 p_a2  vbp   vdd   vdd PMOS W=20u L=1u
+
+* NMOS tail
+M13 ntail vbias 0     0   NMOS W=20u L=1u
+
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.MODEL PMOS PMOS (LEVEL=1 VTO=-1 KP=1.0e-4 LAMBDA=0.02)
+.END

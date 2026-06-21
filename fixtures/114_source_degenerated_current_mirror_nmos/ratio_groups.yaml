@@ -1,0 +1,6 @@
+groups:
+  - devices: [M1, M2]      # matched mirror pair
+    ratio_W: [1, 1]
+    ratio_L: [1, 1]
+  - devices: [R1, R2]      # matched degeneration resistors
+    ratio_value: [1, 1]

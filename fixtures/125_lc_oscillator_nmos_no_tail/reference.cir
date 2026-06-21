@@ -1,0 +1,11 @@
+* NMOS cross-coupled LC oscillator, center-tapped tank, NO tail current source.
+* The simplest textbook form - cross-coupled pair sources tied directly to
+* ground. Lower phase-noise regulation than the version with a tail bias,
+* but commonly shown in introductory presentations of cross-coupled LC oscs.
+M1 voutp voutn 0 0 NMOS W=40u L=1u
+M2 voutn voutp 0 0 NMOS W=40u L=1u
+L1 vdd  voutp  1n
+L2 vdd  voutn  1n
+C1 voutp voutn 1p
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.END

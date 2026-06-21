@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design an NMOS common-gate amplifier with a resistor load, an AC-coupled input, and a current-source bias."
+  - id: verbose
+    text: "Design an NMOS common-gate amplifier with a resistor load and an AC-coupled input: a fixed-bias common-gate transistor whose source is set by an NMOS current source and fed the input through a coupling capacitor, with a resistor load to the supply."
+  - id: spec
+    text: "Design an NMOS common-gate amplifier with a resistor load, an AC-coupled input, and a current-source bias. Use exactly two transistors, one resistor, and one capacitor: M1 is an NMOS transistor with drain at vout, gate at vbias, source at vs, bulk to ground. RL is a resistor between vdd and vout. Cin is a capacitor between vin and vs. M2 is an NMOS transistor with drain at vs, gate at vbn, source to ground, bulk to ground."

@@ -1,0 +1,15 @@
+```spice
+* Common-Source Stage (NMOS) with Resistor Load
+M1 drain1 gate1 source1 bulk1 cs_model W=10u L=1u
+Rload drain1 VDD 10k
+
+* NMOS Source Follower Stage (Directly DC coupled to CS output)
+M2 gate1 source2 bulk2 sf_model W=10u L=1u
+
+* Current Source Bias for the Source Follower
+M3 drain2 gate2 source2 bulk3 tail_model W=10u L=1u
+VDD VDD 0 DC 5
+.MODEL cs_model NMOS (LEVEL=1)
+.MODEL sf_model NMOS (LEVEL=1)
+.MODEL tail_model NMOS (LEVEL=1)
+```

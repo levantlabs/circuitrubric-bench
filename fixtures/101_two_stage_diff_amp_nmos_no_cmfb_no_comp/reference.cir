@@ -1,0 +1,16 @@
+* Two-stage fully differential amplifier, NMOS-input.
+* Stage 1: NMOS diff pair with PMOS current-source loads (no mirror), NMOS tail.
+* Stage 2: two PMOS common-source amps with NMOS current-source loads.
+* No CMFB, no compensation.
+M1 v1n   vinp  ntail 0   NMOS W=20u L=1u
+M2 v1p   vinn  ntail 0   NMOS W=20u L=1u
+M3 v1n   vbp1  vdd   vdd PMOS W=40u L=1u
+M4 v1p   vbp1  vdd   vdd PMOS W=40u L=1u
+M5 ntail vbias 0     0   NMOS W=40u L=1u
+M6 voutp v1n   vdd   vdd PMOS W=80u L=1u
+M7 voutn v1p   vdd   vdd PMOS W=80u L=1u
+M8 voutp vbn2  0     0   NMOS W=40u L=1u
+M9 voutn vbn2  0     0   NMOS W=40u L=1u
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.MODEL PMOS PMOS (LEVEL=1 VTO=-1 KP=1.0e-4 LAMBDA=0.02)
+.END

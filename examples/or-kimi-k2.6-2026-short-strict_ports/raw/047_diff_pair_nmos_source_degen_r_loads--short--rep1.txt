@@ -1,0 +1,11 @@
+ ```spice
+* NMOS source-degenerated differential pair with resistor loads
+M1 OUTN INP S1 GND NMOS W=10u L=0.18u
+M2 OUTP INN S2 GND NMOS W=10u L=0.18u
+RS1 S1 TAIL 1k
+RS2 S2 TAIL 1k
+RD1 VDD OUTN 10k
+RD2 VDD OUTP 10k
+
+.MODEL NMOS NMOS (LEVEL=1 KP=200u VTO=0.5 LAMBDA=0.02)
+```

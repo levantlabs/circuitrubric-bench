@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a CMOS inverter."
+  - id: verbose
+    text: "Design a CMOS inverter: a complementary pair with a PMOS pull-up to the supply and an NMOS pull-down to ground, sharing a common input and a common output."
+  - id: spec
+    text: "Design a CMOS inverter. Use exactly two transistors: M1 is the NMOS pull-down with drain at vout, gate at vin, source to ground, bulk to ground. M2 is the PMOS pull-up with drain at vout, gate at vin, source at VDD, bulk to VDD."

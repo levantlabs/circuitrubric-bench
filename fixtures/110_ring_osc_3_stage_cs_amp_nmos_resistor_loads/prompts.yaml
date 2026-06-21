@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a 3-stage ring oscillator using NMOS common-source amplifier stages with resistor loads."
+  - id: verbose
+    text: "Design a 3-stage ring oscillator from NMOS common-source amplifier stages with resistor loads: three resistor-loaded common-source inverting stages connected in a loop to sustain oscillation."
+  - id: spec
+    text: "Design a 3-stage ring oscillator using NMOS common-source amplifier stages with resistor loads. Use exactly three transistors and three resistors arranged as three CS stages in a loop. M1 is an NMOS transistor with drain at v1, gate at vout, source to ground, bulk to ground. R1 is a resistor between vdd and v1. M2 is an NMOS transistor with drain at v2, gate at v1, source to ground, bulk to ground. R2 is a resistor between vdd and v2. M3 is an NMOS transistor with drain at vout, gate at v2, source to ground, bulk to ground. R3 is a resistor between vdd and vout."

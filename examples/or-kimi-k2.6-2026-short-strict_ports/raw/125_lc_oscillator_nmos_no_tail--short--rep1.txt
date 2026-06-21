@@ -1,0 +1,9 @@
+ ```spice
+M1 VOP VON GND GND nmos W=10u L=0.18u
+M2 VON VOP GND GND nmos W=10u L=0.18u
+L1 VDD VOP 2n
+L2 VDD VON 2n
+K1 L1 L2 0.999
+C1 VOP VON 1p
+.model nmos nmos (level=1 kp=200u vto=0.4 lambda=0.02 gamma=0.5 phi=0.6)
+```

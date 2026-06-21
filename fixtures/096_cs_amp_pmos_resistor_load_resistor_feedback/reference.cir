@@ -1,0 +1,9 @@
+* PMOS common-source amplifier with resistor load and resistive feedback (shunt-shunt).
+* M1 is the input device, Rd is the drain load, Rf is the feedback resistor
+* from output back to gate (also providing DC self-bias).
+M1 vout vin vdd vdd PMOS W=20u L=1u
+Rd vout 0   10k
+Rf vout vin 100k
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.MODEL PMOS PMOS (LEVEL=1 VTO=-1 KP=1.0e-4 LAMBDA=0.02)
+.END

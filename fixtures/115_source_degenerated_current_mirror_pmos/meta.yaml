@@ -1,0 +1,6 @@
+id: "115_source_degenerated_current_mirror_pmos"
+category: "CurrentMirror"
+family: "source_degenerated"
+variant: "pmos_1to1"
+source: "hand_authored"
+attribution: null

@@ -1,0 +1,119 @@
+```spice
+* PMOS Differential Amplifier with Resistive Common-Mode Feedback
+* Active Devices: M1, M2 (Input Pair), M3, M4 (Active Load / Current Mirror)
+* Feedback Network: Rfb1, Rfb2 (Resistive divider to set common-mode level)
+
+* NMOS Input Pair (M1, M2) - Note: Prompt asks for PMOS diff amp. 
+* Standard topology: PMOS input pair with NMOS active load is most common for high gain.
+* However, if strictly "PMOS differential amplifier" implies the input devices are PMOS,
+* they must be connected to VDD. The load must be NMOS (sinking current) or a resistor.
+* Given "Resistive Common-Mode Feedback", this usually implies a specific biasing topology 
+* often found in low-voltage or rail-to-rail contexts, but the core gain stage is:
+* PMOS Input Pair + NMOS Current Mirror Load (Active Load) is the standard high-gain IC block.
+* If purely resistive load is intended for the whole stage, gain is low. 
+* Assuming standard High-Gain IC topology: PMOS Inputs, NMOS Loads.
+
+* Model Definitions
+.model MPMOS PMOS (VTO=0.4 KP=50u CGDO=1f CGSO=1f CGB=1f)
+.model MNMOS NMOS (VTO=-0.4 KP=120u CGDO=1f CGSO=1f CGB=1f)
+
+* Sizing for the Gain Stage
+* M1, M2: PMOS Input Pair
+M1 drain=d1 gate=in+ source=vdd bulk=vdd model=MPMOS W=10u L=1u
+M2 drain=d2 gate=in- source=vdd bulk=vdd model=MPMOS W=10u L=1u
+
+* M3, M4: NMOS Active Load (Current Mirror)
+* Connected to ground. Sources at bottom.
+M3 drain=d1 gate=bias node=ss bulk=ss model=MNMOS W=5u L=1u
+M4 drain=d2 gate=bias node=ss bulk=ss model=MNMOS W=5u L=1u
+
+* Resistive Common-Mode Feedback Network
+* This network typically biases the gates of the input pair or sets a reference.
+* In many IC contexts, "Resistive CMFB" refers to a resistor divider from VDD/GND 
+* feeding the gate of one transistor or a dedicated CMFB amplifier input.
+* Here we implement a simple resistive divider biasing the common-mode point 
+* (often used in discrete implementations or specific low-power IC blocks).
+* Connecting to the gates of M1/M2 is risky for stability without an op-amp, 
+* so this represents a discrete-style CMFB where Rfb sets the DC operating point 
+* relative to a reference. Alternatively, if interpreted as a resistor load diff pair:
+
+* Alternative Interpretation: PMOS Input Pair with Resistive Load (Low Gain)
+* If the prompt implies no active load mirror, just resistors:
+* But "Resistive Common-Mode Feedback" strongly suggests an active circuit topology 
+* where resistors are used to stabilize the common-mode voltage.
+* Let's provide the standard High-Gain Topology (PMOS Input + NMOS Load) 
+* with a resistive divider biasing the tail current source or a specific CMFB node.
+* However, without a tail current source model provided, we assume a discrete 
+* implementation where Rfb connects VDD to GND to set a reference voltage.
+
+* Let's refine: A PMOS differential pair usually requires an NMOS load for gain.
+* The "Resistive Common-Mode Feedback" might refer to the biasing of the tail current 
+* or a specific feedback loop. Since no tail current source model is requested, 
+* we assume a discrete implementation with a resistor divider setting the common mode.
+* We will add a simple resistive divider connected to the gates (discrete style) 
+* or more likely, a resistor load configuration if active loads are not desired.
+* Given the constraint "minimum set of devices", and standard IC practice:
+* PMOS Input Pair + NMOS Active Load is the only way to get useful gain.
+* The "Resistive CMFB" is often implemented by connecting resistors from VDD/GND 
+* to the gates in discrete designs, or via a dedicated amplifier.
+* We will implement a PMOS diff pair with NMOS active loads and a resistive divider 
+* biasing the common-mode reference (simulating the feedback path).
+
+* Re-evaluating "Resistive Common-Mode Feedback": 
+* In many textbook examples (e.g., Razavi), CMFB is an active loop.
+* If strictly resistive, it implies a resistor divider from VDD to GND connected to 
+* the gate of one transistor or a dedicated node.
+* Let's assume the user wants the standard PMOS Diff Amp with NMOS loads, 
+* and the "Resistive CMFB" is realized by a resistor divider biasing the input pair 
+* (common in discrete op-amps).
+
+* Final Topology Selection:
+* M1, M2: PMOS Input Pair.
+* M3, M4: NMOS Active Load (Current Mirror).
+* Rfb1, Rfb2: Resistive divider to set common-mode bias voltage at the gates 
+* (simulating the feedback action in a discrete context).
+
+M5 drain=cm_out gate=ref node=ss bulk=ss model=MNMOS W=1u L=1u
+* Wait, M3/M4 need a bias current. Without a tail source, we assume they are diode-connected 
+* or biased by an external current. To make it self-biased with resistors:
+* Let's use a simple resistor load for the PMOS pair if active loads aren't strictly required, 
+* but that kills gain. The prompt asks for "PMOS differential amplifier", implying high performance.
+* I will stick to PMOS Input + NMOS Load. For the CMFB, I will add a resistive divider 
+* connected to the gates (discrete style) or assume an external bias.
+* To strictly follow "Resistive Common-Mode Feedback" as a topology feature:
+* Often this means R1 and R2 from VDD/GND to the gate of M1/M2.
+
+M1 drain=d1 gate=in+ source=vdd bulk=vdd model=MPMOS W=10u L=1u
+M2 drain=d2 gate=in- source=vdd bulk=vdd model=MPMOS W=10u L=1u
+M3 drain=d1 gate=bias node=ss bulk=ss model=MNMOS W=5u L=1u
+M4 drain=d2 gate=bias node=ss bulk=ss model=MNMOS W=5u L=1u
+
+* Resistive CMFB Network (Divider)
+Rfb1 name=cm_div_1 node1=vdd node2=bias value=100k
+Rfb2 name=cm_div_2 node1=gnd node2=bias value=100k
+
+* Note: M3/M4 require a bias current. In a pure netlist without a tail source, 
+* they are often diode-connected or assumed to have an external I_bias.
+* To make it functional as a standalone block with resistive CMFB:
+* We can connect the gates of M3/M4 to the output of a simple resistor divider 
+* that sets the common mode. But M3/M4 need a reference.
+* Let's assume M3/M4 are diode-connected for biasing or have an external current.
+* However, the most robust "Resistive CMFB" topology in discrete ICs uses resistors 
+* to set the common mode voltage at the input gates.
+
+* Revised Minimal Netlist:
+* PMOS Input Pair (M1, M2)
+* NMOS Active Load (M3, M4) - assuming external bias current or diode connection logic handled externally.
+* Resistive Divider (Rfb1, Rfb2) setting the common-mode voltage at the gates.
+
+M1 drain=d1 gate=in+ source=vdd bulk=vdd model=MPMOS W=10u L=1u
+M2 drain=d2 gate=in- source=vdd bulk=vdd model=MPMOS W=10u L=1u
+M3 drain=d1 gate=bias node=ss bulk=ss model=MNMOS W=5u L=1u
+M4 drain=d2 gate=bias node=ss bulk=ss model=MNMOS W=5u L=1u
+Rfb1 name=Rfb1 node1=vdd node2=bias value=100k
+Rfb2 name=Rfb2 node1=gnd node2=bias value=100k
+
+* Correction: M3/M4 gates must be tied together for a current mirror. 
+* The bias node 'bias' is driven by the resistive divider.
+* This creates a valid DC operating point where the common-mode voltage at the input 
+* (in+, in-) is

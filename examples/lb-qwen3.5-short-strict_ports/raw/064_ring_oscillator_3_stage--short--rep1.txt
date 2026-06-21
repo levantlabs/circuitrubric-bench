@@ -1,0 +1,128 @@
+The user is asking for a "3-stage CMOS inverter-based ring oscillator". However, the system instructions explicitly forbid including:
+- Ideal voltage sources (VDD/GND are implied by device polarity but explicit ideal sources like `Vdd` or `Vin` are banned).
+- Input stimuli.
+- Simulation analyses (`.TRAN`, etc.).
+- Gate bias networks or pull-up/pull-down resistors.
+- Coupling capacitors.
+
+A functional ring oscillator requires:
+1.  **Active Devices**: Inverters made of NMOS and PMOS pairs.
+2.  **Power Rails**: Implicitly connected to VDD and GND via the device terminals (Source/Bulk).
+3.  **Feedback Loop**: The output of stage N connects to the input of stage N+1.
+
+The constraint "Bias and input drive are handled externally" combined with "Do NOT include... ideal voltage sources, input stimuli" makes it impossible to create a *self-starting* or *simulatable* oscillator in isolation without an external trigger or explicit power rails defined as nodes (which are allowed) but without the `.TRAN` analysis.
+
+However, the core instruction is: "Output the minimum set of devices that defines the requested topology".
+A ring oscillator topology consists of 3 inverters. An inverter consists of 1 NMOS and 1 PMOS.
+Total devices: 6 MOSFETs.
+
+Let's construct the netlist for 3 inverters cascaded directly (DC coupled).
+Stage 1: M1 (NMOS), M2 (PMOS)
+Stage 2: M3 (NMOS), M4 (PMOS)
+Stage 3: M5 (NMOS), M6 (PMOS)
+
+Connections:
+- Drain of M1 -> Gate/Drain of M3 (Node A)
+- Drain of M3 -> Gate/Drain of M5 (Node B)
+- Drain of M5 -> Output (Node C)
+- Source of all NMOS -> GND (or `0`)
+- Source of all PMOS -> VDD (or `vdd`)
+- Bulk terminals: Explicitly tied to source for standard CMOS models unless specified otherwise. The prompt says "never leave a bulk terminal floating".
+
+Since I cannot include `.TRAN` or voltage sources, the netlist will define the circuit topology ready for simulation if power rails and an initial condition were added externally. But strictly following "Do NOT include... ideal voltage sources", I must omit `Vdd` and `Vin`. Wait, the instruction says "Bias and input drive are handled externally". This usually implies I don't draw the source `V1`, but I still need to define the nodes `vdd` and `0` for the MOSFETs to connect to. The prohibition is on *ideal voltage sources* (the elements themselves), not the node names.
+
+Let's refine the device list:
+- 3 NMOS devices.
+- 3 PMOS devices.
+- Explicit W, L, M properties.
+- Bulk connected to source.
+
+Topology:
+Inverter 1: Input `in`, Output `out1`.
+Inverter 2: Input `out1`, Output `out2`.
+Inverter 3: Input `out2`, Output `out3`.
+
+Nodes:
+- `vdd` (PMOS sources)
+- `0` (NMOS sources/bulks)
+- `in` (Input, external drive)
+- `n1` (Output of Inv1 / Input of Inv2)
+- `n2` (Output of Inv2 / Input of Inv3)
+- `n3` (Output of Inv3)
+
+MOSFET Lines:
+M1 nmos in n1 0 nmos
+M2 pmos vdd in n1 pmos
+M3 nmos n1 n2 0 nmos
+M4 pmos vdd n1 n2 pmos
+M5 nmos n2 n3 0 nmos
+M6 pmos vdd n2 n3 pmos
+
+Wait, the prompt says "Do NOT include... ideal voltage sources". If I don't define `V(vdd)`, the netlist is incomplete for simulation but defines the topology. The instruction "Bias and input drive are handled externally" supports this.
+
+Let's ensure the model cards are included as requested ("with the appropriate `.MODEL` cards").
+I will use generic models `nmos` and `pmos`.
+
+Final check on constraints:
+- Minimum set of devices? Yes, just the 6 transistors defining the ring.
+- Explicit W, L, M? Yes.
+- Bulk tied? Yes.
+- No resistors/caps/sources? Yes.
+- SPICE order correct? Yes.
+
+```spice
+* 3-Stage Ring Oscillator Topology
+* Note: Power rails (VDD) and input stimulus are handled externally per instructions.
+* Only the active gain stages defining the oscillation loop are included.
+
+.MODEL nmos NMOS (LEVEL=1 VTO=0.7 KP=100u CGDO=0f CGSO=0f CGBO=0f)
+.MODEL pmos PMOS (LEVEL=1 VTO=-0.7 KP=50u CGDO=0f CGSO=0f CGBO=0f)
+
+* Inverter Stage 1
+M1 drain1 gate1 source1 bulk1 nmos W=10u L=1u M=1
+M2 drain1 gate1 source2 bulk2 pmos W=50u L=1u M=1
+
+* Inverter Stage 2 (DC coupled to Stage 1 output)
+M3 drain2 gate2 source1 bulk1 nmos W=10u L=1u M=1
+M4 drain2 gate2 source2 bulk2 pmos W=50u L=1u M=1
+
+* Inverter Stage 3 (DC coupled to Stage 2 output)
+M5 drain3 gate3 source1 bulk1 nmos W=10u L=1u M=1
+M6 drain3 gate3 source2 bulk2 pmos W=50u L=1u M=1
+
+* Node definitions for clarity in topology:
+* gate1 = input (external)
+* drain1 = gate2 = node 1
+* drain2 = gate3 = node 2
+* drain3 = output
+* source1 = 0 (GND)
+* source2 = vdd (VDD)
+```
+
+Wait, I need to make sure the node names in the M lines match the topology strictly.
+Let's trace:
+Inv1: Gate=`in`, Drain=`n1`, Source=`0`/`vdd`.
+Inv2: Gate=`n1`, Drain=`n2`, Source=`0`/`vdd`.
+Inv3: Gate=`n2`, Drain=`n3`, Source=`0`/`vdd`.
+
+Corrected Netlist Logic:
+M1 (NMOS Inv1): D=n1, G=in, S=0, B=0
+M2 (PMOS Inv1): D=n1, G=in, S=vdd, B=vdd
+M3 (NMOS Inv2): D=n2, G=n1, S=0, B=0
+M4 (PMOS Inv2): D=n2, G=n1, S=vdd, B=vdd
+M5 (NMOS Inv3): D=n3, G=n2, S=0, B=0
+M6 (PMOS Inv3): D=n3, G=n2, S=vdd, B=vdd
+
+This looks correct and minimal.
+
+```spice
+.MODEL nmos NMOS (LEVEL=1 VTO=0.7 KP=100u CGDO=0f CGSO=0f CGBO=0f)
+.MODEL pmos PMOS (LEVEL=1 VTO=-0.7 KP=50u CGDO=0f CGSO=0f CGBO=0f)
+
+M1 n1 in 0 0 nmos W=10u L=1u M=1
+M2 n1 in vdd vdd pmos W=50u L=1u M=1
+M3 n2 n1 0 0 nmos W=10u L=1u M=1
+M4 n2 n1 vdd vdd pmos W=50u L=1u M=1
+M5 n3 n2 0 0 nmos W=10u L=1u M=1
+M6 n3 n2 vdd vdd pmos W=50u L=1u M=1
+```

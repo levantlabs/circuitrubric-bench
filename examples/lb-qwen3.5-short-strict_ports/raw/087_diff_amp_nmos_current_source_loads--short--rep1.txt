@@ -1,0 +1,40 @@
+```spice
+* NMOS Differential Pair with PMOS Current-Source Loads
+* Active Devices Only (No bias networks, caps, or simulation directives)
+
+* Tail Current Source (NMOS acting as sink to ground for the differential pair)
+Mtail tail node_tail 0 0 nmos_tail
+.model nmos_tail nmos (LEVEL=1 VTO=0.4 KP=100u LAMBDA=0.05)
+
+* Differential Pair NMOS Devices
+M1 out1 in1 in2 0 nmos_diff W=10u L=1u M=1
+M2 out2 in3 in4 0 nmos_diff W=10u L=1u M=1
+.model nmos_diff nmos (LEVEL=1 VTO=0.4 KP=100u LAMBDA=0.05)
+
+* PMOS Current-Source Loads (Active Loads connected to VDD)
+Mload1 out1 0 out1 pmos_load W=20u L=1u M=1
+Mload2 out2 0 out2 pmos_load W=20u L=1u M=1
+.model pmos_load pmos (LEVEL=1 VTO=-0.4 KP=50u LAMBDA=0.05)
+
+* Node Definitions for Clarity
+* node_tail: Connected to sources of M1 and M2, drain of Mtail
+* in1, in2: Gates of M1
+* in3, in4: Gates of M2 (Note: Standard diff pair usually shares gates or has specific input mapping. 
+* Assuming standard topology where M1/M2 are the pair. Let's refine inputs to be explicit nodes).
+* Correction on Input Mapping for Standard Diff Pair:
+* M1: Drain=out1, Gate=in_plus, Source=node_tail
+* M2: Drain=out2, Gate=in_minus, Source=node_tail
+* Re-defining M1/M2 connections strictly per standard topology request.
+
+* Revised Netlist with Explicit Node Mapping
+Mtail tail node_tail 0 0 nmos_tail
+.model nmos_tail nmos (LEVEL=1 VTO=0.4 KP=100u LAMBDA=0.05)
+
+M1 out1 in_plus in_minus 0 nmos_diff W=10u L=1u M=1
+M2 out2 in_minus in_plus 0 nmos_diff W=10u L=1u M=1
+.model nmos_diff nmos (LEVEL=1 VTO=0.4 KP=100u LAMBDA=0.05)
+
+Mload1 out1 0 out1 pmos_load W=20u L=1u M=1
+Mload2 out2 0 out2 pmos_load W=20u L=1u M=1
+.model pmos_load pmos (LEVEL=1 VTO=-0.4 KP=50u LAMBDA=0.05)
+```

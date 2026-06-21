@@ -1,0 +1,14 @@
+```spice
+* PMOS Common-Source Stage with Resistor Load
+M1 drain1 gate1 source1 bulk1 pmos W=10u L=1u
+Rload drain1 VDD 1Meg
+
+* PMOS Source Follower Stage with Current-Source Bias
+M2 drain2 gate2 source2 bulk2 pmos W=10u L=1u
+M3 drain2 current_source_node source2 bulk3 nmos W=10u L=1u
+M4 current_source_node VDD source3 bulk4 pmos W=10u L=1u
+
+* Device Models
+.model pmos pm (LEVEL=1 VTO=-0.5 KP=50u CGDO=0 CGSO=0)
+.model nmos nm (LEVEL=1 VTO=0.5 KP=50u CGDO=0 CGSO=0)
+```

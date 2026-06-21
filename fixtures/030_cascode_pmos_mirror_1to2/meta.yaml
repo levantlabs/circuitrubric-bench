@@ -1,0 +1,6 @@
+id: "030_cascode_pmos_mirror_1to2"
+category: "CurrentMirror"
+family: "cascode_mirror"
+variant: "pmos_1to2"
+source: "hand_authored"
+attribution: null

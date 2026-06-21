@@ -1,0 +1,9 @@
+* Source-degenerated NMOS current mirror (1:1).
+* Matched degeneration resistors R1 (reference leg) and R2 (output leg)
+* boost output impedance and improve matching.
+M1 iref iref ns1 0 NMOS W=10u L=1u
+R1 ns1  0    1k
+M2 iout iref ns2 0 NMOS W=10u L=1u
+R2 ns2  0    1k
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.END

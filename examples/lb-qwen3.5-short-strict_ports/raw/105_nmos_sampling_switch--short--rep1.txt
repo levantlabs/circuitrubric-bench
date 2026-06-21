@@ -1,0 +1,10 @@
+```spice
+* NMOS Sampling Switch with Hold Capacitor
+* Active Device: M1 (NMOS)
+* Load/Storage Element: C1 (Hold Capacitor)
+
+M1 drain gate source bulk model W=10u L=1u
+C1 hold_node ground 1pF
+
+.MODEL model NMOS (LEVEL=1 VTO=0.7 KP=110u GAMMA=0.6 PHI=0.6 LAMBDA=0.05 CGDO=20f CGSO=20f CGBO=50f)
+```

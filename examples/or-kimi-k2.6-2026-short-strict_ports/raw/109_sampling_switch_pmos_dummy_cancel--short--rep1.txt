@@ -1,0 +1,6 @@
+ ```spice
+* PMOS sampling switch with dummy-device charge-injection cancellation
+M1 OUT CLK IN VDD PCH W=4u L=0.18u
+M2 OUT CLK_B OUT VDD PCH W=2u L=0.18u
+.MODEL PCH PMOS (LEVEL=1 VTO=-0.4 KP=50u LAMBDA=0.02)
+```

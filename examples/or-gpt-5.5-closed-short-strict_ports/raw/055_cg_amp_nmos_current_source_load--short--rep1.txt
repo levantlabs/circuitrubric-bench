@@ -1,0 +1,7 @@
+```spice
+M1 out vg in 0 NMOS W=10u L=1u
+M2 out vbp vdd vdd PMOS W=20u L=1u
+
+.MODEL NMOS NMOS LEVEL=1 VTO=0.7 KP=200u LAMBDA=0.02
+.MODEL PMOS PMOS LEVEL=1 VTO=-0.7 KP=100u LAMBDA=0.02
+```

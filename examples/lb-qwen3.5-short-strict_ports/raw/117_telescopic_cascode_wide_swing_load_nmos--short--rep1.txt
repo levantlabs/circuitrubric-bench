@@ -1,0 +1,120 @@
+```spice
+* NMOS Telescopic Cascode Amplifier with Wide-Swing PMOS Cascode Mirror Load
+* Active Devices Only (No bias networks, caps, or simulation directives)
+
+* --- Amplifying Side (NMOS Input Pair + NMOS Cascodes) ---
+M1 out in cas_n1 nmos_amp
+M2 cas_n1 out cas_n2 nmos_cas
+M3 in out cas_n3 nmos_amp
+M4 cas_n3 out cas_n4 nmos_cas
+
+* --- Load Side (Wide-Swing PMOS Cascode Current Mirror) ---
+* Tail Current Source (PMOS to VDD for NMOS amp, or NMOS to GND? 
+* Per prompt: "NMOS amplifier gets a PMOS current-source load". 
+* So the mirror sinks current from the top of the NMOS stack? 
+* Wait: Standard Telescopic Cascode with Active Load usually implies:
+*   Input Pair (NMOS) at bottom.
+*   Cascode NMOS on top of input pair.
+*   Current Mirror Load (PMOS) at the very top sourcing current to VDD.
+*   However, a "Wide-Swing PMOS Cascode Mirror" typically consists of:
+*     1. A diode-connected PMOS (M5).
+*     2. A cascode PMOS (M6) on top of M5.
+*     3. The mirror pair for the other side (M7, M8).
+*   Let's assume a differential input driving a single-ended output via a current mirror load.
+*   Structure: 
+*     Input Pair: M1 (Left), M3 (Right).
+*     Cascode NMOS: M2 (on M1), M4 (on M3).
+*     Load Mirror: 
+*       Reference branch: M5 (diode connected), M6 (cascode).
+*       Output branch: M7 (diode connected? No, usually M7 is the mirror device, M8 cascode).
+*   Actually, for a single-ended output from a differential pair with active load:
+*     The "Load" is the PMOS current mirror.
+*     Branch 1 (Ref): M5 (gate tied to drain), M6 (cascode on top of M5).
+*     Branch 2 (Out): M7 (gate tied to M5 gate), M8 (cascode on top of M7).
+*   But the prompt asks for "NMOS-input telescopic cascode... with ... PMOS cascode mirror load".
+*   This implies the standard topology: 
+*     Bottom: NMOS Input Pair (M1, M3).
+*     Top of NMOS stack: NMOS Cascodes (M2, M4).
+*     Load: PMOS Current Mirror.
+*       Ref Branch: PMOS Diode-connected (M5) + PMOS Cascode (M6).
+*       Out Branch: PMOS Mirror Device (M7) + PMOS Cascode (M8).
+*   Wait, if M1/M3 are the input pair, their drains connect to the sources of the cascodes? 
+*   No, in telescopic: Input NMOS -> NMOS Cascode -> PMOS Load.
+*   So: 
+*     Node X (Output): Drain of M8, Drain of M7, Gate of M1/M3? No.
+*     Let's define nodes clearly.
+*     VDD at top. GND at bottom.
+*     Input: Vin+ to Gate M1, Vin- to Gate M3.
+*     M1 Source -> GND. M3 Source -> GND.
+*     M1 Drain -> M2 Source. M3 Drain -> M4 Source.
+*     M2 Drain -> Node A (Output). 
+*     M4 Drain -> Node B (Output of other side, usually tied to Ref or used for diff).
+*     For Single-Ended Output: We need a current mirror load.
+*     The "Load" is the PMOS mirror.
+*     Branch 1 (Ref): M5 (PMOS), M6 (PMOS Cascode). 
+*       M5 Drain/Gate tied together. M6 Drain to VDD, Source to M5 Drain.
+*     Branch 2 (Out): M7 (PMOS), M8 (PMOS Cascode).
+*       M7 Gate tied to M5 Gate. M8 Drain to VDD, Source to M7 Drain.
+*     Connection: 
+*       Node A (Output) connects to: 
+*         - Drain of M2 (NMOS cascode on input pair side 1).
+*         - Source of M8 (PMOS cascode load side 1).
+*       Node B (Internal/Ref): 
+*         - Drain of M4 (NMOS cascode on input pair side 2).
+*         - Source of M6 (PMOS cascode load side 2).
+*     Wait, standard single-ended output from diff pair with active load:
+*       The output is taken at the drain of one side. 
+*       The other side's current is mirrored to the output node? 
+*       No, usually: 
+*         Input Pair (M1, M3). 
+*         Cascode NMOS (M2 on M1, M4 on M3).
+*         PMOS Mirror Load (M5/M6 on one side, M7/M8 on the other).
+*         If we want single-ended output at Node Out:
+*           We connect the drain of M2 and Source of M8 to "Out".
+*           We connect the drain of M4 and Source of M6 to a node that is forced to be equal to Out (via the mirror action)? 
+*           Actually, in a standard telescopic cascode with active load:
+*             The PMOS mirror provides the bias current.
+*             One side is the output, the other side is the reference for the mirror.
+*             Usually, M5/M6 form the reference branch (diode connected at bottom of stack? No).
+*             Let's stick to the most robust definition:
+*               Ref Branch: M5 (PMOS diode connected), M6 (PMOS cascode). 
+*                 M5 Drain/Gate = Node Ref. M6 Drain = VDD, Source = Node Ref.
+*               Out Branch: M7 (PMOS mirror), M8 (PMOS cascode).
+*                 M7 Gate = Node Ref. M8 Drain = VDD, Source = Node Out.
+*               Input Pair Side 1: M1, M2. 
+*                 M1 Drain = M2 Source. M2 Drain = Node Out.
+*               Input Pair Side 2: M3, M4.
+*                 M3 Drain = M4 Source. M4 Drain = Node Ref (connected to M5/M6 stack).
+*             This creates a single-ended output at "Node Out" where the signal from M1/M2 is amplified, and the current from M7/M8 mirrors the current from M3/M4? 
+*             Wait, if M3/M4 drain is connected to Node Ref (which is diode connected M5), then M3/M4 acts as the reference branch for the PMOS mirror.
+*             Yes. This is the standard topology.
+
+M1 out in cas_n1 nmos_amp
+M2 cas_n1 out cas_n2 nmos_cas
+M3 in out cas_n3 nmos_amp
+M4 cas_n3 out cas_n4 nmos_cas
+
+M5 ref out cas_p1 pmos_mirror
+M6 cas_p1 ref cas_p2 pmos_cas
+M7 out ref cas_p3 pmos_mirror
+M8 cas_p3 out cas_p4 pmos_cas
+
+* Correction on node naming for clarity in the netlist below:
+*   Let's use explicit node names to avoid confusion.
+*   VDD, GND are implicit or external.
+*   Nodes: 
+*     VinP, VinN (Inputs)
+*     Out (Single Ended Output)
+*     Ref (Reference node for the mirror)
+*   Devices:
+*     M1: Input NMOS 1 (Drain to Cascode S, Gate VinP, Source GND)
+*     M2: Cascode NMOS 1 (Drain Out, Gate Bias, Source M1 D)
+*     M3: Input NMOS 2 (Drain to Cascode S, Gate VinN, Source GND)
+*     M4: Cascode NMOS 2 (Drain Ref, Gate Bias, Source M3 D)
+*     M5: PMOS Mirror Ref (Diode connected? No, usually the bottom of the PMOS stack is diode connected to set Vgs).
+*       Let's refine the "Wide Swing" structure.
+*       Wide Swing Cascode Current Mirror:
+*         Branch 1 (Ref): 
+*           M5 (PMOS) Drain/Gate tied together. Source to VDD? No, usually Source to VDD for PMOS.
+*           Wait, PMOS Source is at VDD.
+*           Structure: VDD -> M6(Cascode) -> M5(Diode) -> Node X

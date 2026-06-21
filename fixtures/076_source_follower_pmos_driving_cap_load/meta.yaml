@@ -1,0 +1,6 @@
+id: "076_source_follower_pmos_driving_cap_load"
+category: "Amplifier"
+family: "source_follower"
+variant: "pmos_current_source_bias_cap_load"
+source: "hand_authored"
+attribution: null

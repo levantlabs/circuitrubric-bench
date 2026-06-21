@@ -1,0 +1,9 @@
+* Cascoded NMOS common-source amplifier with a cascoded PMOS current-source load.
+* M1 NMOS CS input, M2 NMOS cascode, M3 PMOS cascode, M4 PMOS current source.
+M1 mid_n vin   0     0   NMOS W=20u L=1u
+M2 vout  vbn   mid_n 0   NMOS W=20u L=1u
+M3 vout  vbp   mid_p vdd PMOS W=40u L=1u
+M4 mid_p vbp2  vdd   vdd PMOS W=40u L=1u
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.MODEL PMOS PMOS (LEVEL=1 VTO=-1 KP=1.0e-4 LAMBDA=0.02)
+.END

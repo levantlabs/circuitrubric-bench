@@ -1,0 +1,6 @@
+groups:
+  - devices: [M1, M2]      # NMOS input pair matched
+    ratio_W: [1, 1]
+    ratio_L: [1, 1]
+  - devices: [R1, R2]      # load resistors matched
+    ratio_value: [1, 1]

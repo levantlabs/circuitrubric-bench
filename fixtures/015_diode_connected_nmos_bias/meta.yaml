@@ -1,0 +1,6 @@
+id: "015_diode_connected_nmos_bias"
+category: "Bias"
+family: "diode_connected"
+variant: "nmos"
+source: "hand_authored"
+attribution: null

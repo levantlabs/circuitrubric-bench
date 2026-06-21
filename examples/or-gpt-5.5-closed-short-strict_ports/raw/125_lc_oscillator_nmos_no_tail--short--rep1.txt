@@ -1,0 +1,12 @@
+```spice
+* Tailless NMOS cross-coupled LC oscillator with center-tapped tank
+
+M1 OUTP OUTN 0 0 NMOS W=20u L=180n
+M2 OUTN OUTP 0 0 NMOS W=20u L=180n
+
+L1 OUTP VDD 2.5n
+L2 VDD OUTN 2.5n
+C1 OUTP OUTN 1p
+
+.MODEL NMOS NMOS LEVEL=1 VTO=0.5 KP=200u LAMBDA=0.02
+```

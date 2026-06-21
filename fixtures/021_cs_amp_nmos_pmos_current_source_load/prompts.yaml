@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design an NMOS common-source amplifier with a PMOS current-source load."
+  - id: verbose
+    text: "Design an NMOS common-source amplifier with a PMOS current-source load: a common-source input transistor driving the output, actively loaded by a PMOS current source from the supply."
+  - id: spec
+    text: "Design an NMOS common-source amplifier with a PMOS current-source load. Use exactly two transistors: M1 is an NMOS transistor with drain at vout, gate at vin, source to ground, bulk to ground. M2 is a PMOS transistor with drain at vout, gate at vbias, source at VDD, bulk to VDD."

@@ -1,0 +1,14 @@
+```spice
+* PMOS differential amplifier with resistor loads and PMOS current-mirror tail bias
+
+MIP   out_p  in_p       src_tail  VDD  PMOS  W=20u  L=1u
+MIN   out_n  in_n       src_tail  VDD  PMOS  W=20u  L=1u
+
+RDP   out_p  0          10k
+RDN   out_n  0          10k
+
+MTAIL src_tail tail_bias VDD      VDD  PMOS  W=40u  L=1u
+MREF  tail_bias tail_bias VDD     VDD  PMOS  W=20u  L=1u
+
+.MODEL PMOS PMOS (LEVEL=1 VTO=-0.7 KP=50u LAMBDA=0.02)
+```

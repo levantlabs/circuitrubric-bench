@@ -1,0 +1,7 @@
+```spice
+* PMOS common-gate amplifier with NMOS current-source load
+M1 Vout VGP Vin VDD PMOS W=10u L=0.18u
+M2 Vout VBN 0 0 NMOS W=5u L=0.18u
+.MODEL PMOS PMOS (LEVEL=1 VTO=-0.4 KP=50U LAMBDA=0.01)
+.MODEL NMOS NMOS (LEVEL=1 VTO=0.4 KP=100U LAMBDA=0.01)
+```

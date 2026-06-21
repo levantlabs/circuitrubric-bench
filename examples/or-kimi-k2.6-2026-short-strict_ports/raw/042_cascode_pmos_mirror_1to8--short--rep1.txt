@@ -1,0 +1,10 @@
+```spice
+* 1:8 Cascode PMOS Current Mirror
+
+M1  N1  N1  VDD VDD PMOS W=2u L=0.5u
+M3  REF REF N1  VDD PMOS W=2u L=0.5u
+M2  N2  N1  VDD VDD PMOS W=2u L=0.5u M=8
+M4  OUT REF N2  VDD PMOS W=2u L=0.5u M=8
+
+.MODEL PMOS PMOS (LEVEL=1 VTO=-0.7 KP=50U LAMBDA=0.02)
+```

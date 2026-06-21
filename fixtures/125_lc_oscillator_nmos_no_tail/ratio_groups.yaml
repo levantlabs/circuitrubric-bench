@@ -1,0 +1,6 @@
+groups:
+  - devices: [M1, M2]      # matched cross-coupled NMOS pair
+    ratio_W: [1, 1]
+    ratio_L: [1, 1]
+  - devices: [L1, L2]      # matched tank inductors (center-tapped form)
+    ratio_value: [1, 1]

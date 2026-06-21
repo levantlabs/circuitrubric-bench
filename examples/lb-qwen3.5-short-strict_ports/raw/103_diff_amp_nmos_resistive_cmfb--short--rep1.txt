@@ -1,0 +1,13 @@
+```spice
+* NMOS Differential Amplifier with Resistive Common-Mode Feedback
+* Active Devices: M1, M2 (Input Pair), M3 (Active Load)
+* Biasing: Rbias (Resistive CMFB to VDD)
+
+* Device Parameters
+M1 out1 in1 in2 0 nmos W=10u L=1u
+M2 out2 in2 in1 0 nmos W=10u L=1u
+M3 out1 out2 0 vdd pmos W=50u L=1u
+
+* Resistive Common-Mode Feedback Network
+Rbias vdd out1 1Meg
+```

@@ -1,0 +1,43 @@
+```spice
+* Two-Stage Fully Differential Amplifier (No CMFB, No Compensation)
+* Stage 1: NMOS Differential Pair with PMOS Active Loads
+* Stage 2: Common-Source Load Inverters (PMOS Input, NMOS Load)
+
+* --- Device Parameters ---
+* Tail Current Source for Stage 1 (NMOS sinking to ground)
+Mtail tail node_n1 node_n1 0 mtail
+.model mtail nmos (level=1 vto=0.4 kp=100u lambda=0.1)
+
+* Differential Pair Input Devices (NMOS)
+* W/L chosen for reasonable gain and swing; M=1 for simplicity
+Mdiff1 out_n1 in_n1 node_n1 0 mdiff
+.model mdiff nmos (level=1 vto=0.4 kp=200u lambda=0.1)
+
+Mdiff2 out_p1 in_p1 node_n1 0 mdiff
+.model mdiff nmos (level=1 vto=0.4 kp=200u lambda=0.1)
+
+* PMOS Active Loads for Stage 1 (Current Mirror Load)
+* These form the differential-to-single-ended conversion at each side
+Mload_n1 out_n1 in_p1 node_n1 0 mloadp
+.model mloadp pmos (level=1 vto=-0.4 kp=100u lambda=0.1)
+
+Mload_p1 out_p1 in_n1 node_n1 0 mloadp
+.model mloadp pmos (level=1 vto=-0.4 kp=100u lambda=0.1)
+
+* --- Stage 2: Common-Source Load Inverters ---
+* Input is taken from the output of Stage 1 directly (DC coupled)
+* PMOS Driver, NMOS Load
+
+Mcs1 out_n2 out_n1 node_n2 0 mcs
+.model mcs pmos (level=1 vto=-0.4 kp=150u lambda=0.1)
+
+Mcs2 out_p2 out_p1 node_p2 0 mcs
+.model mcs pmos (level=1 vto=-0.4 kp=150u lambda=0.1)
+
+* NMOS Loads for Stage 2
+Mload_n2 out_n2 out_n1 node_n2 0 mloadn
+.model mloadn nmos (level=1 vto=0.4 kp=100u lambda=0.1)
+
+Mload_p2 out_p2 out_p1 node_p2 0 mloadn
+.model mloadn nmos (level=1 vto=0.4 kp=100u lambda=0.1)
+```

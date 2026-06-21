@@ -1,0 +1,38 @@
+```spice
+* Telescopic Cascode OTA: PMOS Input, NMOS Cascode, PMOS Current Source Load
+* Topology: Differential Pair (PMOS) -> Active Load (PMOS Current Mirror) -> Cascode (NMOS)
+* Output is single-ended at the drain of the cascode devices.
+
+* --- Active Devices ---
+
+* Input Differential Pair (PMOS)
+* M1: Left input transistor
+M1 out1 in1 in2 vdd pmos_in W=10u L=1u
+* M2: Right input transistor
+M2 out1 in2 in1 vdd pmos_in W=10u L=1u
+
+* Active Load / Bias Current Source (PMOS)
+* Provides the tail current for the differential pair and acts as the active load.
+* Connected between VDD and the drains of M1/M2.
+M3 out1 vdd vdd pmos_load W=50u L=1u
+
+* Cascode Devices (NMOS)
+* M4: Left cascode transistor (sinks current from M1)
+* Drain connected to M1 drain, Source to Output node.
+M4 out2 out1 out1 gnd nmos_cascode W=5u L=1u
+* M5: Right cascode transistor (sinks current from M2)
+* Drain connected to M2 drain, Source to Output node.
+M5 out2 out2 out2 gnd nmos_cascode W=5u L=1u
+
+* Note: In a standard telescopic cascode with single-ended output, the drains of the cascode devices (M4/M5) are tied together at the output node (out2).
+* The bulk terminals are explicitly connected to their respective supply rails or ground as per convention.
+* M3 Bulk is tied to VDD (default for PMOS source/bulk usually, but explicit connection ensures no floating).
+* M1/M2 Bulk tied to VDD.
+* M4/M5 Bulk tied to GND.
+
+* --- Model Cards ---
+
+.model pmos_in pmos (LEVEL=1 VTO=0.7 KP=100u CGDO=0 CGSO=0)
+.model pmos_load pmos (LEVEL=1 VTO=0.8 KP=100u CGDO=0 CGSO=0)
+.model nmos_cascode nmos (LEVEL=1 VTO=-0.7 KP=50u CGDO=0 CGSO=0)
+```

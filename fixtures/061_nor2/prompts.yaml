@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a two-input CMOS NOR gate."
+  - id: verbose
+    text: "Design a two-input CMOS NOR gate: two parallel NMOS pull-down devices to ground and two series PMOS pull-up devices from the supply, with each input driving one NMOS and one PMOS."
+  - id: spec
+    text: "Design a two-input CMOS NOR gate. Use exactly four transistors: M1 is an NMOS with drain at vout, gate at a, source to ground, bulk to ground. M2 is an NMOS with drain at vout, gate at b, source to ground, bulk to ground. M3 is a PMOS with drain at vout, gate at a, source at the internal series node (call it mid), bulk to VDD. M4 is a PMOS with drain at mid, gate at b, source at VDD, bulk to VDD."

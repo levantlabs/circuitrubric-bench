@@ -1,0 +1,19 @@
+```spice
+* Two-stage fully differential amplifier, no CMFB, no compensation
+
+* Stage 1: NMOS differential pair with PMOS current-source loads
+M1 n1 inp ns 0 NMOS W=20u L=0.18u
+M2 n2 inn ns 0 NMOS W=20u L=0.18u
+M3 n1 vbp1 VDD VDD PMOS W=40u L=0.18u
+M4 n2 vbp1 VDD VDD PMOS W=40u L=0.18u
+M5 ns vbn 0 0 NMOS W=40u L=0.18u
+
+* Stage 2: differential common-source output stage with PMOS current-source loads
+M6 outp n1 0 0 NMOS W=80u L=0.18u
+M7 outn n2 0 0 NMOS W=80u L=0.18u
+M8 outp vbp2 VDD VDD PMOS W=160u L=0.18u
+M9 outn vbp2 VDD VDD PMOS W=160u L=0.18u
+
+.MODEL NMOS NMOS LEVEL=1 VTO=0.5 KP=200u LAMBDA=0.05
+.MODEL PMOS PMOS LEVEL=1 VTO=-0.5 KP=100u LAMBDA=0.05
+```

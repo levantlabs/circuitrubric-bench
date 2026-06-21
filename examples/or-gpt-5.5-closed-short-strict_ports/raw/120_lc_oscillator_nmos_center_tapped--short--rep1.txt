@@ -1,0 +1,12 @@
+```spice
+* NMOS cross-coupled LC oscillator with center-tapped two-inductor tank
+
+M1 OUTP OUTN TAIL 0 NMOS W=20u L=180n
+M2 OUTN OUTP TAIL 0 NMOS W=20u L=180n
+
+L1 VDD OUTP 2n
+L2 VDD OUTN 2n
+Ctank OUTP OUTN 1p
+
+.MODEL NMOS NMOS (LEVEL=1 VTO=0.5 KP=200u LAMBDA=0.02)
+```

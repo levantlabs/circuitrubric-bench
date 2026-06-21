@@ -1,0 +1,6 @@
+id: "085_cascaded_diff_amp_nmos_resistor_loads"
+category: "Amplifier"
+family: "cascaded_diff_amp"
+variant: "nmos_resistor_loads"
+source: "hand_authored"
+attribution: null

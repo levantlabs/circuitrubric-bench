@@ -1,0 +1,9 @@
+* NMOS sampling switch with NMOS dummy-device charge-injection cancellation.
+* M1 is the main pass device. M2 is the dummy: drain and source both at vout,
+* gate driven by the complement clock (clkb), sized at half the main switch
+* so its channel charge cancels M1's injection. Ch holds the sampled voltage.
+M1 vout clk  vin  0 NMOS W=10u L=1u
+M2 vout clkb vout 0 NMOS W=5u  L=1u
+Ch vout 0    1p
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.END

@@ -1,0 +1,7 @@
+```spice
+M1 out? in out 0 NMOS W=10u L=1u
+Mbias out vbias 0 0 NMOS W=5u L=1u
+Rload out 0 10k
+
+.MODEL NMOS NMOS (LEVEL=1 VTO=0.7 KP=200u LAMBDA=0.02)
+```

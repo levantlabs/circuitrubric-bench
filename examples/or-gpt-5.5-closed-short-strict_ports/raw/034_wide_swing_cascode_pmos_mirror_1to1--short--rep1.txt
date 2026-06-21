@@ -1,0 +1,14 @@
+```spice
+.SUBCKT PMOS_WS_CASCODE_MIRROR_1TO1 VDD IREF IBIAS OUT
+* IREF is the 1x PMOS mirror reference node.
+* IBIAS is the wide-swing cascode-bias node; drive with same current as IREF for nominal wide-swing bias.
+
+MREF  IREF  IREF   VDD   VDD   PMOS  W=10u   L=1u
+MOUT  NOUT  IREF   VDD   VDD   PMOS  W=10u   L=1u
+MBIAS IBIAS IBIAS  VDD   VDD   PMOS  W=2.5u  L=1u
+MCAS  OUT   IBIAS  NOUT  VDD   PMOS  W=10u   L=1u
+
+.ENDS PMOS_WS_CASCODE_MIRROR_1TO1
+
+.MODEL PMOS PMOS (LEVEL=1 VTO=-0.7 KP=50u LAMBDA=0.02)
+```

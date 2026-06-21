@@ -1,0 +1,5 @@
+* PMOS source follower with resistor load to VDD.
+M1 0 vin vout vdd PMOS W=40u L=1u
+R1 vdd vout 10k
+.MODEL PMOS PMOS (LEVEL=1 VTO=-1 KP=1.0e-4 LAMBDA=0.02)
+.END

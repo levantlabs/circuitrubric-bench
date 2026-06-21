@@ -1,0 +1,37 @@
+```spice
+* Two-Stage Fully Differential PMOS-Input Amplifier
+* No CMFB, No Compensation
+* Direct DC coupling between stages
+
+* --- First Stage: PMOS Differential Pair ---
+M1 outp inp inb vss pmos_wl
+M2 outn inb inp vss pmos_wl
+M3 tailp outp outn vdd pmos_tail
+
+* --- Second Stage: PMOS Common-Source (Active Load) ---
+* Note: To maintain fully differential operation without CMFB, 
+* the second stage typically uses a cross-coupled or specific active load configuration.
+* However, standard "two-stage" usually implies a gain stage followed by an output buffer/driver.
+* Given "PMOS-input", the first stage is PMOS. The second stage input must be the output of the first.
+* A standard fully differential op-amp second stage often uses NMOS inputs if the first was PMOS, 
+* but the prompt specifies "PMOS-input amplifier" (singular topology description). 
+* Interpreting as a cascaded block where the second stage is also PMOS-input (e.g., for high swing or specific process):
+* We will implement a second PMOS differential pair driven by the first stage's outputs, 
+* loaded with NMOS current sources to sink current from VDD (standard polarity convention).
+
+M4 outp2 outp inb vss pmos_wl
+M5 outn2 outn inp vss pmos_wl
+M6 tailp2 outp2 outn2 vdd pmos_tail
+
+* --- Active Loads for Second Stage (NMOS Current Sources) ---
+* Polarity convention: PMOS amplifier gets NMOS current-source load.
+M7 load_outp outp vdd vss nmos_wl
+M8 load_outn outn vdd vss nmos_wl
+M9 load_outp2 outp2 vdd vss nmos_wl
+M10 load_outn2 outn2 vdd vss nmos_wl
+
+* --- Models ---
+.model pmos_wl pmos (level=1 vto=-0.7 kp=100u lambda=0.1)
+.model nmos_wl nmos (level=1 vto=0.7 kn=100u lambda=0.1)
+.model pmos_tail pmos (level=1 vto=-0.7 kp=50u lambda=0.1)
+```

@@ -1,0 +1,6 @@
+id: "117_telescopic_cascode_wide_swing_load_nmos"
+category: "OTA"
+family: "telescopic_cascode_wide_swing"
+variant: "nmos_input_single_ended"
+source: "hand_authored"
+attribution: null

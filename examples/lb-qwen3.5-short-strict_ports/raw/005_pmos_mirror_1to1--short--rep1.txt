@@ -1,0 +1,8 @@
+```spice
+* 1:1 PMOS Current Mirror
+* Active Devices only, no bias networks or loads per constraints.
+* W/L ratios are equal for 1:1 ratio. Bulk connected to Source for PMOS.
+
+M1 out gate in out pmos W=10u L=1u
+M2 out gate out out pmos W=10u L=1u
+```

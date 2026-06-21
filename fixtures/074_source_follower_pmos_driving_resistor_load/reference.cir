@@ -1,0 +1,9 @@
+* PMOS source follower with PMOS current-source bias and a resistor output load.
+* M1 is the source follower; M2 is the PMOS current-source bias; RL is the
+* external load impedance, in parallel with M2 from VDD to vout.
+M1 0    vin   vout vdd PMOS W=20u L=1u
+M2 vout vbias vdd  vdd PMOS W=20u L=1u
+RL vdd  vout  1k
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.MODEL PMOS PMOS (LEVEL=1 VTO=-1 KP=1.0e-4 LAMBDA=0.02)
+.END

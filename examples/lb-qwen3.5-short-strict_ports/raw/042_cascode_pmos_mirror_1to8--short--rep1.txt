@@ -1,0 +1,123 @@
+```spice
+* 1-to-8 Cascode PMOS Current Mirror
+* Amplifying/Reference Device: M_REF (PMOS)
+* Load for Reference: R_LOAD (Explicitly named load as per instructions)
+* Mirrored Branches: M_M1 to M_M8 (PMOS cascode devices)
+* Loads for Mirrored Branches: R_L1 to R_L8
+
+* PMOS Model Definition
+.MODEL MPMOS PMOS (LEVEL=1 VTO=-0.7 KP=50u GAMMA=0.6 LAMBDA=0.05 PHI=0.6)
+
+* Reference Branch
+* M_REF: Main current-setting PMOS
+M_REF drain_ref gate_ref source_ref bulk_ref MPMOS W=10u L=1u M=1
+R_LOAD drain_ref source_ref 10k
+
+* Cascode Devices for Reference (to set high output impedance)
+* Note: In a standard 1-to-N mirror, the reference branch often mirrors itself or uses a specific bias. 
+* Assuming a standard topology where the reference current is established and mirrored to 8 outputs.
+* To make this a functional "mirror" block without external bias network, we assume gate_ref is driven externally.
+* We add a cascode device above M_REF to define the high-impedance node for mirroring.
+M_CAS_REF drain_cas_ref gate_cas_ref source_ref bulk_ref MPMOS W=10u L=1u M=1
+
+* Mirrored Branches (8 copies)
+* Each branch consists of a cascode device and a main device.
+* Gates are tied together (gate_ref, gate_cas_ref, etc.) to form the mirror.
+
+* Branch 1
+M_M1 drain_out1 gate_mirror source_out1 bulk_out1 MPMOS W=10u L=1u M=1
+M_CAS1 drain_out1 gate_mirror source_out1 bulk_out1 MPMOS W=10u L=1u M=1
+
+* Branch 2
+M_M2 drain_out2 gate_mirror source_out2 bulk_out2 MPMOS W=10u L=1u M=1
+M_CAS2 drain_out2 gate_mirror source_out2 bulk_out2 MPMOS W=10u L=1u M=1
+
+* Branch 3
+M_M3 drain_out3 gate_mirror source_out3 bulk_out3 MPMOS W=10u L=1u M=1
+M_CAS3 drain_out3 gate_mirror source_out3 bulk_out3 MPMOS W=10u L=1u M=1
+
+* Branch 4
+M_M4 drain_out4 gate_mirror source_out4 bulk_out4 MPMOS W=10u L=1u M=1
+M_CAS4 drain_out4 gate_mirror source_out4 bulk_out4 MPMOS W=10u L=1u M=1
+
+* Branch 5
+M_M5 drain_out5 gate_mirror source_out5 bulk_out5 MPMOS W=10u L=1u M=1
+M_CAS5 drain_out5 gate_mirror source_out5 bulk_out5 MPMOS W=10u L=1u M=1
+
+* Branch 6
+M_M6 drain_out6 gate_mirror source_out6 bulk_out6 MPMOS W=10u L=1u M=1
+M_CAS6 drain_out6 gate_mirror source_out6 bulk_out6 MPMOS W=10u L=1u M=1
+
+* Branch 7
+M_M7 drain_out7 gate_mirror source_out7 bulk_out7 MPMOS W=10u L=1u M=1
+M_CAS7 drain_out7 gate_mirror source_out7 bulk_out7 MPMOS W=10u L=1u M=1
+
+* Branch 8
+M_M8 drain_out8 gate_mirror source_out8 bulk_out8 MPMOS W=10u L=1u M=1
+M_CAS8 drain_out8 gate_mirror source_out8 bulk_out8 MPMOS W=10u L=1u M=1
+
+* Node Connections for Mirroring (Gates tied together)
+* gate_ref, gate_cas_ref, gate_mirror are the control nodes.
+* In a pure netlist without bias sources, these nodes must be connected to an external drive.
+* However, to define the topology strictly as requested:
+* We assume gate_ref and gate_cas_ref are driven by an external circuit not included here.
+* The mirrored gates (gate_mirror) are tied to the reference gate stack.
+
+* Explicitly connecting the gate nodes for the mirror action
+* Reference Gate Stack
+R_GATE_REF gate_ref source_ref 1M ; Dummy load to prevent floating if not driven, but per instructions no bias network. 
+* Correction: Per instructions "Do NOT include... gate bias networks". 
+* The netlist defines the devices. The connections between gates define the mirror.
+* We must connect the gate of M_REF and M_CAS_REF to the gates of all M_Mx and M_CASx.
+* Since we cannot add voltage sources, we assume an external node 'V_G' drives them.
+* But the prompt asks for the "minimum set of devices". 
+* If no bias is provided, the topology is defined by the connections.
+* Let's connect all gates to a common node 'VGATE'.
+* And connect all cascode drains to their respective main sources? No, Cascode structure:
+* Source of Main -> Ground (for PMOS? No, PMOS Source to VDD).
+* Standard PMOS Current Mirror: Source at VDD. Drain is output.
+* Cascode: A second PMOS on top. Source of Top PMOS = Drain of Bottom PMOS. 
+* Source of Top PMOS goes to VDD (or a bias current source, but here we assume direct connection or implicit load).
+* Let's refine the topology for a standard IC implementation:
+* All Sources connected to VDD (Bulk usually tied to Source for PMOS in simple models, but let's tie bulk explicitly).
+* All Gates connected together.
+* Drains are outputs.
+
+* Revised Netlist with proper connections and no floating terminals
+* Assumption: All sources connect to a common node 'VDD' (or ground if NMOS, but this is PMOS).
+* Per polarity convention: PMOS Source/Bulk to VDD.
+* We will define the netlist such that all Sources are connected to a node named 'VDD'.
+* All Gates are connected to a node named 'VGATE'.
+
+* Re-defining with explicit connections for the topology block
+* Note: The prompt says "Do NOT include... ideal voltage sources". 
+* So we connect terminals to nodes. We do not create VDD or VGATE sources.
+* We just wire the devices.
+
+* PMOS Model
+.MODEL MPMOS PMOS (LEVEL=1 VTO=-0.7 KP=50u GAMMA=0.6 LAMBDA=0.05 PHI=0.6)
+
+* Reference Branch
+M_REF drain_ref gate_mirror source_ref bulk_ref MPMOS W=10u L=1u M=1
+M_CAS_REF drain_cas_ref gate_mirror source_cas_ref bulk_cas_ref MPMOS W=10u L=1u M=1
+
+* Mirrored Branches (8)
+M_M1 drain_out1 gate_mirror source_out1 bulk_out1 MPMOS W=10u L=1u M=1
+M_CAS1 drain_out1 gate_mirror source_cas1 bulk_cas1 MPMOS W=10u L=1u M=1
+
+M_M2 drain_out2 gate_mirror source_out2 bulk_out2 MPMOS W=10u L=1u M=1
+M_CAS2 drain_out2 gate_mirror source_cas2 bulk_cas2 MPMOS W=10u L=1u M=1
+
+M_M3 drain_out3 gate_mirror source_out3 bulk_out3 MPMOS W=10u L=1u M=1
+M_CAS3 drain_out3 gate_mirror source_cas3 bulk_cas3 MPMOS W=10u L=1u M=1
+
+M_M4 drain_out4 gate_mirror source_out4 bulk_out4 MPMOS W=10u L=1u M=1
+M_CAS4 drain_out4 gate_mirror source_cas4 bulk_cas4 MPMOS W=10u L=1u M=1
+
+M_M5 drain_out5 gate_mirror source_out5 bulk_out5 MPMOS W=10u L=1u M=1
+M_CAS5 drain_out5 gate_mirror source_cas5 bulk_cas5 MPMOS W=10u L=1u M=1
+
+M_M6 drain_out6 gate_mirror source_out6 bulk_out6 MPMOS W=10u L=1u M=1
+M_CAS6 drain_out6 gate_mirror source_cas6 bulk_cas6 MPMOS W=10u L=1u M=1
+
+M_M7 drain_out7 gate_mirror source_out7 bulk_out7 MPMOS W=

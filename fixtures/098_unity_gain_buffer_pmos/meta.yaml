@@ -1,0 +1,6 @@
+id: "098_unity_gain_buffer_pmos"
+category: "Feedback"
+family: "unity_gain_buffer"
+variant: "pmos_input_5t_ota"
+source: "hand_authored"
+attribution: null

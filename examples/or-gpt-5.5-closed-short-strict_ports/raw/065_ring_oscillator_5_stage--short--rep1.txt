@@ -1,0 +1,21 @@
+```spice
+* 5-stage CMOS inverter-based ring oscillator
+
+M1P n1 n5 VDD VDD PMOS W=2u L=180n
+M1N n1 n5 0   0   NMOS W=1u L=180n
+
+M2P n2 n1 VDD VDD PMOS W=2u L=180n
+M2N n2 n1 0   0   NMOS W=1u L=180n
+
+M3P n3 n2 VDD VDD PMOS W=2u L=180n
+M3N n3 n2 0   0   NMOS W=1u L=180n
+
+M4P n4 n3 VDD VDD PMOS W=2u L=180n
+M4N n4 n3 0   0   NMOS W=1u L=180n
+
+M5P n5 n4 VDD VDD PMOS W=2u L=180n
+M5N n5 n4 0   0   NMOS W=1u L=180n
+
+.MODEL NMOS NMOS (LEVEL=1 VTO=0.5 KP=200u LAMBDA=0.02)
+.MODEL PMOS PMOS (LEVEL=1 VTO=-0.5 KP=100u LAMBDA=0.02)
+```

@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a 6T SRAM cell."
+  - id: verbose
+    text: "Design a 6T SRAM cell: a cross-coupled CMOS inverter pair holding the bit, with two NMOS access transistors connecting the storage nodes to complementary bit lines under word-line control."
+  - id: spec
+    text: "Design a 6T SRAM cell. Use exactly six transistors: a 4T cross-coupled inverter latch plus 2 NMOS access transistors. Latch: M1 is an NMOS transistor with drain at q, gate at qb, source to ground, bulk to ground; M2 is an NMOS transistor with drain at qb, gate at q, source to ground, bulk to ground; M3 is a PMOS transistor with drain at q, gate at qb, source at VDD, bulk to VDD; M4 is a PMOS transistor with drain at qb, gate at q, source at VDD, bulk to VDD. Access transistors: M5 is an NMOS transistor with drain at bl, gate at wl, source at q, bulk to ground; M6 is an NMOS transistor with drain at blb, gate at wl, source at qb, bulk to ground."

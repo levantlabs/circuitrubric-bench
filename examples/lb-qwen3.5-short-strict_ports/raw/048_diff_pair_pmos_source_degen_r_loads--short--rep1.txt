@@ -1,0 +1,47 @@
+```spice
+* PMOS Source-Degenerated Differential Pair with Resistor Loads
+* Topology: Two PMOS input transistors (M1, M2) with source degeneration resistors (RS),
+*           connected to a common tail current source (MTail).
+*           Drain loads are PMOS devices acting as active current sources (MP1, MP2) 
+*           or can be interpreted as resistor loads if the prompt implies passive R at drains.
+*           However, standard "resistor loads" for a PMOS pair usually implies NMOS current source loads 
+*           (sinking to ground) OR passive resistors connected to VDD. 
+*           Given the instruction: "an NMOS amplifier gets a PMOS current-source load... a PMOS amplifier gets an NMOS current-source load".
+*           Therefore, we use NMOS devices as active current source loads for the PMOS input pair.
+*           If strictly passive resistors were intended at the drains, they would be named R. 
+*           Assuming standard IC design practice for "resistor loads" in a differential context often implies 
+*           either passive R or active loads. The prompt says "Resistor Loads", so we will use Passive Resistors (RD)
+*           connected to VDD, as that is the literal interpretation of "Resistor Loads". 
+*           Wait, re-reading: "Design a PMOS source-degenerated differential pair with resistor loads."
+*           Literal interpretation: The load elements are Resistors.
+*           Polarity: PMOS inputs -> NMOS tail current? Or PMOS tail? 
+*           Standard CMOS diff pair: PMOS inputs usually have an NMOS tail current (sinking to ground) if the common mode is near VDD/2, 
+*           OR a PMOS tail current if the common mode is near GND. 
+*           Let's assume a standard topology where the tail is an NMOS current source (MTail) sinking to ground, 
+*           and the drains are loaded with Resistors (RD) connected to VDD.
+*           This creates a differential amplifier with single-ended or differential output capability.
+
+* Parameters
+VDD = 5
+VGND = 0
+
+* Tail Current Source (NMOS, sinking to ground)
+MTail drain VGND gate tail bulk VGND model NMOS_TAIL
+Mtail W=10u L=1u M=1
+
+* Input Pair (PMOS)
+M1 drain outp gate in1 source tail bulk VDD model PMOS_INPUT
+M2 drain outn gate in2 source tail bulk VDD model PMOS_INPUT
+
+* Source Degeneration Resistors
+RS1 name tail in1 value 1k
+RS2 name tail in2 value 1k
+
+* Drain Loads (Resistors to VDD)
+RD1 name outp drain value 10k
+RD2 name outn drain value 10k
+
+* Models
+.model PMOS_INPUT pmos (vto=-0.7 kp=50u lambda=0.1)
+.model NMOS_TAIL nmos (vto=0.7 kn=100u lambda=0.1)
+```

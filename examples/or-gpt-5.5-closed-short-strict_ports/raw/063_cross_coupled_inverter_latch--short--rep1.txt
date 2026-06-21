@@ -1,0 +1,12 @@
+```spice
+* 4-transistor cross-coupled CMOS inverter latch
+
+MPL q  qb vdd vdd PMOS W=2u L=180n
+MNL q  qb 0   0   NMOS W=1u L=180n
+
+MPR qb q  vdd vdd PMOS W=2u L=180n
+MNR qb q  0   0   NMOS W=1u L=180n
+
+.MODEL NMOS NMOS LEVEL=1 VTO=0.5 KP=200u LAMBDA=0.05
+.MODEL PMOS PMOS LEVEL=1 VTO=-0.5 KP=100u LAMBDA=0.05
+```

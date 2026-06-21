@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a 1 to 1 wide-swing cascode PMOS current mirror."
+  - id: verbose
+    text: "Design a 1:1 wide-swing cascode PMOS current mirror: a cascoded mirror biased for minimal output headroom, using a separate diode-connected device to set the cascode bias, copying the reference current one-to-one."
+  - id: spec
+    text: "Design a 1 to 1 wide-swing cascode PMOS current mirror. Use exactly five transistors: M5 is a PMOS transistor with drain at vbias, gate at vbias, source at VDD, bulk to VDD. M1 is a PMOS transistor with drain at iref, gate at vbias, source at n1, bulk to VDD. M2 is a PMOS transistor with drain at n1, gate at iref, source at VDD, bulk to VDD. M3 is a PMOS transistor with drain at iout, gate at vbias, source at n2, bulk to VDD. M4 is a PMOS transistor with drain at n2, gate at iref, source at VDD, bulk to VDD."

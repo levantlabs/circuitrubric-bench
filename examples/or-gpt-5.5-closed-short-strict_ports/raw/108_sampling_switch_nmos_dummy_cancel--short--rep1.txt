@@ -1,0 +1,6 @@
+```spice
+MMAIN out clk  in  vss NMOS W=10u L=180n
+MDUM  out clkb out vss NMOS W=5u  L=180n
+
+.MODEL NMOS NMOS (LEVEL=1 VTO=0.5 KP=200u LAMBDA=0.02)
+```

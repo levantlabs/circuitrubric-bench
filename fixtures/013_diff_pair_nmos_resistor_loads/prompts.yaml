@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design an NMOS differential pair with resistor loads."
+  - id: verbose
+    text: "Design an NMOS differential pair with resistor loads: a matched NMOS input pair sharing a tail current source to ground, each output loaded by a resistor to the supply, giving differential outputs."
+  - id: spec
+    text: "Design an NMOS differential pair with resistor loads. Use exactly three transistors and two resistors: M1 is an NMOS transistor with drain at voutn, gate at vinp, source at ntail, bulk to ground. M2 is an NMOS transistor with drain at voutp, gate at vinn, source at ntail, bulk to ground. M3 is an NMOS transistor with drain at ntail, gate at vbias, source to ground, bulk to ground. R1 is a resistor between vdd and voutn. R2 is a resistor between vdd and voutp."

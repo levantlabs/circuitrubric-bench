@@ -1,0 +1,13 @@
+```spice
+* Improved 4-transistor NMOS Wilson current mirror
+* IREF = reference-current input node
+* IOUT = mirrored-current output sink node
+* VSS  = ground / negative rail
+
+M1 nG   nG   VSS VSS NMOS W=10u L=1u
+M2 nX   nG   VSS VSS NMOS W=10u L=1u
+M3 IOUT IREF nX  VSS NMOS W=10u L=1u
+M4 IREF IREF nG  VSS NMOS W=10u L=1u
+
+.MODEL NMOS NMOS (LEVEL=1 VTO=0.7 KP=200u LAMBDA=0.02)
+```

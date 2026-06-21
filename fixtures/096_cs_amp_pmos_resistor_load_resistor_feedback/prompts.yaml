@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a PMOS common-source amplifier with a resistor load and resistive feedback from output to input."
+  - id: verbose
+    text: "Design a PMOS common-source amplifier with a resistor load and resistive feedback: a common-source transistor with a resistor load to ground and a feedback resistor from the output back to the input."
+  - id: spec
+    text: "Design a PMOS common-source amplifier with a resistor load and resistive feedback from output to input. Use exactly one transistor and two resistors: M1 is a PMOS transistor with drain at vout, gate at vin, source at VDD, bulk to VDD. Rd is a resistor between vout and ground. Rf is a resistor between vout and vin."

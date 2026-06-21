@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a 1 to 8 cascode PMOS current mirror."
+  - id: verbose
+    text: "Design a 1:8 cascode PMOS current mirror: a diode-biased reference branch and a matched output branch, each a mirror transistor with a cascode transistor on top, scaled to deliver eight times the reference current at high output impedance."
+  - id: spec
+    text: "Design a 1 to 8 cascode PMOS current mirror. Use exactly four transistors: M1 is a PMOS transistor with drain at n1, gate at n1, source at VDD, bulk to VDD. M2 is a PMOS transistor with drain at iref, gate at iref, source at n1, bulk to VDD. M3 is a PMOS transistor with drain at n2, gate at n1, source at VDD, bulk to VDD. M4 is a PMOS transistor with drain at iout, gate at iref, source at n2, bulk to VDD."

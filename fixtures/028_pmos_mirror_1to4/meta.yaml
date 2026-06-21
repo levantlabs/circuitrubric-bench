@@ -1,0 +1,6 @@
+id: "028_pmos_mirror_1to4"
+category: "CurrentMirror"
+family: "simple_mirror"
+variant: "pmos_1to4"
+source: "hand_authored"
+attribution: null

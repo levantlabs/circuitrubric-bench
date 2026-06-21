@@ -1,0 +1,13 @@
+* NMOS cross-coupled LC oscillator, center-tapped tank (two inductors to VDD).
+* M1/M2 NMOS pair cross-coupled (each gate ties to the other's drain) provides
+* the negative resistance that cancels the tank loss. L1/L2 are the matched
+* tank inductors (one per output side), C1 is the tank capacitor across the
+* differential outputs. M3 is the NMOS tail current source.
+M1 voutp voutn ntail 0 NMOS W=40u L=1u
+M2 voutn voutp ntail 0 NMOS W=40u L=1u
+L1 vdd  voutp  1n
+L2 vdd  voutn  1n
+C1 voutp voutn 1p
+M3 ntail vbias 0    0 NMOS W=80u L=1u
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.END

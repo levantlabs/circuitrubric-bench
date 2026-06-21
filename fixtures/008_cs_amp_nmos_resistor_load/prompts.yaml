@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design an NMOS common-source amplifier with a resistor load."
+  - id: verbose
+    text: "Design an NMOS common-source amplifier with a resistor load: a single common-source transistor driving the output, with a resistor pulling the output up to the supply."
+  - id: spec
+    text: "Design an NMOS common-source amplifier with a resistor load. Use exactly one transistor and one resistor: M1 is an NMOS transistor with drain at vout, gate at vin, source to ground, bulk to ground. R1 is a resistor between vout and vdd."

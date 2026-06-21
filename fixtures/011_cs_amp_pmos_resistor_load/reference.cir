@@ -1,0 +1,5 @@
+* PMOS common-source amplifier with resistor load.
+M1 vout vin vdd vdd PMOS W=20u L=1u
+R1 vout 0 10k
+.MODEL PMOS PMOS (LEVEL=1 VTO=-1 KP=1.0e-4 LAMBDA=0.02)
+.END

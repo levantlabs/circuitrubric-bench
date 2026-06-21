@@ -1,0 +1,6 @@
+id: "106_pmos_sampling_switch"
+category: "SampledData"
+family: "sampling_switch"
+variant: "pmos_with_hold_cap"
+source: "hand_authored"
+attribution: null

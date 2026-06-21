@@ -1,0 +1,11 @@
+```spice
+* NMOS Widlar Current Source
+* Active devices only: M1 (reference), M2 (output)
+* R1 sets the reference current via Vref and Vgs difference
+* No external bias network, capacitors, or simulation directives included.
+
+M1 1 2 3 3 widlar_nmos W=10u L=1u
+M2 4 5 6 6 widlar_nmos W=10u L=1u
+R1 2 3 1k
+Vref 1 0 DC 1.8
+```

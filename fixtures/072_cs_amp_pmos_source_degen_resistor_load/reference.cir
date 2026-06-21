@@ -1,0 +1,9 @@
+* PMOS common-source amplifier with source degeneration and resistor load.
+* Rs (between VDD and source) sets the degeneration; Rd (between drain and ground)
+* is the drain load. M1 sees body effect since source != bulk.
+M1 vout vin vs vdd PMOS W=20u L=1u
+Rs vdd  vs   1k
+Rd vout 0    10k
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.MODEL PMOS PMOS (LEVEL=1 VTO=-1 KP=1.0e-4 LAMBDA=0.02)
+.END

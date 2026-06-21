@@ -1,0 +1,19 @@
+```spice
+* 1-to-8 NMOS Current Mirror
+* Amplifying device: M1 (Reference)
+* Load/Output devices: M2 through M9 (Mirrors)
+* All devices share the same model 'NMOS_REF'
+
+M1 drain=REF_DRAIN gate=REF_GATE source=GND bulk=GND model=NMOS_REF W=10u L=1u M=1
+M2 drain=M2_OUT gate=REF_GATE source=GND bulk=GND model=NMOS_REF W=10u L=1u M=1
+M3 drain=M3_OUT gate=REF_GATE source=GND bulk=GND model=NMOS_REF W=10u L=1u M=1
+M4 drain=M4_OUT gate=REF_GATE source=GND bulk=GND model=NMOS_REF W=10u L=1u M=1
+M5 drain=M5_OUT gate=REF_GATE source=GND bulk=GND model=NMOS_REF W=10u L=1u M=1
+M6 drain=M6_OUT gate=REF_GATE source=GND bulk=GND model=NMOS_REF W=10u L=1u M=1
+M7 drain=M7_OUT gate=REF_GATE source=GND bulk=GND model=NMOS_REF W=10u L=1u M=1
+M8 drain=M8_OUT gate=REF_GATE source=GND bulk=GND model=NMOS_REF W=10u L=1u M=1
+M9 drain=M9_OUT gate=REF_GATE source=GND bulk=GND model=NMOS_REF W=10u L=1u M=1
+
+* Optional: Simple reference current source to bias the mirror (external drive)
+* Iref  REF_DRAIN GND 1mA
+```

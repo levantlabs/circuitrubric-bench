@@ -1,0 +1,58 @@
+```spice
+* 6T SRAM Cell Netlist
+* Active Devices: 6 MOSFETs (4 Load/Driver, 2 Access)
+* Polarity: NMOS access transistors, PMOS load/driver transistors
+
+* --- Device Models ---
+.model NMOS NMOS (LEVEL=1 VTO=0.4 KP=100u GAMMA=0.6 LAMBDA=0.1 PHI=0.6)
+.model PMOS PMOS (LEVEL=1 VTO=-0.4 KP=50u GAMMA=0.6 LAMBDA=0.1 PHI=0.6)
+
+* --- 6T SRAM Cell Definition ---
+* Layout: 
+*   Top: Two PMOS pull-ups (M1, M2) connected to VDD
+*   Bottom: Two NMOS pull-downs (M3, M4) connected to GND
+*   Middle: Two NMOS access transistors (M5, M6) connecting bitlines to cross-coupled inverters
+
+* Node Definitions:
+*   Q1/Q2: Internal storage nodes (cross-coupled)
+*   BL/BLB: Bitline nodes (connected to external drivers not shown per constraints)
+*   W1/W2: Wordline node (connected to external driver not shown per constraints)
+
+M1 drain=Q1 gate=W1 source=VDD bulk=VDD model=PMOS W=10u L=1u M=1
+M2 drain=Q2 gate=W1 source=VDD bulk=VDD model=PMOS W=10u L=1u M=1
+
+M3 drain=Q1 gate=W2 source=GND bulk=GND model=NMOS W=10u L=1u M=1
+M4 drain=Q2 gate=W2 source=GND bulk=GND model=NMOS W=10u L=1u M=1
+
+M5 drain=BL gate=W1 source=Q1 bulk=GND model=NMOS W=10u L=1u M=1
+M6 drain=BLB gate=W1 source=Q2 bulk=GND model=NMOS W=10u L=1u M=1
+
+* Note: In a standard 6T cell, the access transistors (M5, M6) are usually cross-coupled to the opposite storage node.
+* Corrected Cross-Coupling for Standard SRAM Operation:
+*   M5 connects BL to Q2 (Pull-down for Q2 when W1 is high)
+*   M6 connects BLB to Q1 (Pull-down for Q1 when W1 is high)
+*   However, the prompt asks for the topology. The standard cross-coupled inverter structure implies:
+*   Inverter 1: PMOS(M1) + NMOS(M3) -> Output Q1 feeds Gate of M6 and Gate of M2? No.
+*   Standard Topology:
+*   Node Q1 is output of Inv1 (M1/M3). Input to Inv1 is Q2.
+*   Node Q2 is output of Inv2 (M2/M4). Input to Inv2 is Q1.
+*   Access M5 connects BL to Q2.
+*   Access M6 connects BLB to Q1.
+
+* Re-defining connections for correct cross-coupled latch:
+*   M1 (PMOS): Drain=Q1, Gate=Q2, Source=VDD
+*   M2 (PMOS): Drain=Q2, Gate=Q1, Source=VDD
+*   M3 (NMOS): Drain=Q1, Gate=Q2, Source=GND
+*   M4 (NMOS): Drain=Q2, Gate=Q1, Source=GND
+*   M5 (Access NMOS): Drain=BL, Gate=W1, Source=Q2
+*   M6 (Access NMOS): Drain=BLB, Gate=W1, Source=Q1
+
+M1 drain=Q1 gate=Q2 source=VDD bulk=VDD model=PMOS W=10u L=1u M=1
+M2 drain=Q2 gate=Q1 source=VDD bulk=VDD model=PMOS W=10u L=1u M=1
+
+M3 drain=Q1 gate=Q2 source=GND bulk=GND model=NMOS W=10u L=1u M=1
+M4 drain=Q2 gate=Q1 source=GND bulk=GND model=NMOS W=10u L=1u M=1
+
+M5 drain=BL gate=W1 source=Q2 bulk=GND model=NMOS W=10u L=1u M=1
+M6 drain=BLB gate=W1 source=Q1 bulk=GND model=NMOS W=10u L=1u M=1
+```

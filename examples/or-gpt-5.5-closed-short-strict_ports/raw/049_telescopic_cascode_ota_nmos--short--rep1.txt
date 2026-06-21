@@ -1,0 +1,20 @@
+```spice
+* Telescopic cascode OTA, NMOS input pair, single-ended output
+
+M1 n1 vip ntail VSS NMOS W=20u L=0.5u
+M2 n2 vin ntail VSS NMOS W=20u L=0.5u
+
+M3 out_int vbncas n1 VSS NMOS W=20u L=0.5u
+M4 out     vbncas n2 VSS NMOS W=20u L=0.5u
+
+M5 out_int vbpcas p1 VDD PMOS W=40u L=0.5u
+M6 out     vbpcas p2 VDD PMOS W=40u L=0.5u
+
+M7 p1 vbp VDD VDD PMOS W=40u L=0.5u
+M8 p2 vbp VDD VDD PMOS W=40u L=0.5u
+
+M9 ntail vbntail VSS VSS NMOS W=40u L=0.5u
+
+.MODEL NMOS NMOS LEVEL=1 VTO=0.5 KP=200u LAMBDA=0.05
+.MODEL PMOS PMOS LEVEL=1 VTO=-0.5 KP=100u LAMBDA=0.05
+```

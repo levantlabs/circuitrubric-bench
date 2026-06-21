@@ -1,0 +1,11 @@
+ ```spice
+* 5T OTA – PMOS input pair, NMOS current-mirror load, PMOS tail
+M1  D1  INP  S   VDD  PMOS  W=10u  L=1u
+M2  OUT INN  S   VDD  PMOS  W=10u  L=1u
+M3  D1  D1   GND GND  NMOS  W=10u  L=1u
+M4  OUT D1   GND GND  NMOS  W=10u  L=1u
+M5  S   VBP  VDD VDD  PMOS  W=20u  L=1u
+
+.MODEL NMOS NMOS (LEVEL=1 VTO=0.7  KP=100U)
+.MODEL PMOS PMOS (LEVEL=1 VTO=-0.7 KP=50U)
+```

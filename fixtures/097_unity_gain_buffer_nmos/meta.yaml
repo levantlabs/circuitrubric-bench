@@ -1,0 +1,6 @@
+id: "097_unity_gain_buffer_nmos"
+category: "Feedback"
+family: "unity_gain_buffer"
+variant: "nmos_input_5t_ota"
+source: "hand_authored"
+attribution: null

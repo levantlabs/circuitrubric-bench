@@ -1,0 +1,14 @@
+```spice
+M1 outp inp tail 0 NMOS W=20u L=1u
+M2 outn inn tail 0 NMOS W=20u L=1u
+MTAIL tail vbias_tail 0 0 NMOS W=40u L=1u
+
+M3 outp vcmfb vdd vdd PMOS W=40u L=1u
+M4 outn vcmfb vdd vdd PMOS W=40u L=1u
+
+RCM1 outp vcmfb 1Meg
+RCM2 outn vcmfb 1Meg
+
+.MODEL NMOS NMOS LEVEL=1 VTO=0.7 KP=200u LAMBDA=0.02
+.MODEL PMOS PMOS LEVEL=1 VTO=-0.7 KP=100u LAMBDA=0.02
+```

@@ -1,0 +1,6 @@
+id: "116_gilbert_cell_nmos_resistor_loads"
+category: "Mixer"
+family: "gilbert_cell"
+variant: "nmos_resistor_loads"
+source: "hand_authored"
+attribution: null

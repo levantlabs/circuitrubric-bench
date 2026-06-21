@@ -1,0 +1,8 @@
+```spice
+* NMOS Sampling Switch with Dummy-Device Charge Injection Cancellation
+* Topology: Main switch M1 in series with load, Dummy switch M2 paralleled to cancel charge injection.
+* Note: Bulk terminals are tied to sources for standard IC processes (no body effect).
+
+M1 drain=IN gate=CTRL source=OUT bulk=OUT model=nmos W=10u L=1u
+M2 drain=IN gate=CTRL_dummy source=OUT bulk=OUT model=nmos W=10u L=1u M=1
+```

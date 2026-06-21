@@ -1,0 +1,93 @@
+The requested topology ("NMOS differential amplifier with resistor loads") combined with the requirement for a "ring oscillator" creates a fundamental contradiction in standard analog design:
+
+1.  **Topology Conflict**: A differential amplifier stage with resistive loads (active or passive) is a linear gain block. It does not inherently contain the positive feedback required for oscillation.
+2.  **Ring Oscillator Definition**: A ring oscillator consists of an *odd* number of inverting stages connected in a loop.
+3.  **Inversion Requirement**: To form a ring oscillator, each stage must be an **inverting** amplifier (e.g., Common Source).
+4.  **Differential vs. Inverting**: A standard differential pair with resistive loads is non-inverting at the output of one side relative to the input of that same side (if looking at single-ended output from a differential input, it's half-circuit behavior). More importantly, a "differential amplifier" implies two outputs or a differential signal path. A ring oscillator requires a single-ended inverting chain.
+5.  **Resistor Loads**: While NMOS common-source stages *can* use resistor loads to provide gain and inversion, they are rarely used in integrated IC ring oscillators (which prefer current-source loads for higher $f_T$). However, the prompt explicitly requests "resistor loads".
+
+**Resolution Strategy**:
+To satisfy the "Ring Oscillator" requirement, I must design a chain of **Common-Source Inverting Stages**.
+To satisfy the "NMOS differential amplifier" phrasing in the prompt (which likely implies using differential pairs as the building blocks), I will interpret this as using **Differential Pairs** where one side is grounded or biased to act as the single-ended input for the ring, OR, more standardly for a ring oscillator, simply use **Common-Source stages with Resistor Loads**.
+
+However, strictly speaking, a "differential amplifier" stage in a ring oscillator context usually implies a differential pair where the output is taken from one drain. If we connect these in a loop:
+*   Stage 1: Differential Pair (NMOS) + Resistive Load. Output at Drain 1.
+*   Stage 2: ...
+*   Stage 3: ...
+
+But a differential pair with resistive loads has a gain of $-g_m R_D$ (inverting) for the single-ended output relative to the differential input. If we feed the non-inverting input of the next stage, we need an inverter. A differential pair is not a simple inverter unless configured specifically.
+
+**Correction**: The most robust interpretation that yields a functional ring oscillator with NMOS devices and resistor loads is a chain of **Common-Source Inverters**. If the user insists on "differential" topology for the *stage*, they might mean a differential pair where we only use one side, or perhaps they misunderstand the term.
+
+Given the constraint "Design a 3-stage... using NMOS differential amplifiers", I will design a ring oscillator composed of **three Common-Source stages**. To adhere to the spirit of "differential" if possible without breaking the oscillation condition, I could use differential pairs but that requires careful biasing and often results in non-inverting behavior if not split correctly.
+
+**Wait, let's re-read carefully**: "NMOS differential amplifiers".
+If I build a ring oscillator with *differential* stages, I need an odd number of inversions. A differential pair (single-ended output) is an inverter ($V_{out} \propto -V_{in}$).
+So, 3 Differential Pairs (single-ended output taken from one drain) connected in a loop will oscillate.
+
+**Circuit Definition**:
+*   **Active Devices**: NMOS transistors for the input differential pairs.
+*   **Loads**: Resistors ($R_D$) connected from VDD to the drains.
+*   **Biasing**: Since I cannot include gate bias networks or ideal sources, I must assume external DC bias is applied to the gates (e.g., via a current source not shown, or simply floating gates for AC analysis, but for a netlist to be "simulatable", they need DC paths).
+*   **Constraint Check**: The prompt says "Do NOT include... gate bias networks". This implies I should only list the core gain stage devices. However, without a DC path to ground for the gates (other than leakage), an NMOS gate floats. In SPICE, floating nodes cause errors or undefined behavior unless connected to something.
+*   **Workaround**: The prompt says "Bias and input drive are handled externally". I will connect the gates of the differential pairs to generic nodes `IN1`, `IN2` etc., but for a ring oscillator simulation to converge, there must be *some* DC path. Since I cannot add resistors (bias networks), I will assume the user provides a current source or voltage source driving these nodes in their own schematic wrapper.
+*   **Bulks**: NMOS bulks go to Ground.
+
+**Topology**:
+3 Stages.
+Stage 1: NMOS Pair ($M_{1a}, M_{1b}$) with Resistor $R_1$. Output at Drain of $M_{1a}$.
+Stage 2: NMOS Pair ($M_{2a}, M_{2b}$) with Resistor $R_2$. Input to Gate of $M_{2a}$ comes from Drain of $M_{1a}$.
+Stage 3: NMOS Pair ($M_{3a}, M_{3b}$) with Resistor $R_3$. Input to Gate of $M_{3a}$ comes from Drain of $M_{2a}$.
+Feedback: Drain of $M_{3a}$ connects back to Gate of $M_{1a}$.
+
+*Note*: To make this a valid ring oscillator, the differential pairs must be biased such that they operate in saturation. Without explicit bias currents or resistors to ground for the sources, the circuit is incomplete. However, adhering strictly to "minimum set... no gate bias networks", I will define the transistors and loads. The source nodes of the NMOS devices need a connection. Usually, this is a current source ($I_{SS}$). Since I cannot add ideal current sources (per "Do NOT include... ideal current sources"), I must assume the user handles the tail current or uses a resistor to ground for the source (degeneration), but degeneration kills gain/oscillation frequency usually.
+*Alternative*: Perhaps the prompt implies a specific topology where the "differential amplifier" is just the pair, and the tail current is external. I will leave the Source nodes connected to a node `TAIL` which is assumed to be driven by an external current source or bias network not listed in this block.
+
+**Refined Plan**:
+I will provide the netlist for 3 stages of NMOS differential pairs with resistive loads.
+Nodes:
+- VDD, GND (Power rails)
+- TAIL1, TAIL2, TAIL3 (Tail current nodes, external)
+- IN1, IN2 (Inputs to stage 1)
+- OUT1 (Output of stage 1 / Input to stage 2)
+- OUT2 (Output of stage 2 / Input to stage 3)
+- OUT3 (Output of stage 3 / Feedback to Stage 1)
+
+Wait, if I don't include the tail current source, the SPICE simulation will fail to converge or behave incorrectly because the sources are floating. The prompt says "Bias... handled externally". This usually means "don't draw the bias resistors/dividers", but a DC path is mandatory.
+*Decision*: I will assume the user connects an ideal current source or a specific bias network at the `TAIL` nodes in their wrapper, so I will not include those components in this block, but I must define the node connections.
+
+Let's generate the netlist.
+
+```spice
+* 3-Stage Ring Oscillator using NMOS Differential Pairs with Resistor Loads
+* Note: Tail currents and gate bias networks are assumed external per instructions.
+* Bulks connected to GND for all NMOS devices.
+
+* --- Stage 1 ---
+M1A out1 in1 tail1 nmos_diff
+M1B out2 in2 tail1 nmos_diff
+R1 out1 vdd 10k
+
+* --- Stage 2 ---
+M2A out2 in3 tail2 nmos_diff
+M2B out4 in4 tail2 nmos_diff
+R2 out2 vdd 10k
+
+* --- Stage 3 ---
+M3A out3 in5 tail3 nmos_diff
+M3B out6 in6 tail3 nmos_diff
+R3 out3 vdd 10k
+
+* Feedback connection (Ring closure)
+* Connect output of stage 3 to input of stage 1
+.out
+.end
+```
+Wait, the node naming in the thought process above was messy. Let's clean up the nodes for a standard ring oscillator loop.
+Nodes needed:
+- Power: VDD, GND
+- Internal Nodes:
+  - Stage 1 Output (Drain of M1A): `N1`
+  - Stage 2 Input (Gate of M2A) = `N1`
+  - Stage 2 Output (Drain of M2A): `N2`
+  - Stage 3 Input (Gate of M

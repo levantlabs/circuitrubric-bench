@@ -1,0 +1,17 @@
+```spice
+* NMOS Differential Pair with PMOS Diode-Connected Loads
+* Active Devices Only (No bias networks, caps, or stimuli)
+
+* NMOS Input Transistors (Differential Pair)
+M1 out1 in1 in2 0 nmos_diff
+M2 out2 in2 in1 0 nmos_diff
+
+* PMOS Diode-Connected Load Transistors
+* Connected between VDD and the drains of M1/M2
+M3 out1 out1 vdd vdd pmos_load
+M4 out2 out2 vdd vdd pmos_load
+
+* Device Models
+.model nmos_diff nmos (level=1)
+.model pmos_load pmos (level=1)
+```

@@ -1,0 +1,6 @@
+id: "120_lc_oscillator_nmos_center_tapped"
+category: "Oscillator"
+family: "lc_oscillator"
+variant: "nmos_cross_coupled_center_tapped"
+source: "hand_authored"
+attribution: null

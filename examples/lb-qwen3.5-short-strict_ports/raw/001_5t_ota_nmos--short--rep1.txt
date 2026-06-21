@@ -1,0 +1,15 @@
+```spice
+* 5-Transistor OTA with NMOS Inputs (Active Load)
+* Topology: Common-Source Input Pair + Active PMOS Current Source Load
+* Tail current provided by an external bias current source connected to the common source node.
+
+M1 out1 in1 in2 vss m5
+M2 out2 in3 in4 vss m5
+M3 out1 out2 vdd m6
+M4 out1 out2 vdd m6
+M5 tail in1 in2 vss m7
+
+.MODEL m5 nmos (level=1)
+.MODEL m6 pmos (level=1)
+.MODEL m7 current_source_model (level=1)
+```

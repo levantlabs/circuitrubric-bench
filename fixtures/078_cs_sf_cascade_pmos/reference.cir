@@ -1,0 +1,10 @@
+* Cascade of a PMOS common-source stage and a PMOS source follower.
+* Stage 1: M1 CS amp with resistor load R1. Stage 2: M2 source follower with
+* M3 as the PMOS current-source bias.
+M1 n1   vin   vdd vdd PMOS W=20u L=1u
+R1 n1   0     10k
+M2 0    n1    vout vdd PMOS W=20u L=1u
+M3 vout vbias vdd  vdd PMOS W=20u L=1u
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.MODEL PMOS PMOS (LEVEL=1 VTO=-1 KP=1.0e-4 LAMBDA=0.02)
+.END

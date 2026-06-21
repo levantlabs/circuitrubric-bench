@@ -1,0 +1,9 @@
+groups:
+  - devices: [M1, M2]      # matched NMOS input pair
+    ratio_W: [1, 1]
+    ratio_L: [1, 1]
+  - devices: [M3, M4]      # matched PMOS load pair
+    ratio_W: [1, 1]
+    ratio_L: [1, 1]
+  - devices: [R1, R2]      # matched CMFB sense resistors
+    ratio_value: [1, 1]

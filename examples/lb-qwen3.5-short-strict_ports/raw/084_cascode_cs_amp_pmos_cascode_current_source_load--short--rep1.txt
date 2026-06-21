@@ -1,0 +1,20 @@
+```spice
+* Cascoded PMOS Common-Source Amplifier with Cascoded NMOS Current-Source Load
+* Topology: PMOS Input Stage -> Cascode PMOS -> NMOS Active Load -> Cascode NMOS
+
+* --- Amplifying Branch (PMOS) ---
+M1 drain1 gate1 source1 bulk1 pmos W=10u L=1u M=1
+M2 drain1 gate2 cascode1 bulk2 pmos W=10u L=1u M=1
+
+* --- Load Branch (NMOS Current Source) ---
+M3 drain3 gate3 source3 bulk3 nmos W=10u L=1u M=1
+M4 drain3 gate4 cascode3 bulk4 nmos W=10u L=1u M=1
+
+* --- DC Biasing for Cascodes (Ideal Voltage Sources for Netlist Completeness) ---
+Vbias_p cascode_gate pmos 0 DC=0.8V
+Vbias_n cascode_gate2 nmos 0 DC=-0.8V
+
+* --- Device Models ---
+.model pmos pmos (LEVEL=1 VTO=-0.7 KP=50u GAMMA=0.6 LAMBDA=0.05)
+.model nmos nmos (LEVEL=1 VTO=0.7 KP=50u GAMMA=0.6 LAMBDA=0.05)
+```

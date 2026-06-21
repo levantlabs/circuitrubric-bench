@@ -1,0 +1,18 @@
+```spice
+MREF   nmir  nmir  0     0 NMOS W=10u L=1u
+MCREF  iref  iref  nmir  0 NMOS W=10u L=1u
+
+MOUT1  n1    nmir  0     0 NMOS W=10u L=1u
+MCAS1  out1  iref  n1    0 NMOS W=10u L=1u
+
+MOUT2  n2    nmir  0     0 NMOS W=10u L=1u
+MCAS2  out2  iref  n2    0 NMOS W=10u L=1u
+
+MOUT3  n3    nmir  0     0 NMOS W=10u L=1u
+MCAS3  out3  iref  n3    0 NMOS W=10u L=1u
+
+MOUT4  n4    nmir  0     0 NMOS W=10u L=1u
+MCAS4  out4  iref  n4    0 NMOS W=10u L=1u
+
+.MODEL NMOS NMOS LEVEL=1 VTO=0.7 KP=200u LAMBDA=0.02
+```

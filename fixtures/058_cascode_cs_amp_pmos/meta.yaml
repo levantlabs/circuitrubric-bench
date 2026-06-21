@@ -1,0 +1,6 @@
+id: "058_cascode_cs_amp_pmos"
+category: "Amplifier"
+family: "cascode_cs"
+variant: "pmos_nmos_current_source_load"
+source: "hand_authored"
+attribution: null

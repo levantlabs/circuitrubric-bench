@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design an NMOS source-degenerated differential pair with resistor loads."
+  - id: verbose
+    text: "Design an NMOS source-degenerated differential pair with resistor loads: a matched NMOS input pair, each with its own current source to ground and a degeneration resistor bridging their source nodes, with resistor loads to the supply."
+  - id: spec
+    text: "Design an NMOS source-degenerated differential pair with resistor loads. Use exactly four transistors and three resistors: M1 is an NMOS transistor with drain at voutn, gate at vinp, source at ns1, bulk to ground. M2 is an NMOS transistor with drain at voutp, gate at vinn, source at ns2, bulk to ground. M3 is an NMOS transistor with drain at ns1, gate at vbias, source to ground, bulk to ground. M4 is an NMOS transistor with drain at ns2, gate at vbias, source to ground, bulk to ground. R1 is a resistor between vdd and voutn. R2 is a resistor between vdd and voutp. R3 is a resistor between ns1 and ns2."

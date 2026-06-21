@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design an NMOS sampling switch with dummy-device charge-injection cancellation."
+  - id: verbose
+    text: "Design an NMOS sampling switch with dummy-device charge-injection cancellation: a main NMOS pass transistor charging a hold capacitor, plus a dummy NMOS device at the output clocked oppositely to absorb the injected charge."
+  - id: spec
+    text: "Design an NMOS sampling switch with dummy-device charge-injection cancellation. Use exactly two transistors and one capacitor: M1 is an NMOS transistor with drain at vout, gate at clk, source at vin, bulk to ground. M2 is an NMOS transistor with drain at vout, gate at clkb, source at vout, bulk to ground. Ch is a capacitor between vout and ground."

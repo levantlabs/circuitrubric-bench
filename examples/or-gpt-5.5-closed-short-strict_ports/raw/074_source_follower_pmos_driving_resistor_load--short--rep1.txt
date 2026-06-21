@@ -1,0 +1,9 @@
+```spice
+* PMOS source follower with PMOS current-source bias and resistive output load
+
+MPF   0    IN     OUT   VDD   PMOS  W=20u  L=0.18u
+MCS   OUT  PBIAS  VDD   VDD   PMOS  W=10u  L=0.18u
+RLOAD OUT  0      10k
+
+.MODEL PMOS PMOS LEVEL=1 VTO=-0.7 KP=50u LAMBDA=0.02
+```

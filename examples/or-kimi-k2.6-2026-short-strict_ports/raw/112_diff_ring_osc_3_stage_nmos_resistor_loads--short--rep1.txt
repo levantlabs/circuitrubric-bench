@@ -1,0 +1,22 @@
+```spice
+* 3-Stage Differential Ring Oscillator
+* Stage 1
+M1P  DP1  DM3  0  0  NMOS  W=2u  L=0.18u
+M1M  DM1  DP3  0  0  NMOS  W=2u  L=0.18u
+R1P  VDD  DP1  10K
+R1M  VDD  DM1  10K
+
+* Stage 2
+M2P  DP2  DP1  0  0  NMOS  W=2u  L=0.18u
+M2M  DM2  DM1  0  0  NMOS  W=2u  L=0.18u
+R2P  VDD  DP2  10K
+R2M  VDD  DM2  10K
+
+* Stage 3
+M3P  DP3  DP2  0  0  NMOS  W=2u  L=0.18u
+M3M  DM3  DM2  0  0  NMOS  W=2u  L=0.18u
+R3P  VDD  DP3  10K
+R3M  VDD  DM3  10K
+
+.MODEL NMOS NMOS (LEVEL=1 VTO=0.5 KP=200U LAMBDA=0.02)
+```

@@ -1,0 +1,34 @@
+```spice
+* PMOS-Input 5T OTA Non-Inverting Amplifier with Resistor Feedback
+* Topology: Common-Source Input Stage + Active Load (Current Mirror) + Cascode/Active Load for High Output Impedance
+* Feedback: Resistive Divider from Output to Inverting Input
+
+* --- Active Devices ---
+
+* Input Pair (PMOS)
+M1 out in_ inv out PMOS_W L=0.5u W=10u M=1
+M2 out in_ inv out PMOS_W L=0.5u W=10u M=1
+
+* Current Mirror Load (PMOS) - Provides High Output Impedance
+* Note: In a standard 5T OTA, the mirror usually mirrors the tail current or is part of the active load structure.
+* Assuming a standard differential-to-single-ended conversion where M3/M4 form the active load for M1/M2.
+M3 out in_ inv out PMOS_W L=0.5u W=10u M=1
+M4 out in_ inv out PMOS_W L=0.5u W=10u M=1
+
+* Tail Current Source (NMOS) - Sinks current from the PMOS pair
+* Connected to Ground (Source/Bulk)
+Mtail tail in_ inv gnd NMOS_W L=0.5u W=2u M=1
+
+* --- Biasing for the 5T Structure (Implicit External Connections) ---
+* The prompt excludes gate bias networks and ideal sources. 
+* We assume 'in_' is the non-inverting input, 'inv' is the inverting input (feedback node).
+* 'tail' connects to an external current source I_bias not listed here.
+
+* --- Feedback Network ---
+Rf out inv 10k
+Rg inv gnd 1M
+
+* --- Device Models ---
+.model PMOS_W pmos (LEVEL=1 VTO=-0.7 KP=50u GAMMA=0.6 LAMBDA=0.05 CGDO=2p CGSO=2p CGBO=2p)
+.model NMOS_W nmos (LEVEL=1 VTO=0.7 KP=100u GAMMA=0.6 LAMBDA=0.05 CGDO=2p CGSO=2p CGBO=2p)
+```

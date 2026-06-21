@@ -1,0 +1,11 @@
+```spice
+* PMOS Widlar current source
+* External reference current is drawn from node IREF.
+* Output current is sourced from OUT.
+
+MREF IREF IREF VDD VDD PMOS_WIDLAR W=10u L=1u
+MOUT OUT  IREF VS  VDD PMOS_WIDLAR W=10u L=1u
+RWIDLAR VDD VS 10k
+
+.MODEL PMOS_WIDLAR PMOS LEVEL=1 VTO=-0.7 KP=50u LAMBDA=0.02
+```

@@ -1,0 +1,9 @@
+ ```spice
+* 1:2 Cascode NMOS Current Mirror
+M1  vg  vg  gnd  gnd  NMOS  W=10u  L=1u
+M3  ref vb  vg   gnd  NMOS  W=10u  L=1u
+M2  vmid vg gnd  gnd  NMOS  W=10u  L=1u  M=2
+M4  out vb  vmid gnd  NMOS  W=10u  L=1u  M=2
+
+.MODEL NMOS NMOS (LEVEL=1 VTO=0.7 KP=200U LAMBDA=0.01)
+```

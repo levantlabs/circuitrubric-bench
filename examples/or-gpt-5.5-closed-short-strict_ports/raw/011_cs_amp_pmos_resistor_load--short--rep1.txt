@@ -1,0 +1,6 @@
+```spice
+MP1 out in vdd vdd PMOS W=10u L=1u
+RL out 0 10k
+
+.MODEL PMOS PMOS (LEVEL=1 VTO=-0.7 KP=50u LAMBDA=0.02)
+```

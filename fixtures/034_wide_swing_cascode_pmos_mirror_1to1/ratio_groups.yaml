@@ -1,0 +1,9 @@
+groups:
+  - devices: [M1, M3]      # bottom cascode pair (reference vs output) matched 1:1
+    ratio_W: [1, 1]
+    ratio_L: [1, 1]
+    ratio_M: [1, 1]
+  - devices: [M2, M4]      # top pair (at VDD) matched 1:1
+    ratio_W: [1, 1]
+    ratio_L: [1, 1]
+    ratio_M: [1, 1]

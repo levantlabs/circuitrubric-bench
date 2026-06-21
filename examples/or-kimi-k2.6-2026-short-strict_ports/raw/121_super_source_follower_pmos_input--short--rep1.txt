@@ -1,0 +1,10 @@
+```spice
+* PMOS-input super source follower
+M1 GND Vin Vout Vout PMOS W=20u L=0.5u
+M2 VDD Vx Vout GND NMOS W=10u L=0.5u
+M3 Vx Vout VDD VDD PMOS W=10u L=0.5u
+M4 Vx Vb GND GND NMOS W=10u L=0.5u
+
+.MODEL PMOS PMOS (LEVEL=1 KP=50u VTO=-0.4)
+.MODEL NMOS NMOS (LEVEL=1 KP=100u VTO=0.4)
+```

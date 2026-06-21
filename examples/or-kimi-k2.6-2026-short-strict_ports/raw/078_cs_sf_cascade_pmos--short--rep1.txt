@@ -1,0 +1,7 @@
+```spice
+M1 mid in vdd vdd PCH W=10u L=0.5u
+R1 mid 0 50k
+M2 0 mid out vdd PCH W=20u L=0.5u
+M3 out vbias vdd vdd PCH W=10u L=0.5u
+.MODEL PCH PMOS (LEVEL=1 VTO=-0.4 KP=25U LAMBDA=0.02)
+```

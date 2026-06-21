@@ -1,0 +1,13 @@
+groups:
+  - devices: [M1, M2]      # matched stage-1 input pair
+    ratio_W: [1, 1]
+    ratio_L: [1, 1]
+  - devices: [M3, M4]      # matched stage-1 PMOS loads
+    ratio_W: [1, 1]
+    ratio_L: [1, 1]
+  - devices: [M6, M7]      # matched stage-2 PMOS CS pair
+    ratio_W: [1, 1]
+    ratio_L: [1, 1]
+  - devices: [M8, M9]      # matched stage-2 NMOS loads
+    ratio_W: [1, 1]
+    ratio_L: [1, 1]

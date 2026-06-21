@@ -1,0 +1,12 @@
+```spice
+M1 outp inp sp VDD PMOS W=20u L=1u
+M2 outn inn sn VDD PMOS W=20u L=1u
+
+RSP sp tail 200
+RSN sn tail 200
+
+RLP outp 0 10k
+RLN outn 0 10k
+
+.MODEL PMOS PMOS LEVEL=1 VTO=-0.7 KP=50u LAMBDA=0.02
+```

@@ -1,0 +1,6 @@
+id: "062_transmission_gate"
+category: "Digital"
+family: "pass_logic"
+variant: "transmission_gate"
+source: "hand_authored"
+attribution: null

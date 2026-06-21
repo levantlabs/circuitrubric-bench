@@ -1,0 +1,12 @@
+```spice
+* CMOS Transmission Gate Sampling Switch with Hold Capacitor
+* Active Devices: NMOS (M1), PMOS (M2)
+* Load/Storage: Hold Capacitor (CHOLD)
+
+M1 out in gate_n ground nmos W=10u L=1u M=1
+M2 out in gate_p vdd pmos W=10u L=1u M=1
+CHOLD out 0 1pF
+
+.MODEL nmos NMOS (LEVEL=3 VTO=0.7 KP=110u GAMMA=0.6 LAMBDA=0.05)
+.MODEL pmos PMOS (LEVEL=3 VTO=-0.7 KP=50u GAMMA=0.6 LAMBDA=0.05)
+```

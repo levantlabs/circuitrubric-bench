@@ -1,0 +1,6 @@
+id: "047_diff_pair_nmos_source_degen_r_loads"
+category: "Amplifier"
+family: "diff_pair_amplifier"
+variant: "nmos_inputs_source_degen_r_loads"
+source: "hand_authored"
+attribution: null

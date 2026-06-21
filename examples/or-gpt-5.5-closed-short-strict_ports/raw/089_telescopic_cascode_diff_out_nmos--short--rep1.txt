@@ -1,0 +1,25 @@
+```spice
+* NMOS-input telescopic cascode OTA, fully differential output
+
+* NMOS input differential pair
+M1  n1    inp       ntail  vss  NMOS  W=20u  L=0.5u
+M2  n2    inn       ntail  vss  NMOS  W=20u  L=0.5u
+
+* NMOS cascodes
+M3  outp  vb_ncas   n1     vss  NMOS  W=10u  L=0.5u
+M4  outn  vb_ncas   n2     vss  NMOS  W=10u  L=0.5u
+
+* NMOS tail current source
+M5  ntail vb_tail   vss    vss  NMOS  W=40u  L=1u
+
+* PMOS cascode current-source loads
+M6  outp  vb_pcas   p1     vdd  PMOS  W=20u  L=0.5u
+M7  outn  vb_pcas   p2     vdd  PMOS  W=20u  L=0.5u
+
+* PMOS current sources
+M8  p1    vb_pload  vdd    vdd  PMOS  W=40u  L=1u
+M9  p2    vb_pload  vdd    vdd  PMOS  W=40u  L=1u
+
+.MODEL NMOS NMOS LEVEL=1 VTO=0.5 KP=200u LAMBDA=0.05
+.MODEL PMOS PMOS LEVEL=1 VTO=-0.5 KP=100u LAMBDA=0.05
+```

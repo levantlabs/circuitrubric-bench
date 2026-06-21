@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a tailless NMOS cross-coupled LC oscillator with a center-tapped tank."
+  - id: verbose
+    text: "Design a tailless NMOS cross-coupled LC oscillator with a center-tapped tank: a cross-coupled NMOS pair providing negative resistance across an LC tank of two inductors from the supply and a differential capacitor, with the pair tied directly to ground."
+  - id: spec
+    text: "Design a tailless NMOS cross-coupled LC oscillator with a center-tapped tank. Use exactly two transistors, two inductors, and one capacitor: M1 is an NMOS transistor with drain at voutp, gate at voutn, source to ground, bulk to ground. M2 is an NMOS transistor with drain at voutn, gate at voutp, source to ground, bulk to ground. L1 is an inductor between vdd and voutp. L2 is an inductor between vdd and voutn. C1 is a capacitor between voutp and voutn."

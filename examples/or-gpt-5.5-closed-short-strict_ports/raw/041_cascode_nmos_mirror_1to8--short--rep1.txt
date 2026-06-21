@@ -1,0 +1,8 @@
+```spice
+M1 nmir nmir 0 0 NMOS W=10u L=1u
+M2 ncas IREF nmir 0 NMOS W=10u L=1u
+M3 nout nmir 0 0 NMOS W=10u L=1u M=8
+M4 IOUT IREF nout 0 NMOS W=10u L=1u M=8
+
+.MODEL NMOS NMOS LEVEL=1 VTO=0.7 KP=200u LAMBDA=0.02
+```

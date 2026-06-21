@@ -1,0 +1,12 @@
+* Two-stage Miller op-amp, PMOS input. Simple Miller compensation (just Cc).
+M1 va vinp ntail vdd PMOS W=20u L=1u
+M2 vb vinn ntail vdd PMOS W=20u L=1u
+M3 va va 0 0 NMOS W=10u L=1u
+M4 vb va 0 0 NMOS W=10u L=1u
+M5 ntail vbias vdd vdd PMOS W=40u L=1u
+M6 vout vb 0 0 NMOS W=20u L=1u
+M7 vout vbias vdd vdd PMOS W=40u L=1u
+Cc vb vout 1p
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.MODEL PMOS PMOS (LEVEL=1 VTO=-1 KP=1.0e-4 LAMBDA=0.02)
+.END

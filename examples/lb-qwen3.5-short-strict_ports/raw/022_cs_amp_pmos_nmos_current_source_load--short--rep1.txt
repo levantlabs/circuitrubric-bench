@@ -1,0 +1,16 @@
+```spice
+* PMOS Common-Source Amplifier with NMOS Current-Source Load
+* Topology: Direct DC coupling (IC style)
+* Active Devices only; bias and loads handled externally per constraints.
+
+M1 drain gate source bulk PMOS_WL
+M2 load_gate load_drain load_source bulk NMOS_WL
+
+.MODEL PMOS_WL PMOS (LEVEL=1 VTO=-0.7 KP=50u GAMMA=0.5 LAMBDA=0.1)
+.MODEL NMOS_WL NMOS (LEVEL=1 VTO=0.7 KP=50u GAMMA=0.5 LAMBDA=0.1)
+
+* Explicit dimensions for simulability (default W/L assumed 1u/1u if omitted, 
+* but prompt requires explicit properties; using 10u/1u as typical small-signal example)
+M1 drain gate source bulk PMOS_WL W=10u L=1u
+M2 load_gate load_drain load_source bulk NMOS_WL W=10u L=1u
+```

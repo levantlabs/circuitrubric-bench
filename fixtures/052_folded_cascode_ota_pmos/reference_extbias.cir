@@ -1,0 +1,19 @@
+* PMOS-input folded cascode OTA, single-ended output (11T) -- ALT: externally-biased cascode mirror load.
+* Same architecture as reference.cir but the PMOS load-cascode gates (M5/M6) take an external
+* bias (vcasc_p2) instead of the self-biased internal node (voutn). A standard, textbook-valid
+* folded-cascode load variant; structurally distinct from the self-biased form, so it needs its
+* own blessed reference.
+M1 n1 vinp ntail vdd PMOS W=20u L=1u
+M2 n2 vinn ntail vdd PMOS W=20u L=1u
+M3 voutn vcasc_n n1 0 NMOS W=10u L=1u
+M4 voutp vcasc_n n2 0 NMOS W=10u L=1u
+M5 voutn vcasc_p2 n_b1 vdd PMOS W=20u L=1u
+M6 voutp vcasc_p2 n_b2 vdd PMOS W=20u L=1u
+M7 n_b1 n_b1 vdd vdd PMOS W=20u L=1u
+M8 n_b2 n_b1 vdd vdd PMOS W=20u L=1u
+M9 n1 vbias_n1 0 0 NMOS W=20u L=1u
+M10 n2 vbias_n1 0 0 NMOS W=20u L=1u
+M11 ntail vbias vdd vdd PMOS W=40u L=1u
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.MODEL PMOS PMOS (LEVEL=1 VTO=-1 KP=1.0e-4 LAMBDA=0.02)
+.END

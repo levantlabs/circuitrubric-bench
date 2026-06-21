@@ -1,0 +1,5 @@
+```spice
+M1 drain gate source bulk nmos W=10u L=1u M=1
+R1 VDD drain 1Meg
+.MODEL nmos nmos (LEVEL=1)
+```

@@ -1,0 +1,7 @@
+ ```spice
+* NMOS sampling switch with dummy-device charge-injection cancellation
+M1 IN CLK OUT 0 NMOS W=10u L=0.5u
+M2 OUT CLKB OUT 0 NMOS W=5u L=0.5u
+
+.MODEL NMOS NMOS (LEVEL=1 VTO=0.7 KP=200u LAMBDA=0.01 GAMMA=0.5 PHI=0.6)
+```

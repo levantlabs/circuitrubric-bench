@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a non-inverting amplifier using a PMOS-input 5T OTA with a resistor-divider feedback network."
+  - id: verbose
+    text: "Design a non-inverting amplifier using a PMOS-input 5T OTA: a single-stage PMOS-input OTA in feedback, with a resistor divider from the output to the inverting input setting the closed-loop gain."
+  - id: spec
+    text: "Design a non-inverting amplifier using a PMOS-input 5T OTA with a resistor-divider feedback network. Use exactly five transistors and two resistors: M1 is a PMOS transistor with drain at voutn, gate at vinp, source at ntail, bulk to VDD. M2 is a PMOS transistor with drain at vout, gate at vfb, source at ntail, bulk to VDD. M3 is an NMOS transistor with drain at voutn, gate at voutn, source to ground, bulk to ground. M4 is an NMOS transistor with drain at vout, gate at voutn, source to ground, bulk to ground. M5 is a PMOS transistor with drain at ntail, gate at vbias, source at VDD, bulk to VDD. Rf is a resistor between vout and vfb. Rg is a resistor between vfb and ground."

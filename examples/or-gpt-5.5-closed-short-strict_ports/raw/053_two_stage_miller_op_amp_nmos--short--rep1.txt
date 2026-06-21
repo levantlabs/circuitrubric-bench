@@ -1,0 +1,26 @@
+```spice
+.SUBCKT miller_opamp inp inn out vdd vss nbias pbias
+
+* NMOS differential input pair
+M1 nmir inp ntail vss NMOS W=20u L=1u
+M2 n1   inn ntail vss NMOS W=20u L=1u
+
+* PMOS current-mirror active load
+M3 nmir nmir vdd vdd PMOS W=40u L=1u
+M4 n1   nmir vdd vdd PMOS W=40u L=1u
+
+* NMOS tail current source
+M5 ntail nbias vss vss NMOS W=10u L=2u
+
+* Second gain stage: NMOS common-source with PMOS current-source load
+M6 out n1    vss vss NMOS W=80u L=1u
+M7 out pbias vdd vdd PMOS W=160u L=1u
+
+* Miller compensation capacitor
+Cc n1 out 2p
+
+.MODEL NMOS NMOS LEVEL=1 VTO=0.7 KP=200u LAMBDA=0.02
+.MODEL PMOS PMOS LEVEL=1 VTO=-0.7 KP=100u LAMBDA=0.02
+
+.ENDS miller_opamp
+```

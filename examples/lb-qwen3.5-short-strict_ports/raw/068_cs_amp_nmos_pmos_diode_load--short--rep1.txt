@@ -1,0 +1,14 @@
+```spice
+* NMOS Common-Source Amplifier with PMOS Diode-Connected Load
+* Active Devices Only (No bias networks, caps, or stimuli)
+
+M1 drain gate source bulk CS_NMOS
+M2 drain gate source bulk CS_PMOS
+
+.MODEL CS_NMOS NMOS (LEVEL=1 VTO=0.4 KP=100u GAMMA=0.5 LAMBDA=0.05)
+.MODEL CS_PMOS PMOS (LEVEL=1 VTO=-0.4 KP=50u GAMMA=0.5 LAMBDA=0.05)
+
+* Explicit dimensions for simulability
+M1 drain gate source bulk CS_NMOS W=10u L=1u
+M2 drain gate source bulk CS_PMOS W=10u L=1u
+```

@@ -1,0 +1,9 @@
+* Wilson PMOS current mirror, 3-transistor form (1:1).
+* M3 diode-connected at n1 sets V_GS from output current; M1 mirrors that V_GS
+* on the reference leg. M2 is the output cascode whose gate=iref provides the
+* feedback that boosts output impedance. All sources/bulks at VDD.
+M1 iref n1 vdd vdd PMOS W=20u L=1u
+M2 iout iref n1 vdd PMOS W=20u L=1u
+M3 n1 n1 vdd vdd PMOS W=20u L=1u
+.MODEL PMOS PMOS (LEVEL=1 VTO=-1 KP=1.0e-4 LAMBDA=0.02)
+.END

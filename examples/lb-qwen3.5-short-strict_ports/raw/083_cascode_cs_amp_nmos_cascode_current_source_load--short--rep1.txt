@@ -1,0 +1,28 @@
+```spice
+* Cascoded NMOS Common-Source Amplifier with Cascoded PMOS Current-Source Load
+* Topology: 
+*   Input Stage: NMOS (M1) driven by external gate voltage.
+*   Active Load: PMOS Current Mirror stack (M2 cascoding M3).
+*   Output Node: Drain of M4 (cascode device) connected to Drain of M2 (cascode device).
+
+* NMOS Amplifier Devices
+M1 out in s1 nmos W=10u L=1u
+M2 out c1 s1 pmos W=10u L=1u
+M3 c1 vdd s1 pmos W=10u L=1u
+
+* PMOS Current Source Load Devices (Cascoded Stack)
+* M4 is the cascode device for the load current source.
+* M5 is the main current source transistor.
+* M6 and M7 form a simple diode-connected bias generator to set Vbias for M4/M5 stack.
+* Note: In a pure gain block without a specific bias network request, we define the devices 
+* that create the topology. The bulk terminals are tied to their respective supplies.
+
+M4 c1 out s2 pmos W=10u L=1u
+M5 s2 vdd s2 pmos W=10u L=1u
+M6 bias_gen_1 vdd vdd nmos W=1u L=1u
+M7 bias_gen_2 vdd vdd pmos W=1u L=1u
+
+* Device Models (Standard Parameters)
+.model nmos nmos (level=1 VTO=0.4 KP=110u CGDO=0 CGSO=0)
+.model pmos pmos (level=1 VTO=-0.4 KP=50u CGDO=0 CGSO=0)
+```

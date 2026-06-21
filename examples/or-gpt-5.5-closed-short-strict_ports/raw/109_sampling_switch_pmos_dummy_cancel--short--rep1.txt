@@ -1,0 +1,10 @@
+```spice
+* PMOS sampling switch with dummy-device charge-injection cancellation
+* Main PMOS: IN <-> OUT, gate driven by PHI_N
+* Dummy PMOS: half-size, S/D tied to OUT, gate driven by complementary PHI
+
+MSW  OUT PHI_N IN  VDD PMOS W=10u L=180n
+MDUM OUT PHI   OUT VDD PMOS W=5u  L=180n
+
+.MODEL PMOS PMOS LEVEL=1 VTO=-0.5 KP=50u LAMBDA=0.02
+```

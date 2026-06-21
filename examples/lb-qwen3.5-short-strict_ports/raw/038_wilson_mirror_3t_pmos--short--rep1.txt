@@ -1,0 +1,14 @@
+```spice
+* 3-Transistor Wilson Current Mirror (PMOS)
+* Topology: Two input transistors (M1, M2) and one cascode/output transistor (M3).
+* M1 and M2 form the reference branch. M3 is the output device.
+* Polarity: PMOS devices (Source to VDD, Drain/Gate/Bulk floating or tied appropriately).
+
+* Device Parameters (Example 0.18um process style)
+M1 out1 in1 in2 vdd pmos_wl L=1u W=10u M=1
+M2 out2 in1 in2 vdd pmos_wl L=1u W=10u M=1
+M3 out3 out2 in2 vdd pmos_wl L=1u W=10u M=1
+
+* Model Definitions
+.model pmos_wl pmos (LEVEL=3 VTO=0.4 KP=50u GAMMA=0.6 LAMBDA=0.1 PHI=0.6)
+```

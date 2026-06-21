@@ -1,0 +1,8 @@
+ ```spice
+* Cascoded PMOS common-source amplifier with cascoded NMOS current-source load
+M1 mid vin VDD VDD P_1 W=10u L=1u
+M2 vout vbp mid VDD P_1 W=10u L=1u
+M3 vout vbn nmid GND N_1 W=10u L=1u
+M4 nmid vbias GND GND N_1 W=10u L=1u
+
+.MODEL N_1 NMOS (

@@ -1,0 +1,6 @@
+id: "072_cs_amp_pmos_source_degen_resistor_load"
+category: "Amplifier"
+family: "common_source"
+variant: "pmos_source_degen_resistor_load"
+source: "hand_authored"
+attribution: null

@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a Wilson current mirror with NMOS devices."
+  - id: verbose
+    text: "Design a Wilson current mirror with NMOS devices: a mirror that uses output-leg feedback to raise output impedance, with a diode-connected reference device and a stacked output device closing the loop."
+  - id: spec
+    text: "Design a Wilson current mirror with NMOS devices. Use exactly three transistors: M1 is an NMOS transistor with drain at iref, gate at n1, source to ground, bulk to ground. M2 is an NMOS transistor with drain at iout, gate at iref, source at n1, bulk to ground. M3 is an NMOS transistor with drain at n1, gate at n1, source to ground, bulk to ground."

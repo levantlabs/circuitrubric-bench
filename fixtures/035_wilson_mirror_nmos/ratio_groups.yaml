@@ -1,0 +1,5 @@
+groups:
+  - devices: [M1, M2, M3]      # the three Wilson core devices, all 1:1
+    ratio_W: [1, 1, 1]
+    ratio_L: [1, 1, 1]
+    ratio_M: [1, 1, 1]

@@ -1,0 +1,10 @@
+```spice
+* PMOS common-gate amplifier with resistor load, AC-coupled input, and current-source bias
+
+M1 OUT VG SRC VDD PMOS W=20u L=1u
+RLOAD OUT 0 10k
+CIN IN SRC 1u
+IBIAS VDD SRC DC 100u
+
+.MODEL PMOS PMOS (LEVEL=1 VTO=-0.7 KP=50u LAMBDA=0.02)
+```

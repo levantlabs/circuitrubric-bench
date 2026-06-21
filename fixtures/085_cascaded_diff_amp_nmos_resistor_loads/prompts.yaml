@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a cascade of two NMOS differential amplifiers, each with resistor loads."
+  - id: verbose
+    text: "Design a cascade of two NMOS differential amplifiers with resistor loads: a first resistor-loaded differential stage on its own tail current source driving a second identical resistor-loaded differential stage."
+  - id: spec
+    text: "Design a cascade of two NMOS differential amplifiers, each with resistor loads. Use exactly six transistors and four resistors: M1 is an NMOS transistor with drain at v1n, gate at vinp, source at nt1, bulk to ground. M2 is an NMOS transistor with drain at v1p, gate at vinn, source at nt1, bulk to ground. R1 is a resistor between vdd and v1n. R2 is a resistor between vdd and v1p. M3 is an NMOS transistor with drain at nt1, gate at vbias, source to ground, bulk to ground. M4 is an NMOS transistor with drain at voutn, gate at v1n, source at nt2, bulk to ground. M5 is an NMOS transistor with drain at voutp, gate at v1p, source at nt2, bulk to ground. R3 is a resistor between vdd and voutn. R4 is a resistor between vdd and voutp. M6 is an NMOS transistor with drain at nt2, gate at vbias, source to ground, bulk to ground."

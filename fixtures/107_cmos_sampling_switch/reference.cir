@@ -1,0 +1,8 @@
+* CMOS (transmission-gate) sampling switch with hold capacitor (aligned).
+* M1 NMOS + M2 PMOS in parallel as a bidirectional pass; Ch holds vout.
+M1 vout en  vin 0   NMOS W=10u L=1u
+M2 vout enb vin vdd PMOS W=20u L=1u
+Ch vout 0   1p
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.MODEL PMOS PMOS (LEVEL=1 VTO=-1 KP=1.0e-4 LAMBDA=0.02)
+.END

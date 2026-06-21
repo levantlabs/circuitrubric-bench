@@ -1,0 +1,14 @@
+```spice
+* NMOS Common-Source Amplifier with PMOS Current-Source Load
+* Active Devices Only (No bias networks, caps, or stimuli)
+
+* NMOS Amplifying Device
+M1 drain gate source bulk nmos W=10u L=1u M=1
+
+* PMOS Current Source Load
+M2 drain gate source bulk pmos W=10u L=1u M=1
+
+* Device Models (Standard parameters assumed if not defined elsewhere)
+.model nmos nmos (VTO=0.4 KP=100u CGDO=0 CGSO=0 CGB=0)
+.model pmos pmos (VTO=-0.4 KP=50u CGDO=0 CGSO=0 CGB=0)
+```

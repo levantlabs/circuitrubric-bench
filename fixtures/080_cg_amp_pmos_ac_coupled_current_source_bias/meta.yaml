@@ -1,0 +1,6 @@
+id: "080_cg_amp_pmos_ac_coupled_current_source_bias"
+category: "Amplifier"
+family: "common_gate"
+variant: "pmos_ac_coupled_current_source_bias"
+source: "hand_authored"
+attribution: null

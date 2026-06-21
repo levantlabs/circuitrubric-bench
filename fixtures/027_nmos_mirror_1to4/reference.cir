@@ -1,0 +1,5 @@
+* 1 to 4 NMOS current mirror. M1 reference (1 device); M2 mirror (M=4 devices, same W).
+M1 iref iref 0 0 NMOS W=10u L=1u
+M2 iout iref 0 0 NMOS W=10u L=1u M=4
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.END

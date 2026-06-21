@@ -1,0 +1,10 @@
+* Widlar NMOS current source.
+* M1 diode-connected reference (no degeneration); M2 output device with
+* a single degeneration resistor R1 on its source. The asymmetric
+* degeneration produces a logarithmic Iout = (Vt/R1)*ln(Iref/Iout)
+* relationship, giving small Iout from a much larger Iref.
+M1 iref iref 0  0 NMOS W=10u L=1u
+M2 iout iref ns 0 NMOS W=10u L=1u
+R1 ns   0    1k
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.END

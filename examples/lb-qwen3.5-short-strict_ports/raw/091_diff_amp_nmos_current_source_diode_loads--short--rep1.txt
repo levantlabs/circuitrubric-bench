@@ -1,0 +1,30 @@
+```spice
+* NMOS Differential Amplifier with Parallel Current-Source and Diode-Connected Loads
+* Topology: Two input NMOS (M1, M2) in a long-tail configuration driven by a tail current source (MT).
+* Loads: Each branch has a PMOS current source (MP1, MP2) and a diode-connected NMOS (MD1, MD2) in parallel.
+* Note: The prompt requests "parallel current-source and diode-connected loads". 
+* Standard IC practice for high gain is a PMOS active load. To satisfy the specific request for 
+* "diode-connected" elements in parallel with the current source, we include NMOS devices (MD1, MD2)
+* configured as diodes (Gate shorted to Drain). The polarity of the amplifier (NMOS) dictates that
+* the primary active load must be PMOS (sourcing from VDD) per the "opposite polarity" rule.
+
+* Device Models
+.MOSFET NMOS LEVEL=1 VTO=0.4 KP=100U GAMMA=0.5 LAMBDA=0.02
+.MOSFET PMOS LEVEL=1 VTO=-0.4 KP=50U GAMMA=0.5 LAMBDA=0.02
+
+* Differential Pair Inputs (NMOS)
+M1 out1 in1 in2 0 NMOS W=10u L=1u
+M2 out2 in2 in1 0 NMOS W=10u L=1u
+
+* Tail Current Source (NMOS, sinking to ground)
+MT tail 0 0 NMOS W=20u L=1u
+
+* Active Loads (PMOS, sourcing from VDD) - Opposite polarity to NMOS amplifier
+MP1 out1 VDD VDD PMOS W=10u L=1u
+MP2 out2 VDD VDD PMOS W=10u L=1u
+
+* Diode-Connected Loads (NMOS) - As explicitly requested in parallel with the active loads
+* Connected between the output node and Ground. Gate tied to Drain.
+MD1 out1 0 out1 NMOS W=5u L=1u
+MD2 out2 0 out2 NMOS W=5u L=1u
+```

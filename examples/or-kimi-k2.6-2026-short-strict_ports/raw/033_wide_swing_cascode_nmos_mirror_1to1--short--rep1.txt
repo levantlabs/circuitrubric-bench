@@ -1,0 +1,12 @@
+```spice
+* 1:1 Wide-swing cascode NMOS current mirror
+* Input current injected at node 'in'; output taken at node 'out'
+* Vg is the externally-supplied gate bias for the mirror pair (≈Vth+Vov)
+
+M1  d1  Vg  0   0   nmos W=10u L=0.5u
+M2  d2  Vg  0   0   nmos W=10u L=0.5u
+M3  in  in  d1  0   nmos W=10u L=0.5u
+M4  out in  d2  0   nmos W=10u L=0.5u
+
+.MODEL nmos NMOS (LEVEL=1 KP=200u VTO=0.5 LAMBDA=0.02)
+```

@@ -1,0 +1,6 @@
+id: "090_telescopic_cascode_diff_out_pmos"
+category: "OTA"
+family: "telescopic_cascode"
+variant: "pmos_input_differential_output"
+source: "hand_authored"
+attribution: null

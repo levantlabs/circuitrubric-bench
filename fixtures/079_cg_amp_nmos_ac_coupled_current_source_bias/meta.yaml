@@ -1,0 +1,6 @@
+id: "079_cg_amp_nmos_ac_coupled_current_source_bias"
+category: "Amplifier"
+family: "common_gate"
+variant: "nmos_ac_coupled_current_source_bias"
+source: "hand_authored"
+attribution: null

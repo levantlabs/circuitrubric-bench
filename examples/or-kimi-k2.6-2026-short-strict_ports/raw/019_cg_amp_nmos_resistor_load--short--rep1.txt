@@ -1,0 +1,5 @@
+```spice
+M1 VOUT VG VS GND nmos W=10u L=0.18u
+RD1 VDD VOUT 10k
+.MODEL nmos NMOS (LEVEL=1 VTO=0.7 KP=200u LAMBDA=0.01)
+```

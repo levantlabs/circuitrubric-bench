@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design an NMOS common-source amplifier with source degeneration and a resistor load."
+  - id: verbose
+    text: "Design an NMOS common-source amplifier with source degeneration and a resistor load: a common-source transistor with a degeneration resistor to ground and a resistor load from the output to the supply."
+  - id: spec
+    text: "Design an NMOS common-source amplifier with source degeneration and a resistor load. Use exactly one transistor and two resistors: M1 is an NMOS transistor with drain at vout, gate at vin, source at vs, bulk to ground. Rs is a resistor between vs and ground. Rd is a resistor between vdd and vout."

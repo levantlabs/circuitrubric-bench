@@ -1,0 +1,15 @@
+```spice
+* 1-to-1 Wide-Swing Cascode PMOS Current Mirror
+* Topology: 
+*   Input Branch: M1 (Cascode), M2 (Input Device)
+*   Output Branch: M3 (Cascode), M4 (Output Device)
+*   Biasing: External current source IBIAS connected to the drain of M2/M4.
+*   Polarity: PMOS devices (Source to VDD, Bulk tied to Source).
+
+M1 out1 in cas1 vdd pmos_wide
+M2 out1 in cas2 vdd pmos_wide
+M3 out2 cas1 out1 pmos_wide
+M4 out2 cas2 out1 pmos_wide
+
+.MODEL pmos_wide P (LEVEL=1 VTO=-0.7 KP=50u GAMMA=0.6 LAMBDA=0.05 PHI=0.6)
+```

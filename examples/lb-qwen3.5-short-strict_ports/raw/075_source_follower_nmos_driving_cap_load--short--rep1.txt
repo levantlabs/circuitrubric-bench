@@ -1,0 +1,18 @@
+```spice
+* NMOS Source Follower with Current-Source Bias and Capacitive Output Load
+* Active Devices only: Amplifier (M1) and Bias Current Source (M2)
+* Load: Explicit capacitor Cload at the output node
+
+* NMOS Amplifier (Source Follower)
+M1 out in source bulk M_nmos W=10u L=1u M=1
+
+* PMOS Current-Source Bias Load (Sourcing from VDD to Output)
+M2 out vdd vdd bulk M_pmos W=10u L=1u M=1
+
+* Capacitive Output Load
+Cload out 0 1nF
+
+* Device Models
+.model M_nmos nmos (level=1)
+.model M_pmos pmos (level=1)
+```

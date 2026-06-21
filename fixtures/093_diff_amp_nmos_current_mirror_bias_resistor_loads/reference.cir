@@ -1,0 +1,12 @@
+* NMOS differential amplifier, resistor loads, tail biased by a current mirror.
+* M1/M2 input pair, R1/R2 loads, M3 tail (mirror output), M4 diode-connected
+* mirror reference, Rbias sets the reference current.
+M1 voutn vinp  ntail 0 NMOS W=20u L=1u
+M2 voutp vinn  ntail 0 NMOS W=20u L=1u
+R1 vdd  voutn  10k
+R2 vdd  voutp  10k
+M3 ntail nmir  0     0 NMOS W=40u L=1u
+M4 nmir  nmir  0     0 NMOS W=40u L=1u
+Rbias vdd nmir 20k
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.END

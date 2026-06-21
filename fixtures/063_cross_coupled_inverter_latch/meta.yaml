@@ -1,0 +1,6 @@
+id: "063_cross_coupled_inverter_latch"
+category: "Memory"
+family: "latch"
+variant: "cross_coupled_4t"
+source: "hand_authored"
+attribution: null

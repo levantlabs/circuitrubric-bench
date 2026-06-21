@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a PMOS source follower with a current-source load."
+  - id: verbose
+    text: "Design a PMOS source follower with a current-source load: a common-drain transistor whose source drives the output, biased by a PMOS current source pulling up to the supply."
+  - id: spec
+    text: "Design a PMOS source follower with a current-source load. Use exactly two transistors: M1 is a PMOS transistor with drain at 0, gate at vin, source at vout, bulk to VDD. M2 is a PMOS transistor with drain at vout, gate at vbias, source at VDD, bulk to VDD."

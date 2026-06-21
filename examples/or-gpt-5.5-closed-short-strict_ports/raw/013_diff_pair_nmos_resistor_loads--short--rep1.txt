@@ -1,0 +1,10 @@
+```spice
+M1 outp inp tail 0 NMOS W=10u L=1u
+M2 outn inn tail 0 NMOS W=10u L=1u
+MTAIL tail vbias_tail 0 0 NMOS W=20u L=1u
+
+RD1 VDD outp 10k
+RD2 VDD outn 10k
+
+.MODEL NMOS NMOS (LEVEL=1 VTO=0.7 KP=200u LAMBDA=0.02)
+```

@@ -1,0 +1,6 @@
+id: "052_folded_cascode_ota_pmos"
+category: "Amplifier"
+family: "folded_cascode_ota"
+variant: "pmos_inputs"
+source: "hand_authored"
+attribution: null

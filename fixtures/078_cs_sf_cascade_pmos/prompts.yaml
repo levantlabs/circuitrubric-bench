@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a cascade of a PMOS common-source stage with a resistor load and a PMOS source follower with a current-source bias."
+  - id: verbose
+    text: "Design a cascade of a PMOS common-source stage with a resistor load followed by a PMOS source follower with a current-source bias: a resistor-loaded gain stage driving a common-drain output buffer."
+  - id: spec
+    text: "Design a cascade of a PMOS common-source stage with a resistor load and a PMOS source follower with a current-source bias. Use exactly three transistors and one resistor: M1 is a PMOS transistor with drain at n1, gate at vin, source at VDD, bulk to VDD. R1 is a resistor between n1 and ground. M2 is a PMOS transistor with drain to ground, gate at n1, source at vout, bulk to VDD. M3 is a PMOS transistor with drain at vout, gate at vbias, source at VDD, bulk to VDD."

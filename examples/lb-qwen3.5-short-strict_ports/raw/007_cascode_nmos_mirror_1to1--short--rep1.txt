@@ -1,0 +1,21 @@
+```spice
+* 1-to-1 Cascode NMOS Current Mirror (Gain Stage Block)
+* Topology: Input branch (M1, M2) and Output branch (M3, M4)
+* M1/M3 are the cascode devices; M2/M4 are the input/output diode-connected devices.
+* Polarity: All NMOS. Sources connected to ground. Bulks tied to sources.
+
+M1 drain=IN_GATE gate=IN_GATE source=GND bulk=GND model=MOS_L1 W=10u L=1u M=1
+M2 drain=DRAIN_IN gate=DRAIN_IN source=GND bulk=GND model=MOS_L1 W=10u L=1u M=1
+
+M3 drain=OUT_GATE gate=OUT_GATE source=GND bulk=GND model=MOS_L1 W=10u L=1u M=1
+M4 drain=DRAIN_OUT gate=DRAIN_OUT source=GND bulk=GND model=MOS_L1 W=10u L=1u M=1
+
+* Optional: Matched cascode devices (M3/M4) often use same dimensions as input pair for 1:1 ratio
+* If specific cascode sizing is desired, adjust W/L above. 
+* For a true 1:1 current mirror with cascoding, the cascode transistors (M3, M4) usually have 
+* the same W/L as the diode-connected ones (M2, M4) to maintain the ratio, assuming identical Vgs.
+* The gate of M3 is driven by the output of a previous stage or bias circuit (OUT_GATE).
+* The gate of M4 is tied to its drain (DRAIN_OUT), making it diode-connected.
+
+.MODEL MOS_L1 NMOS(VTO=0.7 KP=120u GAMMA=0.6 LAMBDA=0.05)
+```

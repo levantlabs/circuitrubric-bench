@@ -1,0 +1,5 @@
+groups:
+  - devices: [M1, M2]
+    ratio_W: [1, 4]     # effective W ratio (W × M) = 1:4
+    ratio_L: [1, 1]
+    ratio_M: [1, 4]     # canonical unit-device form for FULL credit

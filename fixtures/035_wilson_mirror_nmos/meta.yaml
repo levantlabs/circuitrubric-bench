@@ -1,0 +1,6 @@
+id: "035_wilson_mirror_nmos"
+category: "CurrentMirror"
+family: "wilson_mirror"
+variant: "nmos"
+source: "hand_authored"
+attribution: null

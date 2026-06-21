@@ -1,0 +1,6 @@
+id: "017_two_stage_amp_nmos"
+category: "Amplifier"
+family: "two_stage_amplifier"
+variant: "nmos_resistor_loads"
+source: "hand_authored"
+attribution: null

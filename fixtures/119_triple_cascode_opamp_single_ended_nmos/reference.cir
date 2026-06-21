@@ -1,0 +1,36 @@
+* NMOS-input triple-cascode opamp, single-ended output. 13T.
+* NMOS side: input pair + 2 cascodes per side, all externally biased.
+* PMOS side: self-biased cascoded mirror with diodes on the input-side
+* (voutn) branch at each of the 3 PMOS levels; output-side branch (voutp)
+* mirrors. Single-ended output is voutp (high-impedance side).
+
+* NMOS input pair
+M1  n_a1  vinp  ntail 0   NMOS W=10u L=1u
+M2  n_a2  vinn  ntail 0   NMOS W=10u L=1u
+
+* NMOS cascode pair (first level, external bias)
+M3  n_b1  vcn1  n_a1  0   NMOS W=10u L=1u
+M4  n_b2  vcn1  n_a2  0   NMOS W=10u L=1u
+
+* NMOS cascode pair (second level, external bias)
+M5  voutn vcn2  n_b1  0   NMOS W=10u L=1u
+M6  voutp vcn2  n_b2  0   NMOS W=10u L=1u
+
+* PMOS cascode pair (bottom): M7 diode-connected at voutn, M8 mirrors
+M7  voutn voutn p_b1  vdd PMOS W=20u L=1u
+M8  voutp voutn p_b2  vdd PMOS W=20u L=1u
+
+* PMOS cascode pair (middle): M9 diode at p_b1, M10 mirrors
+M9  p_b1  p_b1  p_a1  vdd PMOS W=20u L=1u
+M10 p_b2  p_b1  p_a2  vdd PMOS W=20u L=1u
+
+* PMOS top pair: M11 diode at p_a1, M12 mirrors
+M11 p_a1  p_a1  vdd   vdd PMOS W=20u L=1u
+M12 p_a2  p_a1  vdd   vdd PMOS W=20u L=1u
+
+* NMOS tail
+M13 ntail vbias 0     0   NMOS W=20u L=1u
+
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.MODEL PMOS PMOS (LEVEL=1 VTO=-1 KP=1.0e-4 LAMBDA=0.02)
+.END

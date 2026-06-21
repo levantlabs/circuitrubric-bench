@@ -1,0 +1,6 @@
+id: "034_wide_swing_cascode_pmos_mirror_1to1"
+category: "CurrentMirror"
+family: "wide_swing_cascode_mirror"
+variant: "pmos_1to1"
+source: "hand_authored"
+attribution: null

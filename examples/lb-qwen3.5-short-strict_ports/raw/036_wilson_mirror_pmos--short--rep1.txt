@@ -1,0 +1,12 @@
+```spice
+* Wilson Current Mirror using PMOS devices
+* Topology: Two input PMOS (M1, M2) and one output PMOS (M3).
+* M1 and M2 form the reference branch; M3 is the high-output-impedance mirror.
+* All sources connected to VDD. Bulks tied to sources.
+
+M1 out_ref in_ref in_ref VDD wilson_pmos W=50u L=1u M=1
+M2 out_ref in_ref in_ref VDD wilson_pmos W=50u L=1u M=1
+M3 out_mirror out_ref out_ref VDD wilson_pmos W=50u L=1u M=1
+
+.MODEL wilson_pmos PMOS (LEVEL=1 VTO=-0.7 KP=100u GAMMA=0.5 LAMBDA=0.02 CGDO=0 CGSO=0)
+```

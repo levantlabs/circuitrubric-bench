@@ -1,0 +1,26 @@
+```spice
+* PMOS Common-Source Amplifier with Resistor Load and Resistive Feedback
+* Topology: Input at Gate, Output at Drain, Feedback Resistor from Drain to Gate
+* Active Devices: M1 (PMOS Amplifier), M2 (PMOS Current Source Load - optional if resistor load is primary)
+* Note: Per prompt "resistor load", we use a physical resistor Rload. 
+* To bias the PMOS amplifier without an explicit ideal voltage source at the gate, 
+* we assume external DC drive or that the feedback network sets the operating point 
+* in conjunction with an implicit bias current path (often provided by a tail current 
+* in differential pairs, but for a single-ended stage, a high-value resistor to VDD/GND 
+* is often implied or handled externally). However, strictly following "no ideal sources",
+* we define the gain stage block. The feedback resistor Rf connects Drain to Gate.
+* The load is Rload connected between Drain and VDD (or GND depending on topology interpretation, 
+* but standard CS with resistor load implies Rload from Drain to VDD).
+
+* PMOS Amplifier Device
+M1 drain gate source bulk VPMOS W=10u L=1u M=1
+
+* Resistive Load (Connected between Drain and VDD)
+Rload drain vdd 10k
+
+* Feedback Resistor (From Output/Drain to Input/Gate)
+Rf gate drain 1M
+
+* PMOS Model Card
+VPMOS VPMOS VDD PMODEL W=10u L=1u
+```

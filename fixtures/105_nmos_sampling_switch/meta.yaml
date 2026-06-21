@@ -1,0 +1,6 @@
+id: "105_nmos_sampling_switch"
+category: "SampledData"
+family: "sampling_switch"
+variant: "nmos_with_hold_cap"
+source: "hand_authored"
+attribution: null

@@ -1,0 +1,22 @@
+```spice
+* NMOS Source-Degenerated Differential Pair with Resistor Loads
+* Active Devices: M1, M2 (Input/Load), M3, M4 (Tail Current)
+* Loads: R1, R2 (Active Load Resistors)
+* Tail Degeneration: Implicitly handled by the tail current source structure if desired, 
+* but standard "source-degenerated" usually implies degeneration resistors on the sources of the input pair.
+* However, a pure differential pair with resistor loads typically has a current source at the tail.
+* If "source-degeneration" refers to resistors R_S1 and R_S2 on M1/M2 sources:
+
+M1 out1 in1 s1 0 nmos W=10u L=1u
+M2 out2 in2 s2 0 nmos W=10u L=1u
+Rload1 out1 VDD 1k
+Rload2 out2 VDD 1k
+RS1 s1 0 100
+RS2 s2 0 100
+
+* Tail Current Source (Active Load for the differential pair)
+Mtail tail_node 0 0 nmos W=50u L=1u
+Rtail tail_node VDD 100k
+
+.MODEL nmos NMOS (LEVEL=1 VTO=0.7 KP=100u GAMMA=0.5 LAMBDA=0.05)
+```

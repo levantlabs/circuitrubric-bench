@@ -1,0 +1,6 @@
+id: "071_cs_amp_nmos_source_degen_resistor_load"
+category: "Amplifier"
+family: "common_source"
+variant: "nmos_source_degen_resistor_load"
+source: "hand_authored"
+attribution: null

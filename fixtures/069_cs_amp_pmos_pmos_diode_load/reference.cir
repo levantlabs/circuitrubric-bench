@@ -1,0 +1,8 @@
+* PMOS common-source amplifier with PMOS diode-connected load.
+* M1 is the PMOS input device (source at VDD); M2 is the PMOS diode load
+* between vout (its source) and ground (its drain=gate). M2 sees body effect.
+M1 vout vin   vdd vdd PMOS W=20u L=1u
+M2 0    0    vout vdd PMOS W=20u L=1u
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.MODEL PMOS PMOS (LEVEL=1 VTO=-1 KP=1.0e-4 LAMBDA=0.02)
+.END

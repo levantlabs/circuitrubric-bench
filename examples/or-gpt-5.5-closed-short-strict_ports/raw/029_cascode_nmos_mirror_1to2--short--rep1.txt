@@ -1,0 +1,14 @@
+```spice
+* 1-to-2 cascode NMOS current mirror
+
+MREF   NBIAS IREF  0     0 NMOS W=10u L=1u
+MCREF  IREF  IREF  NBIAS 0 NMOS W=10u L=1u
+
+MOUT1  N1    NBIAS 0     0 NMOS W=10u L=1u
+MCAS1  OUT1  IREF  N1    0 NMOS W=10u L=1u
+
+MOUT2  N2    NBIAS 0     0 NMOS W=10u L=1u
+MCAS2  OUT2  IREF  N2    0 NMOS W=10u L=1u
+
+.MODEL NMOS NMOS (LEVEL=1 VTO=0.7 KP=200u LAMBDA=0.02)
+```

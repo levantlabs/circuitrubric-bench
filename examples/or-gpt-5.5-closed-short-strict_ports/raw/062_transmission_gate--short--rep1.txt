@@ -1,0 +1,8 @@
+```spice
+* CMOS transmission gate
+M_NTG out en  in  0   NMOS W=1u L=180n
+M_PTG out enb in  VDD PMOS W=2u L=180n
+
+.MODEL NMOS NMOS LEVEL=1 VTO=0.5 KP=200u LAMBDA=0.02
+.MODEL PMOS PMOS LEVEL=1 VTO=-0.5 KP=100u LAMBDA=0.02
+```

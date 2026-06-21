@@ -1,0 +1,6 @@
+id: "104_diff_amp_pmos_resistive_cmfb"
+category: "Amplifier"
+family: "diff_amp_cmfb"
+variant: "pmos_resistive_cmfb"
+source: "hand_authored"
+attribution: null

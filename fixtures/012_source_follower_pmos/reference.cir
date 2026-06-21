@@ -1,0 +1,5 @@
+* PMOS source follower with PMOS current-source load.
+M1 0 vin vout vdd PMOS W=40u L=1u
+M2 vout vbias vdd vdd PMOS W=40u L=1u
+.MODEL PMOS PMOS (LEVEL=1 VTO=-1 KP=1.0e-4 LAMBDA=0.02)
+.END

@@ -1,0 +1,14 @@
+```spice
+* 3-stage PMOS common-source ring oscillator with resistor loads
+
+M1 n1 n3 VDD VDD PMOS W=10u L=1u
+R1 n1 0 10k
+
+M2 n2 n1 VDD VDD PMOS W=10u L=1u
+R2 n2 0 10k
+
+M3 n3 n2 VDD VDD PMOS W=10u L=1u
+R3 n3 0 10k
+
+.MODEL PMOS PMOS (LEVEL=1 VTO=-0.7 KP=50u LAMBDA=0.02)
+```

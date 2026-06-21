@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design an NMOS source follower with a resistor load."
+  - id: verbose
+    text: "Design an NMOS source follower with a resistor load: a common-drain transistor whose source drives the output, with a resistor from the output to ground as the load."
+  - id: spec
+    text: "Design an NMOS source follower with a resistor load. Use exactly one transistor and one resistor: M1 is an NMOS transistor with drain at vdd, gate at vin, source at vout, bulk to ground. R1 is a resistor between vout and 0."

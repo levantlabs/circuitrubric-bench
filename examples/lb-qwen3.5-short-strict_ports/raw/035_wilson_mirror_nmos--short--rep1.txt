@@ -1,0 +1,6 @@
+```spice
+M1 out gate out out w=10u l=1u model=nmos
+M2 in gate out out w=10u l=1u model=nmos
+M3 in gate in in w=10u l=1u model=nmos
+.model nmos nmos (level=1)
+```

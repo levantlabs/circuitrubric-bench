@@ -1,0 +1,13 @@
+* PMOS-input telescopic cascode OTA, single-ended output (9T).
+M1 n_a1 vinp ntail vdd PMOS W=20u L=1u
+M2 n_a2 vinn ntail vdd PMOS W=20u L=1u
+M3 voutn vcasc_p n_a1 vdd PMOS W=20u L=1u
+M4 voutp vcasc_p n_a2 vdd PMOS W=20u L=1u
+M5 voutn voutn n_b1 0 NMOS W=10u L=1u
+M6 voutp voutn n_b2 0 NMOS W=10u L=1u
+M7 n_b1 n_b1 0 0 NMOS W=10u L=1u
+M8 n_b2 n_b1 0 0 NMOS W=10u L=1u
+M9 ntail vbias vdd vdd PMOS W=40u L=1u
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.MODEL PMOS PMOS (LEVEL=1 VTO=-1 KP=1.0e-4 LAMBDA=0.02)
+.END

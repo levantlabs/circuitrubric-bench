@@ -1,0 +1,6 @@
+id: "113_diff_ring_osc_3_stage_pmos_resistor_loads"
+category: "Oscillator"
+family: "diff_ring_osc"
+variant: "pmos_3_stage_resistor_loads"
+source: "hand_authored"
+attribution: null

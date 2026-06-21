@@ -1,0 +1,6 @@
+id: "009_source_follower_nmos"
+category: "Amplifier"
+family: "source_follower"
+variant: "nmos_current_source_load"
+source: "hand_authored"
+attribution: null

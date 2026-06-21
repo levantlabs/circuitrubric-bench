@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a PMOS source follower with a current-source bias and a capacitive output load."
+  - id: verbose
+    text: "Design a PMOS source follower with a current-source bias and a capacitive output load: a common-drain transistor biased by a PMOS current source from the supply, with a capacitor load at the output."
+  - id: spec
+    text: "Design a PMOS source follower with a current-source bias and a capacitive output load. Use exactly two transistors and one capacitor: M1 is a PMOS transistor with drain to ground, gate at vin, source at vout, bulk to VDD. M2 is a PMOS transistor with drain at vout, gate at vbias, source at VDD, bulk to VDD. CL is a capacitor between vout and ground."

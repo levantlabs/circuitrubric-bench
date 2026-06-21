@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a 3-transistor Wilson current mirror with PMOS devices."
+  - id: verbose
+    text: "Design a 3-transistor Wilson current mirror with PMOS devices: a diode-connected reference device and a two-device output leg, where the output current feeds back to set the mirror bias and boost output impedance."
+  - id: spec
+    text: "Design a 3-transistor Wilson current mirror with PMOS devices. Use exactly three transistors: M1 is a PMOS transistor with drain at iref, gate at n1, source at VDD, bulk to VDD. M2 is a PMOS transistor with drain at iout, gate at iref, source at n1, bulk to VDD. M3 is a PMOS transistor with drain at n1, gate at n1, source at VDD, bulk to VDD."

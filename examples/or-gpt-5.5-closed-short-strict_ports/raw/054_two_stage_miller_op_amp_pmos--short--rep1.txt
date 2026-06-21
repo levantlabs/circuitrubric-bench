@@ -1,0 +1,25 @@
+```spice
+* Two-stage Miller-compensated CMOS op-amp, PMOS input pair, single-ended output
+* External nodes: INP INN OUT VDD 0 VBP1 VBP2
+
+* PMOS differential input pair
+M1 nleft  INP  ntail VDD PMOS W=20u L=1u
+M2 n1     INN  ntail VDD PMOS W=20u L=1u
+
+* NMOS current-mirror active load
+M3 nleft  nleft 0     0   NMOS W=10u L=1u
+M4 n1     nleft 0     0   NMOS W=10u L=1u
+
+* PMOS tail current source for input stage
+M5 ntail  VBP1 VDD   VDD PMOS W=40u L=1u
+
+* Second gain stage: NMOS common-source with PMOS current-source load
+M6 OUT    n1   0     0   NMOS W=60u L=1u
+M7 OUT    VBP2 VDD   VDD PMOS W=120u L=1u
+
+* Miller compensation capacitor
+CC OUT n1 2p
+
+.MODEL NMOS NMOS LEVEL=1 VTO=0.7  KP=120u LAMBDA=0.02
+.MODEL PMOS PMOS LEVEL=1 VTO=-0.7 KP=50u  LAMBDA=0.02
+```

@@ -1,0 +1,19 @@
+groups:
+  - devices: [M1, M2]      # matched NMOS input pair
+    ratio_W: [1, 1]
+    ratio_L: [1, 1]
+  - devices: [M3, M4]      # matched first NMOS cascode pair
+    ratio_W: [1, 1]
+    ratio_L: [1, 1]
+  - devices: [M5, M6]      # matched second NMOS cascode pair
+    ratio_W: [1, 1]
+    ratio_L: [1, 1]
+  - devices: [M7, M8]      # matched first PMOS cascode pair
+    ratio_W: [1, 1]
+    ratio_L: [1, 1]
+  - devices: [M9, M10]     # matched second PMOS cascode pair
+    ratio_W: [1, 1]
+    ratio_L: [1, 1]
+  - devices: [M11, M12]    # matched PMOS top current sources
+    ratio_W: [1, 1]
+    ratio_L: [1, 1]

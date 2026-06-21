@@ -1,0 +1,9 @@
+```spice
+* NMOS Common-Gate Amplifier with PMOS Current-Source Load
+* Input applied to Source, Output taken from Drain
+* Gate of NMOS is AC/DC grounded (handled externally)
+* PMOS acts as active load connected to VDD
+
+M1 drain out source gate bulk model_nmos W=10u L=1u M=1
+M2 drain out source gate bulk model_pmos W=10u L=1u M=1
+```

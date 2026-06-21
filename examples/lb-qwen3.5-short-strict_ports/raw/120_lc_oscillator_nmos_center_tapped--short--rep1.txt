@@ -1,0 +1,26 @@
+```spice
+* NMOS Cross-Coupled LC Oscillator with Center-Tapped Tank
+* Topology: Two NMOS transistors in a cross-coupled configuration.
+* Load: A parallel LC tank split into two halves (L1, L2) meeting at the center tap (VDD).
+* Note: This topology uses NMOS devices for gain and a resistive load to VDD 
+        to provide the necessary DC bias current path and startup conditions.
+        The "center-tapped" description implies the inductors are connected to VDD
+        via a common node or split into two equal halves meeting at VDD.
+
+* Device Parameters (Example 180nm process values)
+M1 out1 in1 out1 bulk1 NMOS W=10u L=0.5u M=1
+M2 out2 in2 out2 bulk2 NMOS W=10u L=0.5u M=1
+
+* Tank Inductors (Split into two halves for center-tap at VDD)
+* L_half represents half of the total tank inductance connected to VDD
+L1 out1 vdd L=1n
+L2 out2 vdd L=1n
+
+* DC Bias Resistors (Explicitly included as "matched elements" or loads 
+   to define the operating point, as per instructions for explicitly-named loads)
+Rbias1 out1 vdd R=10k
+Rbias2 out2 vdd R=10k
+
+* MOSFET Models
+.MODEL NMOS NMOS (VTO=0.4 KP=100u CGDO=1p CGSO=1p CGB=1p)
+```

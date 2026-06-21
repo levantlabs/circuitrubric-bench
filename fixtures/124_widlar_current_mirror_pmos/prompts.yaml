@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a PMOS Widlar current source."
+  - id: verbose
+    text: "Design a PMOS Widlar current source: a diode-connected reference device and an output device sharing the gate bias, with a degeneration resistor in the output device's source leg setting a small scaled output current."
+  - id: spec
+    text: "Design a PMOS Widlar current source. Use exactly two transistors and one resistor: M1 is a PMOS transistor with drain at iref, gate at iref, source at VDD, bulk to VDD. M2 is a PMOS transistor with drain at iout, gate at iref, source at ps, bulk to VDD. R1 is a resistor between vdd and ps."

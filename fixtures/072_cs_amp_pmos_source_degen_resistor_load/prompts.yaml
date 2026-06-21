@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a PMOS common-source amplifier with source degeneration and a resistor load."
+  - id: verbose
+    text: "Design a PMOS common-source amplifier with source degeneration and a resistor load: a common-source transistor with a degeneration resistor to the supply and a resistor load from the output to ground."
+  - id: spec
+    text: "Design a PMOS common-source amplifier with source degeneration and a resistor load. Use exactly one transistor and two resistors: M1 is a PMOS transistor with drain at vout, gate at vin, source at vs, bulk to VDD. Rs is a resistor between vdd and vs. Rd is a resistor between vout and ground."

@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a PMOS differential amplifier with NMOS current-source loads."
+  - id: verbose
+    text: "Design a PMOS differential amplifier with NMOS current-source loads: a matched PMOS input pair on a tail current source from the supply, each output actively loaded by an NMOS current source to ground, giving differential outputs."
+  - id: spec
+    text: "Design a PMOS differential amplifier with NMOS current-source loads. Use exactly five transistors: M1 is a PMOS transistor with drain at voutn, gate at vinp, source at ntail, bulk to VDD. M2 is a PMOS transistor with drain at voutp, gate at vinn, source at ntail, bulk to VDD. M3 is an NMOS transistor with drain at voutn, gate at vbn, source to ground, bulk to ground. M4 is an NMOS transistor with drain at voutp, gate at vbn, source to ground, bulk to ground. M5 is a PMOS transistor with drain at ntail, gate at vbias, source at VDD, bulk to VDD."

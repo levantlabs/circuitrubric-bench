@@ -1,0 +1,9 @@
+* CMOS transmission gate (aligned: NMOS and PMOS both with drain at vout).
+* NMOS and PMOS pass devices in parallel, driven by complementary controls.
+* Covers both "both drains at vout, both sources at vin" and the net-renamed
+* "both drains at vin, both sources at vout" cases via graph isomorphism.
+M1 vout en  vin 0   NMOS W=10u L=1u
+M2 vout enb vin vdd PMOS W=20u L=1u
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.MODEL PMOS PMOS (LEVEL=1 VTO=-1 KP=1.0e-4 LAMBDA=0.02)
+.END

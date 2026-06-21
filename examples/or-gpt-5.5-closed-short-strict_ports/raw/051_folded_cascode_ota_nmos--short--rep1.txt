@@ -1,0 +1,22 @@
+```spice
+* Folded-cascode OTA, NMOS inputs, single-ended output
+
+M_INP   NFP   INP        TAIL  0    NMOS  W=20u L=0.5u
+M_INN   NFN   INN        TAIL  0    NMOS  W=20u L=0.5u
+M_TAIL  TAIL  VBN_TAIL   0     0    NMOS  W=10u L=1u
+
+M_PSRC1 NFP   VBP_SRC    VDD   VDD  PMOS  W=20u L=1u
+M_PSRC2 NFN   VBP_SRC    VDD   VDD  PMOS  W=20u L=1u
+
+M_PCAS1 NCL   VBP_CAS    NFP   VDD  PMOS  W=20u L=0.5u
+M_PCAS2 OUT   VBP_CAS    NFN   VDD  PMOS  W=20u L=0.5u
+
+M_NCAS1 NCL   VBN_CAS    NML   0    NMOS  W=10u L=0.5u
+M_NCAS2 OUT   VBN_CAS    NMR   0    NMOS  W=10u L=0.5u
+
+M_NMIR1 NML   NML        0     0    NMOS  W=10u L=1u
+M_NMIR2 NMR   NML        0     0    NMOS  W=10u L=1u
+
+.MODEL NMOS NMOS (LEVEL=1 VTO=0.5 KP=200u LAMBDA=0.05)
+.MODEL PMOS PMOS (LEVEL=1 VTO=-0.5 KP=100u LAMBDA=0.05)
+```

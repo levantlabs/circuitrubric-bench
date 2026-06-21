@@ -1,0 +1,8 @@
+* NMOS differential pair with resistor loads and NMOS tail current source.
+M1 voutn vinp ntail 0 NMOS W=20u L=1u
+M2 voutp vinn ntail 0 NMOS W=20u L=1u
+R1 vdd voutn 10k
+R2 vdd voutp 10k
+M3 ntail vbias 0 0 NMOS W=40u L=1u
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.END

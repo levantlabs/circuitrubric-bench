@@ -1,0 +1,5 @@
+```spice
+M1 out gate 0 0 nmos W=10u L=1u
+Rload out VDD 1Meg
+.MODEL nmos NMOS (LEVEL=1)
+```

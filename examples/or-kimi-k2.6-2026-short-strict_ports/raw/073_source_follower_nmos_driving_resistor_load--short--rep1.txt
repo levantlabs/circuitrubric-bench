@@ -1,0 +1,6 @@
+```spice
+M1 VDD Vin Vout GND NMOS W=20u L=0.5u
+M2 Vout Vbias GND GND NMOS W=10u L=0.5u
+RL Vout GND 10k
+.MODEL NMOS NMOS (LEVEL=1 VTO=0.7 KP=200u LAMBDA=0.05)
+```

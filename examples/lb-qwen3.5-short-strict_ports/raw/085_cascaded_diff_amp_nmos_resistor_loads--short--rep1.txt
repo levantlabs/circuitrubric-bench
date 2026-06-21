@@ -1,0 +1,17 @@
+```spice
+* Stage 1: NMOS Differential Pair with Resistor Loads
+M1 out1a in1 in2 0 nmos_diff
+M2 out1b in1 in2 0 nmos_diff
+Rload1 out1a 0 10k
+Rload2 out1b 0 10k
+
+* Stage 2: NMOS Differential Pair with Resistor Loads (DC Coupled)
+* Inputs are the outputs of Stage 1
+M3 out2a out1a out1b 0 nmos_diff
+M4 out2b out1a out1b 0 nmos_diff
+Rload3 out2a 0 10k
+Rload4 out2b 0 10k
+
+* Device Models
+.nmos_diff W=10u L=1u
+```

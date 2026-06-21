@@ -1,0 +1,27 @@
+```spice
+.SUBCKT folded_cascode_ota_pmos_in inp inn out vdd vss vbp_tail vbn_fold vbn_cas
+
+* PMOS input differential pair
+MIP  f1  inp stail vdd PMOS W=20u L=0.5u
+MIN  f2  inn stail vdd PMOS W=20u L=0.5u
+
+* PMOS tail current source
+MTAIL stail vbp_tail vdd vdd PMOS W=10u L=0.5u
+
+* NMOS folded-cascode devices
+MFC1 n1  vbn_cas f1 vss NMOS W=8u L=0.5u
+MFC2 out vbn_cas f2 vss NMOS W=8u L=0.5u
+
+* NMOS folding current sinks
+MFOLD1 f1 vbn_fold vss vss NMOS W=8u L=0.5u
+MFOLD2 f2 vbn_fold vss vss NMOS W=8u L=0.5u
+
+* PMOS current-mirror load for single-ended output
+MPL1 n1  n1 vdd vdd PMOS W=12u L=0.5u
+MPL2 out n1 vdd vdd PMOS W=12u L=0.5u
+
+.ENDS folded_cascode_ota_pmos_in
+
+.MODEL NMOS NMOS LEVEL=1 VTO=0.5 KP=200u LAMBDA=0.05
+.MODEL PMOS PMOS LEVEL=1 VTO=-0.5 KP=80u LAMBDA=0.05
+```

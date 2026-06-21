@@ -1,0 +1,13 @@
+* NMOS-input super source follower (4T) - twin of 121 with polarities flipped.
+* M1: NMOS input device. Source = vout (the SF output), drain = vn.
+* M3: PMOS current source feeding M1's drain from VDD (top bias).
+* M4: NMOS current source pulling vout to ground (bottom bias).
+* M2: PMOS feedback device. Drain ties to vout (closes the feedback loop),
+*   gate at vn (the top current source node), source/bulk at VDD.
+M1 vn   vin vout 0   NMOS W=10u L=1u
+M3 vn   vbp vdd  vdd PMOS W=20u L=1u
+M4 vout vbn 0    0   NMOS W=10u L=1u
+M2 vout vn  vdd  vdd PMOS W=20u L=1u
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.MODEL PMOS PMOS (LEVEL=1 VTO=-1 KP=1.0e-4 LAMBDA=0.02)
+.END

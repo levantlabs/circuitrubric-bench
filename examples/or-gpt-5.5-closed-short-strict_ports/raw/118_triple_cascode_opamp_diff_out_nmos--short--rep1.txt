@@ -1,0 +1,31 @@
+```spice
+* NMOS-input fully differential triple-cascode opamp core
+* External nodes: VDD VSS VINP VINN OUTP OUTN
+* External bias nodes: VBN_TAIL VBN1 VBN2 VBN3 VBP0 VBP1 VBP2 VBP3
+* No common-mode feedback included
+
+MTAIL ntail VBN_TAIL VSS VSS NMOS W=20u L=0.5u
+
+MINP n_inp VINP ntail VSS NMOS W=40u L=0.5u
+MNC1N n_inp_c1 VBN1 n_inp VSS NMOS W=40u L=0.5u
+MNC2N n_inp_c2 VBN2 n_inp_c1 VSS NMOS W=40u L=0.5u
+MNC3N OUTN VBN3 n_inp_c2 VSS NMOS W=40u L=0.5u
+
+MINN n_inn VINN ntail VSS NMOS W=40u L=0.5u
+MNC1P n_inn_c1 VBN1 n_inn VSS NMOS W=40u L=0.5u
+MNC2P n_inn_c2 VBN2 n_inn_c1 VSS NMOS W=40u L=0.5u
+MNC3P OUTP VBN3 n_inn_c2 VSS NMOS W=40u L=0.5u
+
+MP0N p_load_n0 VBP0 VDD VDD PMOS W=80u L=0.5u
+MPC1N p_load_n1 VBP1 p_load_n0 VDD PMOS W=80u L=0.5u
+MPC2N p_load_n2 VBP2 p_load_n1 VDD PMOS W=80u L=0.5u
+MPC3N OUTN VBP3 p_load_n2 VDD PMOS W=80u L=0.5u
+
+MP0P p_load_p0 VBP0 VDD VDD PMOS W=80u L=0.5u
+MPC1P p_load_p1 VBP1 p_load_p0 VDD PMOS W=80u L=0.5u
+MPC2P p_load_p2 VBP2 p_load_p1 VDD PMOS W=80u L=0.5u
+MPC3P OUTP VBP3 p_load_p2 VDD PMOS W=80u L=0.5u
+
+.MODEL NMOS NMOS LEVEL=1 VTO=0.7 KP=200u LAMBDA=0.02
+.MODEL PMOS PMOS LEVEL=1 VTO=-0.7 KP=100u LAMBDA=0.02
+```

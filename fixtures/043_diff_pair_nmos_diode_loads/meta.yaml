@@ -1,0 +1,6 @@
+id: "043_diff_pair_nmos_diode_loads"
+category: "Amplifier"
+family: "diff_pair_amplifier"
+variant: "nmos_inputs_pmos_diode_loads"
+source: "hand_authored"
+attribution: null

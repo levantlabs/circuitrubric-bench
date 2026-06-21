@@ -1,0 +1,14 @@
+```spice
+* 3-stage NMOS common-source ring oscillator with resistor loads
+
+R1 VDD n1 10k
+M1 n1 n3 0 0 NMOS W=10u L=1u
+
+R2 VDD n2 10k
+M2 n2 n1 0 0 NMOS W=10u L=1u
+
+R3 VDD n3 10k
+M3 n3 n2 0 0 NMOS W=10u L=1u
+
+.MODEL NMOS NMOS LEVEL=1 VTO=0.7 KP=200u LAMBDA=0.02
+```

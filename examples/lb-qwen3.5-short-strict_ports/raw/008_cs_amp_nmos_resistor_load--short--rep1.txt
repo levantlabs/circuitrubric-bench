@@ -1,0 +1,8 @@
+```spice
+* NMOS Common-Source Amplifier with Resistor Load
+* Active devices only; bias and input drive are external.
+
+M1 drain gate source bulk CS_RESISTOR
+.model CS_RESISTOR nmos (level=1 vto=0.7 kp=100u lambda=0.1)
+Rload drain VDD 1Meg
+```

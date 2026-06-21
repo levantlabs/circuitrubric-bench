@@ -1,0 +1,11 @@
+* 6T SRAM cell, alt: access transistors with drain at storage, source at bitline.
+* Same topology as reference.cir; only the access transistors' D/S labels swap.
+M1 q   qb 0   0   NMOS W=10u L=1u
+M2 qb  q  0   0   NMOS W=10u L=1u
+M3 q   qb vdd vdd PMOS W=20u L=1u
+M4 qb  q  vdd vdd PMOS W=20u L=1u
+M5 q   wl bl  0   NMOS W=10u L=1u
+M6 qb  wl blb 0   NMOS W=10u L=1u
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.MODEL PMOS PMOS (LEVEL=1 VTO=-1 KP=1.0e-4 LAMBDA=0.02)
+.END

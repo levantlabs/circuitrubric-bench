@@ -1,0 +1,11 @@
+groups:
+  - devices: [M1, M2]      # matched stage-1 input pair
+    ratio_W: [1, 1]
+    ratio_L: [1, 1]
+  - devices: [M4, M5]      # matched stage-2 input pair
+    ratio_W: [1, 1]
+    ratio_L: [1, 1]
+  - devices: [R1, R2]      # matched stage-1 resistor loads
+    ratio_value: [1, 1]
+  - devices: [R3, R4]      # matched stage-2 resistor loads
+    ratio_value: [1, 1]

@@ -1,0 +1,6 @@
+id: "069_cs_amp_pmos_pmos_diode_load"
+category: "Amplifier"
+family: "common_source"
+variant: "pmos_pmos_diode_load"
+source: "hand_authored"
+attribution: null

@@ -1,0 +1,8 @@
+```spice
+* PMOS Sampling Switch with Hold Capacitor
+* Active Device: M1 (PMOS) acting as the switch
+* Load: C1 (Hold Capacitor) connected between Drain and Source
+
+M1 drain gate source bulk VDD PMOS_WELL L=1u W=10u M=1
+C1 drain source 1pF
+```

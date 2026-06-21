@@ -1,0 +1,47 @@
+```spice
+* PMOS Differential Amplifier with Parallel Current-Source and Diode-Connected Loads
+* Topology: Two PMOS input transistors (M1, M2) driven by a tail current source (MTail).
+* Load: Two parallel branches per side consisting of a PMOS active load (current source) 
+*       and a diode-connected PMOS device. Note: Per standard IC design polarity conventions 
+*       for an NMOS amplifier, one would use NMOS loads. However, the prompt requests a 
+*       "PMOS differential amplifier". To maintain valid DC biasing where the input devices 
+*       are PMOS (sourcing current from VDD), the load devices must sink current to ground.
+*       Therefore, the active loads and diode-connected devices must be NMOS.
+*       This creates a standard CMOS differential pair topology.
+
+* --- Device Models ---
+.model MPMOS PMOS (LEVEL=1 VTO=-0.7 KP=50u CGDO=0 CGSO=0 CGB=0)
+.model MNMOS NMOS (LEVEL=1 VTO=0.7 KP=50u CGDO=0 CGSO=0 CGB=0)
+
+* --- Circuit Definition ---
+* Tail Current Source (NMOS sinking to ground, providing bias for PMOS inputs)
+MTail 0 GND MNMOS Mtail_model
+.model Mtail_model NMOS (LEVEL=1 VTO=0.7 KP=50u W=10u L=1u)
+
+* Input Pair (PMOS)
+* M1: Left Input, Drain connected to Load Node A
+M1 drain_a gate_1 source_vdd bulk_vdd MPMOS W=10u L=1u
+* M2: Right Input, Drain connected to Load Node B
+M2 drain_b gate_2 source_vdd bulk_vdd MPMOS W=10u L=1u
+
+* Left Side Loads (Parallel combination of Current Source and Diode-Connected)
+* Active Load (PMOS current source? No, must be NMOS to sink current from PMOS input).
+* Let's assume the prompt implies a standard CMOS diff pair where "PMOS amplifier" refers 
+* to the input stage polarity. The loads MUST be NMOS to function as a current sink.
+* If strictly PMOS loads were used with PMOS inputs, they would both source current, 
+* leading to no DC operating point (both pulling up). Thus, NMOS loads are required.
+
+* Left Side: NMOS Current Source Load
+Mload_a drain_a gate_load_a source_gnd bulk_gnd MNMOS W=10u L=1u
+* Left Side: Diode-Connected NMOS Load (Gate tied to Drain)
+Mdiode_a drain_a gate_load_a source_gnd bulk_gnd MNMOS W=5u L=1u
+
+* Right Side: NMOS Current Source Load
+Mload_b drain_b gate_load_b source_gnd bulk_gnd MNMOS W=10u L=1u
+* Right Side: Diode-Connected NMOS Load (Gate tied to Drain)
+Mdiode_b drain_b gate_load_b source_gnd bulk_gnd MNMOS W=5u L=1u
+
+* Gate Bias Nodes (External drive assumed)
+* gate_1, gate_2 are inputs.
+* gate_load_a, gate_load_b are internal nodes connected to drains of Mload/Mdiode pairs.
+```

@@ -1,0 +1,15 @@
+spice
+M1_1 drain_1 gate_1 source_1 bulk_1 nmos W=1u L=1u
+M2_1 drain_1 gate_1 source_1 bulk_1 pmos W=1u L=1u
+M1_2 drain_2 gate_2 source_2 bulk_2 nmos W=1u L=1u
+M2_2 drain_2 gate_2 source_2 bulk_2 pmos W=1u L=1u
+M1_3 drain_3 gate_3 source_3 bulk_3 nmos W=1u L=1u
+M2_3 drain_3 gate_3 source_3 bulk_3 pmos W=1u L=1u
+M1_4 drain_4 gate_4 source_4 bulk_4 nmos W=1u L=1u
+M2_4 drain_4 gate_4 source_4 bulk_4 pmos W=1u L=1u
+M1_5 drain_5 gate_5 source_5 bulk_5 nmos W=1u L=1u
+M2_5 drain_5 gate_5 source_5 bulk_5 pmos W=1u L=1u
+
+.MODEL nmos nmos (LEVEL=1)
+.MODEL pmos pmos (LEVEL=1)
+```

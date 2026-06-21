@@ -1,0 +1,9 @@
+* PMOS source follower with PMOS current-source bias and a capacitive output load.
+* M1 is the source follower; M2 is the PMOS current-source bias; CL is the
+* external capacitive load on the output node.
+M1 0    vin   vout vdd PMOS W=20u L=1u
+M2 vout vbias vdd  vdd PMOS W=20u L=1u
+CL vout 0     1p
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.MODEL PMOS PMOS (LEVEL=1 VTO=-1 KP=1.0e-4 LAMBDA=0.02)
+.END

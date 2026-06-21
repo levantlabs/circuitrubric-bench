@@ -1,0 +1,17 @@
+```spice
+* Two-Input CMOS NAND Gate Topology
+* Pull-up Network: Parallel PMOS (M1, M2)
+* Pull-down Network: Series NMOS (M3, M4)
+
+* PMOS Devices (Source to VDD)
+M1 out in1 in2 vdd pmos W=10u L=1u
+M2 out in2 in1 vdd pmos W=10u L=1u
+
+* NMOS Devices (Source to Ground, Drain connected to Output of PMOS)
+M3 out in1 0 0 nmos W=5u L=1u
+M4 out in2 0 0 nmos W=5u L=1u
+
+* Device Models
+.model pmos pm (LEVEL=1 VTO=-0.7 KP=50u CGDO=0 CGSO=0)
+.model nmos nm (LEVEL=1 VTO=0.7 KP=100u CGDO=0 CGSO=0)
+```

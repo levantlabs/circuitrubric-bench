@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a PMOS source follower with a resistor load."
+  - id: verbose
+    text: "Design a PMOS source follower with a resistor load: a common-drain transistor whose source drives the output, with a resistor from the output to the supply as the load."
+  - id: spec
+    text: "Design a PMOS source follower with a resistor load. Use exactly one transistor and one resistor: M1 is a PMOS transistor with drain at 0, gate at vin, source at vout, bulk to VDD. R1 is a resistor between vdd and vout."

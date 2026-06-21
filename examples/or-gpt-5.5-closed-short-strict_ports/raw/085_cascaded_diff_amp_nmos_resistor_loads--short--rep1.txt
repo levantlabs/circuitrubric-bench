@@ -1,0 +1,21 @@
+```spice
+* Two cascaded NMOS differential amplifiers with resistor loads
+
+* Stage 1 resistor loads
+RD1P VDD V1P 10k
+RD1N VDD V1N 10k
+
+* Stage 1 NMOS differential pair
+M1N V1N INP TAIL1 0 NMOS W=20u L=1u
+M1P V1P INN TAIL1 0 NMOS W=20u L=1u
+
+* Stage 2 resistor loads
+RD2P VDD OUTP 10k
+RD2N VDD OUTN 10k
+
+* Stage 2 NMOS differential pair, directly DC-coupled to stage 1 outputs
+M2N OUTN V1P TAIL2 0 NMOS W=20u L=1u
+M2P OUTP V1N TAIL2 0 NMOS W=20u L=1u
+
+.MODEL NMOS NMOS LEVEL=1 VTO=0.7 KP=200u LAMBDA=0.02
+```

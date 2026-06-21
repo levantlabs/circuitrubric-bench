@@ -1,0 +1,9 @@
+* PMOS sampling switch with PMOS dummy-device charge-injection cancellation.
+* M1 is the main pass PMOS; M2 is the dummy PMOS with drain=source=vout
+* and gate driven by the complement clock (clkb); Ch holds the sampled voltage.
+M1 vout clk  vin  vdd PMOS W=20u L=1u
+M2 vout clkb vout vdd PMOS W=10u L=1u
+Ch vout 0    1p
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.MODEL PMOS PMOS (LEVEL=1 VTO=-1 KP=1.0e-4 LAMBDA=0.02)
+.END

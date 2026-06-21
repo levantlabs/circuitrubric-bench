@@ -1,0 +1,10 @@
+* 3-stage CS-amp ring oscillator with resistor loads (NMOS).
+* Three NMOS CS stages in a loop: vout -> v1 -> v2 -> vout.
+M1 v1   vout 0 0 NMOS W=10u L=1u
+R1 vdd  v1   10k
+M2 v2   v1   0 0 NMOS W=10u L=1u
+R2 vdd  v2   10k
+M3 vout v2   0 0 NMOS W=10u L=1u
+R3 vdd  vout 10k
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.END

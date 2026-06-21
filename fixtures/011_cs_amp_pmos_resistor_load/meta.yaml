@@ -1,0 +1,6 @@
+id: "011_cs_amp_pmos_resistor_load"
+category: "Amplifier"
+family: "common_source"
+variant: "pmos_resistor_load"
+source: "hand_authored"
+attribution: null

@@ -1,0 +1,43 @@
+```spice
+* Tailless NMOS Cross-Coupled LC Oscillator with Center-Tapped Tank
+* Topology: Two NMOS transistors (M1, M2) acting as the active cross-coupled pair.
+* Load: A center-tapped inductor (L1 split into L1a, L1b) connected to VDD via a PMOS current source load (MP).
+* The "tailless" nature implies no tail current source; the cross-coupling provides the negative resistance.
+* Note: To simulate oscillation, initial conditions or noise are typically required in .TRAN, 
+* but per instructions, no stimuli/analyses are included. Only the circuit topology is defined.
+
+* --- Power Supply ---
+VDD vdd 0 DC 5
+
+* --- Active Devices (NMOS Cross-Coupled Pair) ---
+* M1: Drain connected to L1a, Gate connected to Source of M2, Source to Ground
+M1 drain_m1 gate_m2 source_m1 bulk_m1 vdd l_osc_nmos
+.model l_osc_nmos nmos (level=1 VTO=0.4 KP=50u CGSO=0 CGDO=0 CJSW=0)
+* M2: Drain connected to L1b, Gate connected to Source of M1, Source to Ground
+M2 drain_m2 gate_m1 source_m2 bulk_m2 vdd l_osc_nmos
+
+* --- Load Network (Center-Tapped Tank + Current Source) ---
+* MP: PMOS current source load sourcing current from VDD to the tank center tap.
+MP drain_mp gate_mp source_mp bulk_mp vdd l_osc_pmos
+.model l_osc_pmos pmos (level=1 VTO=-0.4 KP=50u CGSO=0 CGDO=0 CJSW=0)
+
+* L1a: Half of the inductor connected to M1 drain and MP drain
+L1a drain_m1 drain_mp 1nH
+
+* L1b: Half of the inductor connected to M2 drain and MP drain
+L1b drain_m2 drain_mp 1nH
+
+* C1, C2: Optional tank tuning capacitors (often present in LC tanks, omitted if purely inductive tank requested, 
+* but a center-tapped tank usually implies parallel resonance. Adding small caps makes it a standard LC oscillator.
+* If strictly "LC" without explicit C values, these are often implicit or zero. 
+* However, a pure L-C tank requires C for oscillation frequency. Assuming standard LC tank topology:
+C1 drain_m1 0 1pF
+C2 drain_m2 0 1pF
+
+* --- Bulk Connections (Explicitly tied to sources per convention) ---
+* M1/M2 bulk tied to source (ground)
+M1 bulk_m1 source_m1
+M2 bulk_m2 source_m2
+* MP bulk tied to source (VDD)
+MP bulk_mp source_mp
+```

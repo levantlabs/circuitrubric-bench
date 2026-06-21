@@ -1,0 +1,28 @@
+```spice
+* Telescopic Cascode OTA: NMOS Input, PMOS Current-Source Load
+* Topology: Differential Pair (NMOS) + Active Cascodes (NMOS) + PMOS Tail Current Source
+* Note: Single-ended output is taken from one side of the differential pair.
+
+* --- Device Parameters ---
+* Amplifying Devices (Input Pair & Cascodes)
+M1 out in1 in2 0 nmos_amp W=10u L=1u
+M2 cas_in1 in1 in2 0 nmos_cas W=5u L=1u
+M3 out in3 in4 0 nmos_amp W=10u L=1u
+M4 cas_in3 in3 in4 0 nmos_cas W=5u L=1u
+
+* Load Devices (Current Source Loads)
+* PMOS loads sourcing current from VDD to the output nodes
+M5 out vdd 0 0 pmos_load W=20u L=1u
+M6 cas_out1 vdd cas_in1 0 0 pmos_cas W=20u L=1u
+M7 cas_out3 vdd cas_in3 0 0 pmos_cas W=20u L=1u
+
+* Tail Current Source (NMOS sinking to ground)
+Mtail tail 0 0 0 nmos_tail W=50u L=1u
+
+* --- Model Definitions ---
+.model nmos_amp nmos (LEVEL=1 VTO=0.4 KP=120u CGDO=0 CGSO=0 CGBO=0)
+.model nmos_cas nmos (LEVEL=1 VTO=0.4 KP=120u CGDO=0 CGSO=0 CGBO=0)
+.model nmos_tail nmos (LEVEL=1 VTO=0.4 KP=120u CGDO=0 CGSO=0 CGBO=0)
+.model pmos_load pmos (LEVEL=1 VTO=-0.4 KP=60u CGDO=0 CGSO=0 CGBO=0)
+.model pmos_cas pmos (LEVEL=1 VTO=-0.4 KP=60u CGDO=0 CGSO=0 CGBO=0)
+```

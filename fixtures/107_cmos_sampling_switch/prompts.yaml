@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a CMOS transmission-gate sampling switch with a hold capacitor."
+  - id: verbose
+    text: "Design a CMOS transmission-gate sampling switch with a hold capacitor: complementary NMOS and PMOS pass devices switching the input onto a hold capacitor, driven by complementary clock controls."
+  - id: spec
+    text: "Design a CMOS transmission-gate sampling switch with a hold capacitor. Use exactly two transistors and one capacitor: M1 is an NMOS pass device with drain at vout, gate at en, source at vin, bulk to ground. M2 is a PMOS pass device with drain at vout, gate at enb, source at vin, bulk to VDD. Ch is a capacitor between vout and ground."

@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a PMOS differential pair with resistor loads."
+  - id: verbose
+    text: "Design a PMOS differential pair with resistor loads: a matched PMOS input pair sharing a tail current source from the supply, each output loaded by a resistor to ground, giving differential outputs."
+  - id: spec
+    text: "Design a PMOS differential pair with resistor loads. Use exactly three transistors and two resistors: M1 is a PMOS transistor with drain at voutn, gate at vinp, source at ntail, bulk to VDD. M2 is a PMOS transistor with drain at voutp, gate at vinn, source at ntail, bulk to VDD. M3 is a PMOS transistor with drain at ntail, gate at vbias, source at VDD, bulk to VDD. R1 is a resistor between voutn and 0. R2 is a resistor between voutp and 0."

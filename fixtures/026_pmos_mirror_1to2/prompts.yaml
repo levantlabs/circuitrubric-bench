@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a 1 to 2 PMOS current mirror."
+  - id: verbose
+    text: "Design a 1:2 PMOS current mirror: a diode-connected reference transistor that sets the bias for an output transistor scaled to deliver twice the reference current, both referenced to the supply."
+  - id: spec
+    text: "Design a 1 to 2 PMOS current mirror. Use exactly two transistors: M1 is a PMOS transistor with drain at iref, gate at iref, source at VDD, bulk to VDD. M2 is a PMOS transistor with drain at iout, gate at iref, source at VDD, bulk to VDD."

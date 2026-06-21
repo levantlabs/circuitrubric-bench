@@ -1,0 +1,12 @@
+```spice
+* 1:8 self-biased cascode PMOS current mirror
+* Pins: VDD, IREF, OUT
+
+MPREF   NREF  NREF  VDD   VDD  PMOS  W=1u  L=180n
+MPCREF  IREF  IREF  NREF  VDD  PMOS  W=1u  L=180n
+
+MPOUT   NOUT  NREF  VDD   VDD  PMOS  W=1u  L=180n  M=8
+MPCOUT  OUT   IREF  NOUT  VDD  PMOS  W=1u  L=180n  M=8
+
+.MODEL PMOS PMOS LEVEL=1 VTO=-0.7 KP=50u LAMBDA=0.02
+```

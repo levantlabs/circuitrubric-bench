@@ -1,0 +1,11 @@
+```spice
+* NMOS Input Super Source Follower
+* Topology: Common-Drain stage with active load (PMOS current source)
+* Note: Gate bias is external. Bulk terminals are tied to sources for standard IC process.
+
+M1 drain=OUT gate=IN source=GND bulk=GND model=NMOS W=10u L=1u M=1
+M2 drain=VDD gate=BiasPMOS source=OUT bulk=VDD model=PMOS W=10u L=1u M=1
+
+.MODEL NMOS NMOS (LEVEL=1 VTO=0.7 KP=100u GAMMA=0.5 LAMBDA=0.05 CGDO=2p CGSO=2p CGBO=0)
+.MODEL PMOS PMOS (LEVEL=1 VTO=-0.7 KP=50u GAMMA=0.5 LAMBDA=0.05 CGDO=2p CGSO=2p CGBO=0)
+```

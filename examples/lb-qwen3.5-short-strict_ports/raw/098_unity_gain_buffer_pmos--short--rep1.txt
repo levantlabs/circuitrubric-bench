@@ -1,0 +1,13 @@
+```spice
+* PMOS-input 5T Unity-Gain Buffer (Source Follower)
+* Topology: PMOS Input Stage + NMOS Current Source Load
+* The output node is directly connected to the gate of the next stage or load.
+
+M1 out in VDD VDD pmos W=10u L=1u M=1
+M2 out out VDD VDD pmos W=10u L=1u M=1
+M3 out in VSS VSS nmos W=10u L=1u M=1
+M4 out out VSS VSS nmos W=10u L=1u M=1
+
+.MODEL pmos pmos (LEVEL=1 VTO=-0.7 KP=50u GAMMA=0.6 LAMBDA=0.1)
+.MODEL nmos nmos (LEVEL=1 VTO=0.7 KP=100u GAMMA=0.6 LAMBDA=0.1)
+```

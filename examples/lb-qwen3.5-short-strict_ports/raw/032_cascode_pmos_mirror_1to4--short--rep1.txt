@@ -1,0 +1,13 @@
+```spice
+* 1-to-4 Cascode PMOS Current Mirror
+* Amplifying/Reference Branch: M1 (Ref), M2 (Cascode Ref)
+* Output/Branch Branch: M3 (Output), M4 (Cascode Output)
+* Note: Bulk terminals connected to Source for PMOS devices.
+
+M1 1 0 0 0 PMOS_WL
+M2 2 1 0 0 PMOS_WL
+M3 2 0 0 0 PMOS_WL
+M4 3 2 0 0 PMOS_WL
+
+.MODEL PMOS_WL P (LEVEL=1 VTO=-0.5 KP=50u GAMMA=0.5 LAMBDA=0.05)
+```

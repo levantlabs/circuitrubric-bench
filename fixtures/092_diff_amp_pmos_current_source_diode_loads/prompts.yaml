@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a PMOS differential amplifier with parallel current-source and diode-connected loads."
+  - id: verbose
+    text: "Design a PMOS differential amplifier with parallel current-source and diode-connected loads: a matched PMOS input pair on a tail source, each output loaded by both an NMOS current source and a diode-connected NMOS device to ground."
+  - id: spec
+    text: "Design a PMOS differential amplifier with parallel current-source and diode-connected loads. Use exactly seven transistors: M1 is a PMOS transistor with drain at voutn, gate at vinp, source at ntail, bulk to VDD. M2 is a PMOS transistor with drain at voutp, gate at vinn, source at ntail, bulk to VDD. M3 is an NMOS transistor with drain at voutn, gate at vbn, source to ground, bulk to ground. M4 is an NMOS transistor with drain at voutp, gate at vbn, source to ground, bulk to ground. M5 is an NMOS transistor with drain at voutn, gate at voutn, source to ground, bulk to ground. M6 is an NMOS transistor with drain at voutp, gate at voutp, source to ground, bulk to ground. M7 is a PMOS transistor with drain at ntail, gate at vbias, source at VDD, bulk to VDD."

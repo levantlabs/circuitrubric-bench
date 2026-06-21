@@ -1,0 +1,9 @@
+```spice
+MCS n1 vin 0 0 NMOS W=10u L=1u
+RLOAD VDD n1 10k
+
+MSF VDD n1 vout 0 NMOS W=20u L=1u
+MIBIAS vout vbias 0 0 NMOS W=10u L=1u
+
+.MODEL NMOS NMOS (LEVEL=1 VTO=0.7 KP=200u LAMBDA=0.02)
+```

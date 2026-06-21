@@ -1,0 +1,10 @@
+```spice
+* PMOS Common-Source Amplifier with Diode-Connected PMOS Load
+* Note: Both devices are PMOS. The load is diode-connected (Gate shorted to Drain).
+* Polarity: Sources connected to VDD, Bulks connected to Sources.
+
+M1 drain gate source bulk model_pmos W=10u L=1u M=1
+M2 drain_gate_load gate_load source_load bulk_load model_pmos W=5u L=1u M=1
+
+.model model_pmos pmosp (LEVEL=1 VTO=-0.7 KP=50u GAMMA=0.5 LAMBDA=0.1)
+```

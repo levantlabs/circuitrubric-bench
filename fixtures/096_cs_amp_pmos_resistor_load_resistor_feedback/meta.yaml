@@ -1,0 +1,6 @@
+id: "096_cs_amp_pmos_resistor_load_resistor_feedback"
+category: "Amplifier"
+family: "feedback_cs"
+variant: "pmos_resistor_load_resistor_feedback"
+source: "hand_authored"
+attribution: null

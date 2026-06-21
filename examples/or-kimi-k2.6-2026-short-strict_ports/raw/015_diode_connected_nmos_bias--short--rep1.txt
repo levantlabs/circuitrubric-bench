@@ -1,0 +1,5 @@
+ ```spice
+R1 VDD VG 10k
+M1 VG VG 0 0 NCH W=10u L=1u
+.MODEL NCH NMOS (LEVEL=1 KP=100u VTO=0.7)
+```

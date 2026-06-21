@@ -1,0 +1,6 @@
+id: "020_cg_amp_pmos_resistor_load"
+category: "Amplifier"
+family: "common_gate"
+variant: "pmos_resistor_load"
+source: "hand_authored"
+attribution: null

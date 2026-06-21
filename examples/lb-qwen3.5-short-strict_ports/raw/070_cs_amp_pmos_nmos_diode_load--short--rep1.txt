@@ -1,0 +1,11 @@
+```spice
+* PMOS Common-Source Amplifier with NMOS Diode-Connected Load
+* Topology: PMOS (Q1) acts as the amplifying device, NMOS (Q2) acts as the active load (diode-connected).
+* DC Coupling: Output of Q1 is directly connected to Gate and Drain of Q2.
+
+M1 drain gate source bulk model_pmos W=10u L=1u
+M2 drain gate source bulk model_nmos W=10u L=1u
+
+.model model_pmos pmosp (LEVEL=1 VTO=-0.5 KP=50u CGDO=0 CGSO=0)
+.model model_nmos nmos (LEVEL=1 VTO=0.5 KP=50u CGDO=0 CGSO=0)
+```

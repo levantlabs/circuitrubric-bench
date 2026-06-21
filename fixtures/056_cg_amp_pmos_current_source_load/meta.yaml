@@ -1,0 +1,6 @@
+id: "056_cg_amp_pmos_current_source_load"
+category: "Amplifier"
+family: "common_gate"
+variant: "pmos_current_source_load"
+source: "hand_authored"
+attribution: null

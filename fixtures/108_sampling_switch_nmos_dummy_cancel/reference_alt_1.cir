@@ -1,0 +1,6 @@
+* NMOS sampling switch w/ dummy cancel, alt: main switch D/S swapped.
+M1 vin  clk  vout 0 NMOS W=10u L=1u
+M2 vout clkb vout 0 NMOS W=5u  L=1u
+Ch vout 0    1p
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.END

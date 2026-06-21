@@ -1,0 +1,8 @@
+* PMOS sampling switch with hold capacitor.
+* M1 is the pass device (drain at vout, source at vin); Ch holds the sampled
+* voltage at vout. PMOS conducts when its gate is low.
+M1 vout clk vin vdd PMOS W=20u L=1u
+Ch vout 0   1p
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.MODEL PMOS PMOS (LEVEL=1 VTO=-1 KP=1.0e-4 LAMBDA=0.02)
+.END

@@ -1,0 +1,9 @@
+groups:
+  - devices: [M1, M3]      # bottom pair (reference + output bottom)
+    ratio_W: [1, 4]
+    ratio_L: [1, 1]
+    ratio_M: [1, 4]
+  - devices: [M2, M4]      # cascode top pair
+    ratio_W: [1, 4]
+    ratio_L: [1, 1]
+    ratio_M: [1, 4]

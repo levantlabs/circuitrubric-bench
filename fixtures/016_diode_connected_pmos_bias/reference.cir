@@ -1,0 +1,5 @@
+* Diode-connected PMOS bias generator with a current-setting resistor to ground.
+M1 vbias vbias vdd vdd PMOS W=20u L=1u
+R1 vbias 0 36k
+.MODEL PMOS PMOS (LEVEL=1 VTO=-1 KP=1.0e-4 LAMBDA=0.02)
+.END

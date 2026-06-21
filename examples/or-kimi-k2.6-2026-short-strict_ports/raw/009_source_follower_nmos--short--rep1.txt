@@ -1,0 +1,5 @@
+```spice
+M1 VDD Vin Vout GND NCH W=10u L=0.18u
+M2 Vout Vb GND GND NCH W=5u L=0.36u
+.MODEL NCH NMOS (LEVEL=1 KP=200u VTO=0.5 LAMBDA=0.02)
+```

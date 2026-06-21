@@ -1,0 +1,5 @@
+* Diode-connected NMOS bias generator with a current-setting resistor from VDD.
+M1 vbias vbias 0 0 NMOS W=10u L=1u
+R1 vdd vbias 36k
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.END

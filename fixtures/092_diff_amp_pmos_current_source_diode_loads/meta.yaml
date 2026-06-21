@@ -1,0 +1,6 @@
+id: "092_diff_amp_pmos_current_source_diode_loads"
+category: "Amplifier"
+family: "diff_amp"
+variant: "pmos_current_source_diode_loads"
+source: "hand_authored"
+attribution: null

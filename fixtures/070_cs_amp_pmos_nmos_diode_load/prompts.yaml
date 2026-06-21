@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a PMOS common-source amplifier with an NMOS diode-connected load."
+  - id: verbose
+    text: "Design a PMOS common-source amplifier with an NMOS diode-connected load: a common-source input transistor driving the output, loaded by a diode-connected NMOS device to ground."
+  - id: spec
+    text: "Design a PMOS common-source amplifier with an NMOS diode-connected load. Use exactly two transistors: M1 is a PMOS transistor with drain at vout, gate at vin, source at VDD, bulk to VDD. M2 is an NMOS transistor with drain at vout, gate at vout, source to ground, bulk to ground."

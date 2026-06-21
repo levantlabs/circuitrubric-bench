@@ -1,0 +1,7 @@
+```spice
+M_PU out in VDD VDD PMOS W=2u L=180n
+M_PD out in 0   0   NMOS W=1u L=180n
+
+.MODEL NMOS NMOS LEVEL=1 VTO=0.5 KP=200u
+.MODEL PMOS PMOS LEVEL=1 VTO=-0.5 KP=100u
+```

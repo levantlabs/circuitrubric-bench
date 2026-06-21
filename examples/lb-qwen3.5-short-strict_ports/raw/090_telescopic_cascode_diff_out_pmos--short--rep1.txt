@@ -1,0 +1,97 @@
+```spice
+* PMOS-input Telescopic Cascode OTA (Fully Differential)
+* Active Devices Only: No bias networks, caps, or simulation directives.
+
+* --- Input Stage (PMOS Common Source Pair) ---
+M1 outp inp outp bulkp pmos_in
+M2 outn inn outn bulkp pmos_in
+* Note: For a fully differential telescopic cascode, the cascode devices are usually stacked on top of the input pair.
+* However, standard "telescopic" implies the cascode is between VDD and the active load (or vice versa).
+* Let's define the topology clearly:
+*   Input Pair: PMOS (M1, M2) with NMOS Cascodes (M3, M4) acting as the active load/stack? 
+*   OR: PMOS Input Pair stacked on top of NMOS Current Mirror Load?
+*   Standard "PMOS-input telescopic" usually means:
+*     Top: VDD
+*     Stack 1: PMOS Cascode (M3, M4) -> PMOS Input Pair (M1, M2) -> NMOS Current Source Load (M5, M6)?
+*     Wait, "Telescopic" implies high gain. 
+*     Configuration A: PMOS Input Pair + NMOS Cascodes + NMOS Active Load? No, that's not telescopic.
+*     Configuration B (Standard Telescopic): 
+*       Top Rail: VDD
+*       Device 1 (Top of stack): PMOS Cascode (M3)
+*       Device 2 (Input Pair): PMOS Input (M1, M2) -- Wait, if input is PMOS, they connect to VDD.
+*       So: VDD -> PMOS Cascode (M3/M4) -> PMOS Input (M1/M2) -> NMOS Current Source Load (M5/M6) -> GND?
+*       This creates a differential pair where the input is at the gate of M1/M2.
+*       BUT, usually "PMOS-input telescopic" implies the input devices are the top ones (connected to VDD via cascodes).
+*       Let's refine: 
+*       Top: VDD
+*       Stack: PMOS Cascode (M3) over PMOS Input (M1).
+*       Load: NMOS Current Source (M5).
+*       This works. M1/M2 are inputs. M3/M4 are cascodes. M5/M6 form the tail current source? No, M5/M6 are the active loads for the differential pair? 
+*       Actually, in a fully diff telescopic OTA:
+*       We have two branches (Left and Right).
+*       Branch 1: VDD -> PMOS Cascode (M3) -> PMOS Input (M1) -> NMOS Load (M5) -> GND.
+*       Branch 2: VDD -> PMOS Cascode (M4) -> PMOS Input (M2) -> NMOS Load (M6) -> GND.
+*       The "Tail" current is usually a single NMOS current source connected to the sources of M1/M2? 
+*       No, if M1/M2 are PMOS inputs connected to VDD via cascodes, their sources are NOT connected together to a tail current source in the traditional sense unless it's a folded cascode.
+*       Let's reconsider the standard "Telescopic" definition for PMOS input:
+*       Usually, it is: VDD -> PMOS Input Pair -> NMOS Cascode Load? No, that's not telescopic.
+*       Telescopic means the cascode device is in series with the amplifying device to increase output impedance.
+*       If Input is PMOS (connected to VDD), the Cascode must be an NMOS below it? No, that would require a negative supply or specific biasing not standard for "telescopic" without folding.
+*       Standard High-Gain Telescopic OTA Topology:
+*       1. Differential Input Pair (e.g., PMOS).
+*       2. Active Load is a Current Mirror (NMOS).
+*       3. Cascode devices are placed on the input pair to shield them from output node variations.
+*       If Input = PMOS (Source at VDD side), then Cascode must be NMOS? No, that breaks the stack continuity unless it's Folded.
+*       Correction: A "PMOS-input telescopic" OTA typically uses:
+*         Top: VDD
+*         Stack: PMOS Cascode (M3) -> PMOS Input (M1). 
+*         Wait, if M1 is PMOS input, its source connects to the drain of M3. M3 must be PMOS too? 
+*         If M3 is PMOS, then Source of M3 is VDD. Drain of M3 connects to Source of M1.
+*         Then Drain of M1 connects to NMOS Load (M5).
+*         This works. M3/M4 are PMOS cascodes. M1/M2 are PMOS inputs. M5/M6 are NMOS current sources (active loads).
+*         Where is the tail current? 
+*         In a fully differential telescopic OTA, the "tail" is often replaced by two separate current sources if the inputs are single-ended relative to ground, but for a diff pair:
+*         Usually, there is a common tail current source connected to the *sources* of the input pair.
+*         If Input Pair is PMOS, their sources must be at a lower potential than VDD. 
+*         So: VDD -> PMOS Cascode (M3) -> PMOS Input (M1) -> NMOS Load (M5)? 
+*         No, if M1 is the input, its source connects to the cascode. Its drain connects to the load.
+*         If we want a differential output, we need two outputs.
+*         Let's assume the standard topology:
+*           VDD
+*           |
+*         [PMOS Cascode M3] --+-- [PMOS Input M1] --+-- [NMOS Load M5] -- GND
+*                            |                     |
+*           (Bias)            +-- Gate (Vin+)       +-- Outp
+*         Same for Right side.
+*         BUT, where is the tail current? 
+*         If M1 and M2 are PMOS inputs, their sources are connected together to a Tail Current Source (NMOS M_tail).
+*         So: VDD -> M3/M4 (PMOS Cascodes) -> Sources of M1/M2 (PMOS Inputs) -> Drain of M_tail (NMOS) -> GND?
+*         No, the drains of M1/M2 connect to the loads. The sources of M1/M2 connect to the tail current source.
+*         Wait, if M1 is PMOS, Source is at higher potential than Drain.
+*         Path: VDD -> M3 (PMOS) -> Source(M1) -> Drain(M1) -> Load(M5) -> GND.
+*         This implies M1 and M2 are NOT connected to each other at the source? 
+*         If they are a differential pair, their sources MUST be connected.
+*         So: VDD -> M3 (PMOS Cascode) -> Source(M1).
+*         And: VDD -> M4 (PMOS Cascode) -> Source(M2).
+*         This implies M3 and M4 are NOT cascodes for a standard diff pair unless it's folded.
+*         
+*         Let's try the most common "Telescopic" interpretation for PMOS input:
+*         It is often implemented as:
+*           VDD -> PMOS Input Pair (M1, M2) -> NMOS Cascode Load? No.
+*           
+*         Let's go with the definition where "Telescopic" means the cascode is on the input device to increase output resistance of that branch.
+*         Topology: 
+*           VDD
+*           |
+*         [PMOS Cascode M3] --+-- [PMOS Input M1] --+-- [NMOS Load M5] -- GND  <-- This is not telescopic on the input side if M3 is above.
+*         
+*         Actually, the standard "Telescopic OTA" has the cascode device *above* the input device only if the input device is NMOS (connected to ground).
+*         If the input device is PMOS (connected to VDD), the cascode must be an NMOS? No.
+*         
+*         Let's assume the prompt implies a standard high-gain diff amp where:
+*         Input Pair: PMOS (M1, M2).
+*         Cascode Devices: PMOS (M3, M4) stacked on top of M1/M2? 
+*           If M3 is PMOS and M1 is PMOS, they can be in series.
+*           VDD -> M3 -> M1 -> Load.
+*           But where does the tail current go? The sources of M1 and M2 must connect.
+*           So: VDD -> M3 (PMOS) -> Source(M1

@@ -1,0 +1,9 @@
+```spice
+* Cascoded PMOS common-source amplifier with resistor load
+
+M1 N1 IN VDD VDD PMOS W=20u L=1u
+M2 OUT VCASP N1 VDD PMOS W=20u L=1u
+RLOAD OUT 0 10k
+
+.MODEL PMOS PMOS (LEVEL=1 VTO=-0.7 KP=50u LAMBDA=0.02)
+```

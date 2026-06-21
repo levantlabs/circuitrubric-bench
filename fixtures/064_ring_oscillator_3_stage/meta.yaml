@@ -1,0 +1,6 @@
+id: "064_ring_oscillator_3_stage"
+category: "Digital"
+family: "ring_oscillator"
+variant: "inverter_3_stage"
+source: "hand_authored"
+attribution: null

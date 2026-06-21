@@ -1,0 +1,12 @@
+```spice
+* Source-Degenerated PMOS Current Mirror
+* Active Devices: M1 (Reference), M2 (Output)
+* Load/Matched Elements: R1 (Source Degeneration for Ref), R2 (Source Degeneration for Out)
+
+M1 drain_ref gate_ref source_ref bulk_pmos ref_model W=10u L=1u
+M2 drain_out gate_ref source_out bulk_pmos ref_model W=20u L=1u
+R1 source_ref ground 1k
+R2 source_out ground 1k
+
+.MODEL ref_model PMOS (LEVEL=1 VTO=-0.7 KP=50u GAMMA=0.5 LAMBDA=0.05)
+```

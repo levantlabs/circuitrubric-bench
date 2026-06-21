@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a diode-connected NMOS bias generator with a resistor from VDD."
+  - id: verbose
+    text: "Design a diode-connected NMOS bias generator: a diode-connected NMOS transistor with a resistor from the supply setting its current, producing a stable bias voltage."
+  - id: spec
+    text: "Design a diode-connected NMOS bias generator with a resistor from VDD. Use exactly one transistor and one resistor: M1 is an NMOS transistor with drain at vbias, gate at vbias, source to ground, bulk to ground. R1 is a resistor between vdd and vbias."

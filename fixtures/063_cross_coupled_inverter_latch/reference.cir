@@ -1,0 +1,10 @@
+* 4-transistor cross-coupled inverter latch (core of a sense amp / flip-flop).
+* Two CMOS inverters wired back-to-back: each inverter's output feeds the
+* other's input. Storage nodes are Q and Qb.
+M1 q   qb 0   0   NMOS W=10u L=1u
+M2 qb  q  0   0   NMOS W=10u L=1u
+M3 q   qb vdd vdd PMOS W=20u L=1u
+M4 qb  q  vdd vdd PMOS W=20u L=1u
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.MODEL PMOS PMOS (LEVEL=1 VTO=-1 KP=1.0e-4 LAMBDA=0.02)
+.END

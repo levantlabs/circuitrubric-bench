@@ -1,0 +1,110 @@
+```spice
+* 1-to-1 Wide-Swing Cascode NMOS Current Mirror
+* Topology: Input branch (M1, M2) and Output branch (M3, M4).
+* M1/M3 are the cascode devices (NMOS).
+* M2/M4 are the diode-connected input/output transistors (NMOS).
+* To achieve "wide-swing" behavior in an NMOS-only mirror, the cascode gates are typically tied to a bias voltage (Vbias) that allows the output transistor to swing closer to ground. 
+* However, strictly following the prompt's constraint to exclude gate bias networks and ideal sources, we must assume external biasing for the cascode gates or tie them to a specific node if implied.
+* Since no Vbias source is allowed in the netlist per instructions ("Do NOT include... ideal voltage sources"), we will implement the standard wide-swing topology where the cascode gate is driven by an external node 'VBIAS'. 
+* Alternatively, for a self-biased version without explicit resistors/caps, one might tie cascode gates to the drain of the diode-connected device (standard cascode), but that is not "wide-swing".
+* True wide-swing requires Vbias < VDD - |Vtp| (for PMOS) or specific NMOS bias. 
+* Given the constraint "Do NOT include... ideal voltage sources", we assume the node 'VBIAS' is provided externally.
+* If a purely passive implementation is required without external Vbias, a wide-swing cascode is impossible with just MOSFETs and ground/VDD rails unless using a current-steering bias network (which involves resistors/caps not requested).
+* We will assume 'VBIAS' is an external node.
+
+* Parameters
+.PARAM W=10u
+.PARAM L=1u
+
+* Input Branch
+M1 drain_in gate_in source_in bulk_in M1_MOD W={W} L={L}
+M2 drain_in gate_in source_in bulk_in M2_MOD W={W} L={L}
+
+* Output Branch (Cascode)
+M3 drain_out gate_out source_out bulk_out M3_MOD W={W} L={L}
+M4 drain_out gate_out source_out bulk_out M4_MOD W={W} L={L}
+
+* Connections for Wide-Swing Cascode:
+* M1 and M2 form the input mirror pair. M2 is diode-connected (Gate tied to Drain).
+* M3 and M4 form the output cascode pair. M4 is diode-connected (Gate tied to Drain).
+* For wide-swing, Gate of M3 (cascode) needs a specific bias. We assume node 'VBIAS' exists externally.
+* Gate of M1 is input signal. Gate of M2 is connected to Drain of M2.
+* Gate of M3 is connected to VBIAS (external). Gate of M4 is connected to Drain of M4.
+
+* Correct Netlist Wiring for Wide-Swing Cascode NMOS Mirror:
+* Input Side: M1 (cascode), M2 (diode-connected input). 
+* Output Side: M3 (cascode), M4 (diode-connected output).
+* Note: In a standard wide-swing cascode, the cascode transistor (M1/M3) is usually placed *above* the diode-connected one? 
+* No, in an NMOS current mirror sourcing current from VDD:
+  - Top device is Cascode. Bottom device is Diode-connected (or vice versa depending on definition).
+  - Standard Wide-Swing: The cascode gate is biased low enough to allow the bottom transistor to enter saturation but not deep triode, while the top transistor handles the headroom.
+  - Let's define the stack from VDD to GND:
+    - Top: Cascode NMOS (M_top)
+    - Bottom: Diode-connected NMOS (M_bot) -> This is NOT wide swing.
+  - Wide Swing NMOS Mirror (sinking current):
+    - Top: Diode-connected NMOS (M1)
+    - Bottom: Cascode NMOS (M2) with gate biased low? No, that doesn't work for NMOS sinking.
+  
+* Re-evaluating "NMOS Current Mirror": Usually implies sourcing current from VDD or sinking to GND.
+* If Sinking to GND (Common in ICs):
+  - Stack: VDD -> PMOS Load -> NMOS Mirror.
+  - But prompt asks for "NMOS current mirror". This usually means the active devices are NMOS.
+  - If they sink current to ground:
+    - Top device must be connected to a higher potential.
+    - Standard Cascode (not wide swing): M1 (diode), M2 (cascode).
+    - Wide Swing: Requires the cascode gate to be biased such that Vds of the bottom device is minimized but > Vgs-Vth.
+    - Actually, the classic "Wide-Swing" cascode current mirror uses a specific bias voltage on the cascode gate.
+    - Let's assume the topology: 
+      Input Branch: M1 (Diode connected), M2 (Cascode).
+      Output Branch: M3 (Diode connected), M4 (Cascode).
+      Wait, for wide swing, the cascode device is usually the one with the fixed gate voltage, and the diode-connected one sets the current.
+      To get wide swing in NMOS sinking to ground:
+      - Top transistor (connected to VDD or previous stage) is Diode Connected? No.
+      - Let's stick to the most common definition: 
+        Input: M1 (Diode), M2 (Cascode). Output: M3 (Diode), M4 (Cascode).
+        For Wide Swing, the gate of the cascode device (M2/M4) is biased at Vbias = Vgs + Vds_sat_min.
+        Since I cannot add a voltage source, I will assume node 'VBIAS' is external.
+        
+* Let's refine the stack order for NMOS sinking current:
+  - Node X (Input Current In) -> Drain of M1.
+  - Gate of M1 tied to Drain of M1.
+  - Source of M1 tied to Drain of M2.
+  - Gate of M2 tied to VBIAS (External).
+  - Source of M2 tied to Ground.
+  
+  Output:
+  - Node Y (Output Current Out) -> Drain of M3.
+  - Gate of M3 tied to Drain of M3.
+  - Source of M3 tied to Drain of M4.
+  - Gate of M4 tied to VBIAS (External).
+  - Source of M4 tied to Ground.
+
+* This configuration is the standard wide-swing cascode current mirror.
+* Models are generic NMOS. Bulk connected to source for simplicity or ground if well-connected.
+* Prompt says "NMOS source and bulk typically to ground". So Bulk = Source for all.
+
+M1 drain_in gate_in source_in bulk_in M1_MOD W=10u L=1u
+M2 drain_in gate_out_in source_in bulk_in M2_MOD W=10u L=1u
+M3 drain_out gate_out source_out bulk_out M3_MOD W=10u L=1u
+M4 drain_out gate_out source_out bulk_out M4_MOD W=10u L=1u
+
+* Wait, the wiring above for M2 and M4 is incorrect for wide swing if we want to minimize Vds.
+* In a wide-swing cascode:
+  - The diode-connected device (M1/M3) sets the current.
+  - The cascode device (M2/M4) sits on top of it? Or below?
+  - If sinking to ground:
+    - Bottom device (closest to GND) is the Cascode device? No, if bottom is cascode, its source is at Vgs-Vth above ground. The diode connected one is on top.
+    - If Top is Diode Connected: Vds_top = Vgs - Vth. 
+    - If Bottom is Cascode: Gate of bottom is biased low (Vbias). 
+    - This allows the output voltage to swing down closer to Vgs-Vth + Vbias_offset?
+    - Actually, the standard wide-swing topology has the cascode gate biased such that the diode-connected device operates at the edge of saturation.
+    - Let's assume the stack is: [Diode Connected] on top of [Cascode].
+    - Top Node: Drain/Gate of Diode (M1). Source connected to Drain of Cascode (M2).
+    - Bottom Node: Source of Cascode (M2) -> Ground.
+    - Gate of Cascode (M2) -> VBIAS.
+    - This is the correct wide-swing structure for NMOS sinking current.
+
+* Correction on M2/M4 connections in the netlist above:
+  - M1: Drain=Gate, Source=Drain_M2. (Diode Connected)
+  - M2: Drain=Source_M1, Gate=VBIAS, Source=GND. (Cascode)
+  - M3: Drain=Gate, Source=Drain_M4.

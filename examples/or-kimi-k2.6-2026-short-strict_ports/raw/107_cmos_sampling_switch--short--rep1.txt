@@ -1,0 +1,8 @@
+ ```spice
+* CMOS transmission-gate sampling switch with hold capacitor
+MN0 IN CLK OUT 0 NMOS_MODEL W=1u L=0.18u
+MP0 IN CLKB OUT VDD PMOS_MODEL W=2u L=0.18u
+CHOLD OUT 0 1p
+.MODEL NMOS_MODEL NMOS (LEVEL=1 VTO=0.5 KP=200U)
+.MODEL PMOS_MODEL PMOS (LEVEL=1 VTO=-0.5 KP=100U)
+```

@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a CMOS transmission gate."
+  - id: verbose
+    text: "Design a CMOS transmission gate: parallel NMOS and PMOS pass devices sharing input and output terminals, driven by complementary controls so both conduct when enabled."
+  - id: spec
+    text: "Design a CMOS transmission gate. Use exactly two transistors: M1 is an NMOS pass device with drain at vout, gate at en, source at vin, bulk to ground. M2 is a PMOS pass device with drain at vout, gate at enb, source at vin, bulk to VDD."

@@ -1,0 +1,10 @@
+```spice
+* Source-Degenerated NMOS Current Mirror
+* Topology: Two matched NMOS devices (M1, M2) with a degeneration resistor (Rdeg) on the source of the output device (M2).
+* M1 acts as the reference diode-connected device.
+* M2 acts as the output current source with local feedback via Rdeg.
+
+M1 1 0 2 0 NMOS W=1u L=1u
+M2 3 0 4 0 NMOS W=1u L=1u
+Rdeg 4 0 1k
+```

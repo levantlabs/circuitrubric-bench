@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design an NMOS Widlar current source."
+  - id: verbose
+    text: "Design an NMOS Widlar current source: a diode-connected reference device and an output device sharing the gate bias, with a degeneration resistor in the output device's source leg setting a small scaled output current."
+  - id: spec
+    text: "Design an NMOS Widlar current source. Use exactly two transistors and one resistor: M1 is an NMOS transistor with drain at iref, gate at iref, source to ground, bulk to ground. M2 is an NMOS transistor with drain at iout, gate at iref, source at ns, bulk to ground. R1 is a resistor between ns and ground."

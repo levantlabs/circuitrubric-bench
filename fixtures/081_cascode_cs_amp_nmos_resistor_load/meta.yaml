@@ -1,0 +1,6 @@
+id: "081_cascode_cs_amp_nmos_resistor_load"
+category: "Amplifier"
+family: "cascode_cs"
+variant: "nmos_resistor_load"
+source: "hand_authored"
+attribution: null

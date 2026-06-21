@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a 3-stage ring oscillator using PMOS common-source amplifier stages with resistor loads."
+  - id: verbose
+    text: "Design a 3-stage ring oscillator from PMOS common-source amplifier stages with resistor loads: three resistor-loaded common-source inverting stages connected in a loop to sustain oscillation."
+  - id: spec
+    text: "Design a 3-stage ring oscillator using PMOS common-source amplifier stages with resistor loads. Use exactly three transistors and three resistors arranged as three CS stages in a loop. M1 is a PMOS transistor with drain at v1, gate at vout, source at VDD, bulk to VDD. R1 is a resistor between v1 and ground. M2 is a PMOS transistor with drain at v2, gate at v1, source at VDD, bulk to VDD. R2 is a resistor between v2 and ground. M3 is a PMOS transistor with drain at vout, gate at v2, source at VDD, bulk to VDD. R3 is a resistor between vout and ground."

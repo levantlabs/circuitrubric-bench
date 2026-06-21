@@ -1,0 +1,15 @@
+* 5-stage inverter ring oscillator (10T).
+* Five CMOS inverters chained in a loop: vout -> v1 -> v2 -> v3 -> v4 -> vout.
+M1  v1   vout 0   0   NMOS W=10u L=1u
+M2  v1   vout vdd vdd PMOS W=20u L=1u
+M3  v2   v1   0   0   NMOS W=10u L=1u
+M4  v2   v1   vdd vdd PMOS W=20u L=1u
+M5  v3   v2   0   0   NMOS W=10u L=1u
+M6  v3   v2   vdd vdd PMOS W=20u L=1u
+M7  v4   v3   0   0   NMOS W=10u L=1u
+M8  v4   v3   vdd vdd PMOS W=20u L=1u
+M9  vout v4   0   0   NMOS W=10u L=1u
+M10 vout v4   vdd vdd PMOS W=20u L=1u
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.MODEL PMOS PMOS (LEVEL=1 VTO=-1 KP=1.0e-4 LAMBDA=0.02)
+.END

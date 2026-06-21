@@ -1,0 +1,10 @@
+```spice
+* NMOS Common-Source Amplifier with Resistor Load and Resistive Feedback
+* Topology: Output node connected to Gate via Feedback Resistor (Rf)
+* Input applied to the other end of Rf (handled externally)
+* Active Device: NMOS (M1)
+* Loads: Drain Resistor (RD), Feedback Resistor (RF)
+
+M1 drain gate source bulk RD RF L=1u W=10u M=1
+.MODEL NMOS NMOS (LEVEL=1 VTO=0.7 KP=100u GAMMA=0.5 LAMBDA=0.05 CGSO=2p CGDO=2p CJ=1e-3)
+```

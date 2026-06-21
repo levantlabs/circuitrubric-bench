@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "circuitrubric"
+version = "0.1.0"
+description = "A structural benchmark for evaluating LLM-generated analog circuit netlists"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Apache-2.0" }
+keywords = ["benchmark", "LLM", "analog", "circuits", "netlist", "EDA", "evaluation"]
+dependencies = [
+    "networkx>=3.0",
+    "pyyaml>=6.0",
+    "pydantic>=2.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "pytest-cov>=4.0"]
+# Backends for `circuitrubric run` — install only what you use. The grader
+# core needs none of these.
+anthropic = ["anthropic>=0.40"]
+openai = ["openai>=1.0"]          # also covers ollama via its /v1 endpoint, vLLM, etc.
+ollama = ["ollama>=0.3"]          # native ollama backend
+run = ["anthropic>=0.40", "openai>=1.0", "ollama>=0.3"]
+
+[project.scripts]
+circuitrubric = "circuitrubric.cli:main"
+
+[tool.setuptools]
+packages = ["circuitrubric"]

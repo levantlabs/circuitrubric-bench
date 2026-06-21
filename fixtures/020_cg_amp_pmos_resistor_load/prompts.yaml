@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a PMOS common-gate amplifier with a resistor load."
+  - id: verbose
+    text: "Design a PMOS common-gate amplifier with a resistor load: a fixed-bias common-gate transistor taking its input at the source, with a resistor load from the output to ground."
+  - id: spec
+    text: "Design a PMOS common-gate amplifier with a resistor load. Use exactly one transistor and one resistor: M1 is a PMOS transistor with drain at vout, gate at vbias, source at vin, bulk to VDD. R1 is a resistor between vout and 0."

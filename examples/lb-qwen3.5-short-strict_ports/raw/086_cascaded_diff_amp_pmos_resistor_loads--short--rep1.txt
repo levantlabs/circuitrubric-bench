@@ -1,0 +1,16 @@
+```spice
+* Stage 1: PMOS Differential Pair with Resistor Loads
+M1 out1a in1 in2 vdd pmos_diff W=10u L=1u
+M2 out1b in1 in2 vdd pmos_diff W=10u L=1u
+R1 out1a out1a vdd 50k
+R2 out1b out1b vdd 50k
+
+* Stage 2: PMOS Differential Pair with Resistor Loads (DC Coupled)
+M3 out2a out1a in3 vdd pmos_diff W=10u L=1u
+M4 out2b out1a in3 vdd pmos_diff W=10u L=1u
+R3 out2a out2a vdd 50k
+R4 out2b out2b vdd 50k
+
+* Device Models
+.model pmos_diff p (VTO=-0.7 CGDO=0 CGSO=0 CGB=0 RD=0 RS=0)
+```

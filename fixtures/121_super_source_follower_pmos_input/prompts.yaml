@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a PMOS-input super source follower."
+  - id: verbose
+    text: "Design a PMOS-input super source follower: a PMOS source-follower input device whose output impedance is lowered by an NMOS feedback transistor sensing the input device's drain, with current-source biasing at the output and sense nodes."
+  - id: spec
+    text: "Design a PMOS-input super source follower. Use exactly four transistors: M1 is a PMOS transistor with drain at vn, gate at vin, source at vout, bulk to VDD. M2 is an NMOS transistor with drain at vout, gate at vn, source to ground, bulk to ground. M3 is a PMOS transistor with drain at vout, gate at vbp, source at VDD, bulk to VDD. M4 is an NMOS transistor with drain at vn, gate at vbn, source to ground, bulk to ground."

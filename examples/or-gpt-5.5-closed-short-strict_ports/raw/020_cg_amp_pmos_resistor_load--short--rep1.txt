@@ -1,0 +1,9 @@
+```spice
+* PMOS common-gate amplifier with resistor load
+* External connections: IN = source input, VG = gate bias, OUT = output, VDD = PMOS bulk supply
+
+M1 OUT VG IN VDD PMOS W=20u L=1u
+RLOAD OUT 0 10k
+
+.MODEL PMOS PMOS (LEVEL=1 VTO=-0.7 KP=50u LAMBDA=0.02)
+```

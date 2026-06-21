@@ -1,0 +1,7 @@
+```spice
+M1 out in ns 0 NMOS W=10u L=1u
+RD vdd out 10k
+RS ns 0 1k
+
+.MODEL NMOS NMOS (LEVEL=1 VTO=0.7 KP=200u LAMBDA=0.02)
+```

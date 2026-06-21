@@ -1,0 +1,6 @@
+id: "107_cmos_sampling_switch"
+category: "SampledData"
+family: "sampling_switch"
+variant: "cmos_transmission_gate_with_hold_cap"
+source: "hand_authored"
+attribution: null

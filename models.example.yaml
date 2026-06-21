@@ -1,0 +1,37 @@
+# Model sweep config for `circuitrubric run-all`.
+# Copy to models.yaml, edit, then:  circuitrubric run-all
+#
+# Each row: backend (anthropic|openai|ollama) + model (the backend's model id).
+# Optional: base_url (for openai-compatible servers), api_key_env, label.
+# Install the backends you use: pip install -e ".[run]"   (or [anthropic]/[openai]/[ollama])
+
+# --- Anthropic (needs ANTHROPIC_API_KEY) ---
+- {backend: anthropic, model: claude-opus-4-8,             label: opus-4.8}
+- {backend: anthropic, model: claude-opus-4-7,             label: opus-4.7}
+- {backend: anthropic, model: claude-sonnet-4-6,           label: sonnet-4.6}
+- {backend: anthropic, model: claude-haiku-4-5-20251001,   label: haiku-4.5}
+
+# --- Local models via ollama (no API key; `ollama pull <model>` first) ---
+- {backend: ollama, model: "qwen3.5:latest",                       label: qwen3.5}
+- {backend: ollama, model: "qwen3:30b-a3b-instruct-2507-q4_K_M",   label: qwen3-30b}
+- {backend: ollama, model: "qwen2.5-coder:7b",                     label: qwen2.5-coder}
+- {backend: ollama, model: "llama3.1:8b",                          label: llama3.1-8b}
+- {backend: ollama, model: "gemma2:9b",                            label: gemma2-9b}
+- {backend: ollama, model: "granite3.1-dense:8b",                  label: granite3.1}
+- {backend: ollama, model: "phi4:14b",                             label: phi4}
+
+# --- OpenAI / any OpenAI-compatible server (vLLM, Together, ollama's /v1, …) ---
+# - {backend: openai, model: gpt-4o, label: gpt-4o}                # needs OPENAI_API_KEY
+# - {backend: openai, model: meta-llama/Llama-3.1-70B-Instruct,
+#    base_url: http://localhost:8000/v1, api_key_env: VLLM_KEY, label: llama-3.1-70b}
+
+# --- OpenRouter: open frontier models through one key (needs OPENROUTER_API_KEY) ---
+# OpenRouter is just an OpenAI-compatible endpoint — use backend: openai with its base_url.
+# Reproduces the open-model baselines; see docs/reproducing.md. Use PAID slugs (the ":free"
+# variants are rate-capped). Reasoning models need a large --max-tokens (e.g. 20000) or they
+# emit empty content; some reject --temperature (omit it), as with the Claude models.
+- {backend: openai, base_url: "https://openrouter.ai/api/v1", api_key_env: OPENROUTER_API_KEY, model: "deepseek/deepseek-v4-flash", label: deepseek-v4-flash}
+- {backend: openai, base_url: "https://openrouter.ai/api/v1", api_key_env: OPENROUTER_API_KEY, model: "deepseek/deepseek-v4-pro",   label: deepseek-v4-pro}
+- {backend: openai, base_url: "https://openrouter.ai/api/v1", api_key_env: OPENROUTER_API_KEY, model: "z-ai/glm-5.1",               label: glm-5.1}
+- {backend: openai, base_url: "https://openrouter.ai/api/v1", api_key_env: OPENROUTER_API_KEY, model: "moonshotai/kimi-k2.6",       label: kimi-k2.6}
+- {backend: openai, base_url: "https://openrouter.ai/api/v1", api_key_env: OPENROUTER_API_KEY, model: "qwen/qwen3.7-max",           label: qwen3.7-max}

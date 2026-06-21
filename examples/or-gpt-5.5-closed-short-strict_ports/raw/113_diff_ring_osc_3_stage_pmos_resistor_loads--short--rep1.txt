@@ -1,0 +1,26 @@
+```spice
+* 3-stage differential ring oscillator: PMOS differential pairs with resistor loads
+
+* Stage 1
+MP1P out1p out3p s1 VDD PMOS W=20u L=180n
+MP1N out1n out3n s1 VDD PMOS W=20u L=180n
+MTAIL1 s1 VBP VDD VDD PMOS W=40u L=180n
+RL1P out1p 0 10k
+RL1N out1n 0 10k
+
+* Stage 2
+MP2P out2p out1p s2 VDD PMOS W=20u L=180n
+MP2N out2n out1n s2 VDD PMOS W=20u L=180n
+MTAIL2 s2 VBP VDD VDD PMOS W=40u L=180n
+RL2P out2p 0 10k
+RL2N out2n 0 10k
+
+* Stage 3
+MP3P out3p out2p s3 VDD PMOS W=20u L=180n
+MP3N out3n out2n s3 VDD PMOS W=20u L=180n
+MTAIL3 s3 VBP VDD VDD PMOS W=40u L=180n
+RL3P out3p 0 10k
+RL3N out3n 0 10k
+
+.MODEL PMOS PMOS LEVEL=1 VTO=-0.5 KP=60u LAMBDA=0.05
+```

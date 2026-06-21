@@ -1,0 +1,10 @@
+* Two-input CMOS NAND gate.
+* NMOS series stack on pull-down, PMOS parallel pair on pull-up.
+* Inputs: a, b. Output: vout = !(a AND b).
+M1 vout a mid 0 NMOS W=10u L=1u
+M2 mid  b 0   0 NMOS W=10u L=1u
+M3 vout a vdd vdd PMOS W=20u L=1u
+M4 vout b vdd vdd PMOS W=20u L=1u
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.MODEL PMOS PMOS (LEVEL=1 VTO=-1 KP=1.0e-4 LAMBDA=0.02)
+.END

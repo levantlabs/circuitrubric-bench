@@ -1,0 +1,6 @@
+id: "018_two_stage_amp_pmos"
+category: "Amplifier"
+family: "two_stage_amplifier"
+variant: "pmos_resistor_loads"
+source: "hand_authored"
+attribution: null

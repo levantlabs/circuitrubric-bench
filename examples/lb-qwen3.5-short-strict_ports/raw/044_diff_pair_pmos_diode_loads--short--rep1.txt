@@ -1,0 +1,22 @@
+```spice
+* PMOS Differential Pair with NMOS Diode-Connected Loads
+* Topology: Active load (NMOS) connected to VSS, PMOS inputs at gates, sources tied together and biased by current source (external).
+* Note: Bulk terminals are explicitly tied to their respective supply rails.
+
+M1 out in1 in2 vss pmos_wl
+M2 out in3 in4 vss pmos_wl
+M5 out out in5 vdd nmos_dl
+M6 out out in6 vdd nmos_dl
+
+.MODEL pmos_wl pmos (LEVEL=1 VTO=-0.7 KP=50u GAMMA=0.5 LAMBDA=0.1)
+.MODEL nmos_dl nmos (LEVEL=1 VTO=0.7 KP=50u GAMMA=0.5 LAMBDA=0.1)
+
+* Explicit dimensions for simulability (default W/L assumed if omitted, but included here per instructions)
+* M1/M2: PMOS Differential Pair Devices
+M1 out in1 in2 vss pmos_wl W=10u L=1u
+M2 out in3 in4 vss pmos_wl W=10u L=1u
+
+* M5/M6: NMOS Diode-Connected Load Devices (Drain connected to Gate)
+M5 out out in5 vdd nmos_dl W=10u L=1u
+M6 out out in6 vdd nmos_dl W=10u L=1u
+```

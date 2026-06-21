@@ -1,0 +1,6 @@
+id: "046_diff_pair_pmos_cascode_mirror_load"
+category: "Amplifier"
+family: "diff_pair_amplifier"
+variant: "pmos_inputs_nmos_cascode_mirror_load"
+source: "hand_authored"
+attribution: null

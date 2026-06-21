@@ -1,0 +1,54 @@
+The request asks for an **NMOS common-gate amplifier** with specific features:
+1.  **Active Device**: NMOS (Common-Gate topology implies the Gate is grounded/AC-grounded).
+2.  **Load**: Resistor ($R_D$) connected to $V_{DD}$.
+3.  **Bias**: Current source. Per polarity conventions, an NMOS amplifier requires a **PMOS** current-source load to sink current from $V_{DD}$ (or an NMOS current source sinking to ground if the topology were flipped, but standard Common-Gate with a resistor load usually implies the active device is in saturation with a high-impedance or resistive pull-up).
+    *   *Correction on Topology Interpretation*: A "Common-Gate" stage typically has the input at the Source and output at the Drain. The Gate is AC ground.
+    *   *Biasing Conflict*: If the load is explicitly a **Resistor**, the DC bias current must come from somewhere. In an IC context, this usually means a PMOS current source pulling up to $V_{DD}$ while the NMOS pulls down? No, that's not right.
+    *   *Standard Resistor Load CG*: The NMOS drain connects to $V_{DD}$ via $R_D$. The NMOS source needs a bias current. This is usually provided by a tail current source (NMOS or PMOS depending on supply). However, the prompt asks for "a current-source bias".
+    *   *Polarity Convention Check*: "For a current-source load whose polarity isn't specified, default to the OPPOSITE polarity from the amplifying device".
+        *   Amplifying device: NMOS.
+        *   Load (if active): PMOS.
+        *   BUT the prompt says "resistor load".
+    *   *Re-evaluating "Current-source bias"*: In a Common-Gate, the "bias" usually refers to the tail current setting the operating point ($I_{SS}$). The drain side has the resistor.
+    *   *Wait, let's look at the constraint*: "Design an NMOS common-gate amplifier with a resistor load, an AC-coupled input, and a current-source bias."
+    *   If I strictly follow "no coupling capacitors" for IC cascades, but the prompt explicitly asks for **"AC-coupled input"**, I must include the input capacitor ($C_{in}$) despite the general rule about on-chip cascades. The rule says "unless the prompt explicitly asks for it".
+    *   *Bias Network*: The gate needs to be at a DC potential. In a CG stage, the Gate is usually grounded directly or via a large resistor. The prompt forbids "gate bias networks (voltage dividers...)" unless explicitly asked? No, it says "Do NOT include... gate bias networks". However, a simple ground connection isn't a network. But to set $V_{GS}$ for an NMOS in CG, the Gate must be at a specific DC voltage relative to the Source. If the input is AC coupled via a capacitor, the Gate *must* have a DC path to a bias voltage (usually Ground). A direct short to ground works if the tail current source allows it, but typically we need a resistor or just a wire to ground for the gate.
+    *   *Tail Current Source*: To bias the NMOS source, we need a current source connected between the Source and Ground (for an NMOS sinking current) or $V_{DD}$?
+        *   NMOS Common Gate: Input at Source. Output at Drain. Gate at AC Ground.
+        *   DC Path for Drain: $V_{DD} \to R_D \to D$.
+        *   DC Path for Source: $S \to I_{bias} \to GND$. The bias current source must be an **NMOS** (sinking to ground) or a PMOS pulling up? If the drain is pulled up by $R_D$, the NMOS channel conducts from Drain to Source. Current flows $V_{DD} \to R_D \to D \to S \to I_{bias} \to GND$. Thus, the tail current source must be an **NMOS** (or PMOS if connected to negative rail, but standard is ground).
+        *   Wait, the prompt says "current-source bias". It doesn't specify NMOS or PMOS for the tail. By convention, if the load is a resistor to $V_{DD}$, the active device is NMOS. The current flowing through it must go to ground. So the tail current source should be an **NMOS** (saturated) acting as a sink? Or a PMOS acting as a source from a negative rail?
+        *   Let's stick to standard single-supply IC design: $V_{DD}$ at top, Ground at bottom.
+        *   NMOS Amplifier ($M1$): Drain to $R_D$ (to $V_{DD}$). Source to Tail Current Source. Gate to AC Ground.
+        *   Tail Current Source: Must sink current from $M1$. An **NMOS** current source connected between $S$ and GND is the standard implementation for a low-voltage drop, but often a PMOS is used if we want high compliance? No, an NMOS sinking to ground is the natural complement to an NMOS pulling up? Actually, usually, we use a PMOS current source as a load. Here the load is a resistor. The tail must be a current sink. An **NMOS** current source (with its gate biased appropriately) sinks current to ground.
+        *   *Alternative*: Maybe the "current-source bias" refers to the load? No, it says "resistor load". So the bias is the tail.
+        *   *Gate Bias*: The prompt forbids "gate bias networks". A single connection to Ground (0) is not a network. However, for an NMOS CG stage with AC coupling at the source, the Gate must be DC grounded. If we connect Gate directly to 0, that's fine.
+        *   *Input Coupling*: The prompt explicitly asks for "AC-coupled input". This requires a capacitor $C_{in}$ between the signal source and the Source node of the NMOS.
+        *   *Tail Current Source Model*: Needs a `.MODEL`. Let's call it `Mtail`. It needs `W`, `L`.
+        *   *Amplifier Device Model*: `Mamp`. Needs `W`, `L`.
+        *   *Resistor Load*: `Rload`.
+        *   *Input Capacitor*: `Cin`.
+
+    *   *Refining the Tail Current Source Polarity*:
+        *   Circuit: $V_{DD}$ -- $R_D$ -- Drain($M1$) -- Source($M1$) -- Tail(Current Source) -- GND.
+        *   Current flows down.
+        *   Tail device must be a current sink.
+        *   Standard NMOS current source sinks current to ground.
+        *   Is it allowed? The prompt says "For a current-source load whose polarity isn't specified, default to the OPPOSITE polarity". This rule applies to the *load* of an amplifier. Here the tail is not the load; the resistor is the load. The tail is the bias element.
+        *   However, if I use an NMOS for the tail, I need a bias voltage for its gate. The prompt says "Do NOT include... gate bias networks". This implies I should not draw a divider. But I still need to define the device. If I assume an external bias voltage `VBias` exists (handled externally), I can just reference it.
+        *   Wait, if I cannot include gate bias networks, how do I bias the tail current source? The prompt says "Bias and input drive are handled externally". This means I don't need to draw the resistors for the tail's gate. I just define the device `Mtail` connected between Source and Ground, with its Gate connected to an external node (e.g., `VBias`).
+        *   Same for the Amplifier Gate: It needs to be at AC ground. Direct connection to 0 is fine.
+
+    *   *Wait, one nuance*: "AC-coupled input".
+        *   Input signal -> Capacitor -> Source of NMOS.
+        *   The other side of the capacitor goes to an external node `Vin`.
+        *   The Gate of the NMOS goes to Ground (0).
+        *   The Drain goes to $R_D$ then $V_{DD}$.
+        *   The Source goes to the Tail Current Source.
+        *   The Tail Current Source connects to Ground.
+
+    *   *Device Count*:
+        1.  Amplifier NMOS (`Mamp`).
+        2.  Tail Current Source NMOS (`Mtail`) OR PMOS?
+            *   If I use an NMOS tail, it needs a gate voltage $V_{GS} > V_{th}$. Since the source is at some positive voltage (due to $R_D$ drop and $V_{DD}$), the tail source node is roughly $V_{DS,sat}$. The tail device must be in saturation. An NMOS sinking current works perfectly fine here.
+            *   Does the "opposite polarity

@@ -1,0 +1,30 @@
+```spice
+* NMOS-input telescopic cascode amplifier
+* Wide-swing PMOS cascode current-mirror load, single-ended output
+* External bias nodes: VBN_TAIL, VBN_CASC, VBP_CASC
+
+.SUBCKT NMOS_TELESCOPIC_PMOS_WS_LOAD VINP VINN OUT VDD 0 VBN_TAIL VBN_CASC VBP_CASC
+
+* NMOS input differential pair
+MNINP   ndp      VINP       ntail    0    NMOS  W=20u  L=0.5u
+MNINN   ndn      VINN       ntail    0    NMOS  W=20u  L=0.5u
+
+* NMOS telescopic cascodes
+MNCASP  nref     VBN_CASC   ndp      0    NMOS  W=20u  L=0.5u
+MNCASN  OUT      VBN_CASC   ndn      0    NMOS  W=20u  L=0.5u
+
+* NMOS tail current-source device
+MNTAIL  ntail    VBN_TAIL   0        0    NMOS  W=40u  L=1u
+
+* Wide-swing PMOS cascode mirror load
+MPMIRL  pg       pg         VDD      VDD  PMOS  W=40u  L=0.5u
+MPCASL  nref     VBP_CASC   pg       VDD  PMOS  W=40u  L=0.5u
+
+MPMIRR  pr       pg         VDD      VDD  PMOS  W=40u  L=0.5u
+MPCASR  OUT      VBP_CASC   pr       VDD  PMOS  W=40u  L=0.5u
+
+.ENDS NMOS_TELESCOPIC_PMOS_WS_LOAD
+
+.MODEL NMOS NMOS LEVEL=1 VTO=0.5 KP=200u LAMBDA=0.05
+.MODEL PMOS PMOS LEVEL=1 VTO=-0.5 KP=80u LAMBDA=0.05
+```

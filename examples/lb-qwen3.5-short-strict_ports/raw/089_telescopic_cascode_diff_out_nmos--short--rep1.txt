@@ -1,0 +1,108 @@
+```spice
+* NMOS-input Telescopic Cascode OTA (Fully Differential)
+* Active Devices Only: No bias networks, caps, or simulation directives.
+
+* --- Input Pair (NMOS) ---
+M1 outp gatep outp bulkp M_inpair
+M2 outn gaten outn bulkn M_inpair
+
+* --- Cascode Devices (NMOS) ---
+M3 cascp gatec outp bulkp M_cascode
+M4 cascn gatenc outn bulkn M_cascode
+
+* --- Current Source Loads (PMOS) ---
+* Tail Current Source (Sinking to Ground via PMOS? No, standard is NMOS tail sinking. 
+* Correction: Standard Telescopic Cascode uses NMOS input pair with PMOS current source load.
+* Let's re-architect for standard topology:
+*   Input Pair: NMOS (M1, M2)
+*   Load: PMOS Current Sources (M5, M6)
+*   Cascode: NMOS (M3, M4) stacked on top of input pair? 
+*   Wait, "Telescopic" usually implies: Input Device + Cascode Device in series.
+*   If Input is NMOS, the stack must go to VDD. So Load is PMOS.
+*   Stack: VDD -> PMOS Load -> NMOS Cascode -> NMOS Input -> Ground? 
+*   No, that's not telescopic. Telescopic is: VDD -> PMOS Load -> NMOS Cascode -> NMOS Input -> Tail Current.
+*   Let's refine the node connections for a standard fully differential telescopic cascode.
+
+* Re-evaluating Topology:
+*   Side A (Positive Output):
+*     M1 (Input NMOS): Drain connected to Source of M3. Gate = Vin+. Source = Tail Node.
+*     M3 (Cascode NMOS): Drain connected to Drain of M5 (Load PMOS). Gate = Vbias_cascode. Source = Drain of M1.
+*     M5 (Load PMOS): Source = VDD, Drain = Drain of M3. Gate = Vbias_tail (for the other side? No, usually current mirror loads).
+*   Actually, standard fully differential telescopic cascode often uses a current mirror load or active current sources.
+*   Let's assume a symmetric design with PMOS current source loads and NMOS cascodes.
+
+* Revised Device List:
+*   M1, M2: Input NMOS pair.
+*   M3, M4: Cascode NMOS devices (stacked on input pair).
+*   M5, M6: Load PMOS devices (sourcing current from VDD).
+*   M7, M8: Tail Current Source? Usually a single tail current source splits or two separate. 
+*   For a fully differential OTA, we often have a common tail current source connected to the sources of M1/M2.
+*   Let's use a PMOS current mirror load configuration which is standard for high gain.
+*   However, the prompt asks for "NMOS-input telescopic cascode". 
+*   Standard Topology: 
+*     VDD -> PMOS Load (M5/M6) -> NMOS Cascode (M3/M4) -> NMOS Input (M1/M2) -> Tail Current (M9).
+*   Wait, if M1 is input, its source goes to tail. Its drain goes to cascode source. Cascode drain goes to load.
+*   Let's define the nodes clearly.
+
+* Nodes:
+*   VDD, GND
+*   Vin_p, Vin_n (Inputs)
+*   Vout_p, Vout_n (Outputs)
+*   Tail Node (common source for M1/M2) -> Connected to PMOS Current Source M9? Or NMOS current sink?
+*   Standard: NMOS input pair sources connect to a PMOS current source tail? No, usually NMOS inputs have sources connected to a current sink (NMOS or PMOS depending on VDD/GND). 
+*   If Input is NMOS, Source must be lower potential. So Tail Current Sink is typically an NMOS current source (sinking to GND) or a PMOS current source if the whole chip is flipped? 
+*   Convention: NMOS input pair -> Sources connected to a PMOS current source tail? No, that would require VDD at bottom.
+*   Standard: NMOS Input Pair sources connect to a Current Sink (NMOS M_tail). But where does the current come from? From the Load.
+*   Let's stick to the most common IC implementation:
+*     Topology: VDD -> PMOS Load -> NMOS Cascode -> NMOS Input -> NMOS Tail Current -> GND.
+*   This creates a high impedance node at the drain of the cascode (which is the output).
+
+* Device Definitions:
+*   M1, M2: NMOS Inputs.
+*   M3, M4: NMOS Cascodes.
+*   M5, M6: PMOS Loads.
+*   M7: NMOS Tail Current Source (connected to sources of M1/M2).
+
+* Wait, if M1/M2 are NMOS, their sources connect to the tail current source. 
+* If the tail current source is an NMOS (M7), its drain connects to M1/M2 sources, and its source connects to GND.
+* The drains of M3/M4 connect to the drains of M5/M6.
+* The drains of M1/M2 connect to the sources of M3/M4.
+* This forms the telescopic stack.
+
+* Let's write the netlist lines.
+* Models: M_inpair, M_cascode, M_load, M_tail.
+
+M1 outp gatep cascdrain_p bulkp M_inpair W=10u L=1u
+M2 outn gaten cascdrain_n bulkn M_inpair W=10u L=1u
+M3 cascp gatec outp bulkp M_cascode W=5u L=1u
+M4 cascn gatenc outn bulkn M_cascode W=5u L=1u
+M5 outp vdd loadgate_p bulkp M_load W=20u L=1u
+M6 outn vdd loadgate_n bulkp M_load W=20u L=1u
+M7 tailnode gate_tail cascdrain_p bulkn M_tail W=10u L=1u
+
+* Wait, M5 and M6 are PMOS loads. Their sources go to VDD.
+* M1 and M2 are NMOS inputs. Their drains go to M3/M4 sources.
+* M3 and M4 are NMOS cascodes. Their drains go to M5/M6 drains (Output).
+* M7 is the tail current source. It must be an NMOS sinking current to GND? 
+* If M1/M2 are NMOS, their sources connect to M7 drain. M7 source connects to GND.
+* But where does the current for M5/M6 come from? M5/M6 are PMOS loads sourcing current.
+* The current flows: VDD -> M5 -> M3 -> M1 -> M7 -> GND.
+* This works.
+
+* Correction on M7 polarity: If M1/M2 are NMOS, they need a path to ground. An NMOS current source (M7) sinks current from the sources of M1/M2 to ground. Correct.
+* Correction on M5/M6 polarity: They are PMOS loads sourcing current from VDD. Correct.
+
+* One detail: "Fully differential output". The outputs are taken at the drains of the cascode devices (M3/M4).
+* The inputs are Vin_p and Vin_n connected to gates of M1/M2.
+* The cascode gates (gatec, gatenc) are biased by a constant voltage (Vbias_cascode).
+* The tail current gate (gate_tail) is biased by Vbias_tail.
+* The load gates (loadgate_p, loadgate_n) are usually tied together for a simple current mirror or differential pair of loads? 
+* For a fully differential OTA with active loads, often the PMOS loads form a current mirror or are simply two identical PMOS devices biased by a common voltage if symmetry is assumed, OR they form a Wilson/Mirror structure. 
+* To keep it minimal and standard: Use two identical PMOS devices (M5, M6) biased by a common gate voltage (or separate mirrors). 
+* However, to ensure differential operation without complex mirror nets in the minimal set, we often assume the load gates are tied to a bias node or form a simple current mirror. 
+* Let's assume a simple symmetric design where M5 and M6 are identical PMOS devices biased by a common voltage Vbias_load (or just connected together). 
+* But strictly speaking, for a fully differential output with high CMRR, the loads should ideally be a current mirror or matched pairs. 
+* Given "minimum set of devices", I will use two identical PMOS devices with their gates tied to a bias node `Vbias_load`.
+
+* Refining Node Names for Clarity:
+*   M1:

@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a diode-connected PMOS bias generator with a resistor to ground."
+  - id: verbose
+    text: "Design a diode-connected PMOS bias generator: a diode-connected PMOS transistor with a resistor to ground setting its current, producing a stable bias voltage."
+  - id: spec
+    text: "Design a diode-connected PMOS bias generator with a resistor to ground. Use exactly one transistor and one resistor: M1 is a PMOS transistor with drain at vbias, gate at vbias, source at VDD, bulk to VDD. R1 is a resistor between vbias and 0."

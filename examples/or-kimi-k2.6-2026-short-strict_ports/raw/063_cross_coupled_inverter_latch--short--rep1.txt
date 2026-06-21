@@ -1,0 +1,10 @@
+```spice
+* 4-transistor cross-coupled inverter latch
+M1  Q  QB  VDD  VDD  PMOS  W=2u  L=100n
+M2  Q  QB  GND  GND  NMOS  W=1u  L=100n
+M3  QB  Q  VDD  VDD  PMOS  W=2u  L=100n
+M4  QB  Q  GND  GND  NMOS  W=1u  L=100n
+
+.MODEL NMOS NMOS (LEVEL=1 VTO=0.7  KP=100u)
+.MODEL PMOS PMOS (LEVEL=1 VTO=-0.7 KP=50u)
+```

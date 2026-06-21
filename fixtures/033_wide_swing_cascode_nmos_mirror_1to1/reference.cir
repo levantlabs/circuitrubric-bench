@@ -1,0 +1,11 @@
+* Wide-swing cascode NMOS mirror, 5-T Sooch form.
+* All devices same W/L=10u/1u. M5 (bias-gen, diode-connected) is M=1; M1-M4 are
+* M=4 each. The 4x relative scaling sets M5's V_GS ~2*V_DSsat above the others,
+* biasing vbias to keep M2/M4 at edge of saturation (max output swing).
+M5 vbias vbias 0 0 NMOS W=10u L=1u
+M1 iref vbias n1 0 NMOS W=10u L=1u M=4
+M2 n1 iref 0 0 NMOS W=10u L=1u M=4
+M3 iout vbias n2 0 NMOS W=10u L=1u M=4
+M4 n2 iref 0 0 NMOS W=10u L=1u M=4
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.END

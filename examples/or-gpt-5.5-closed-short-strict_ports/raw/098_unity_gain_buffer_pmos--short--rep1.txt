@@ -1,0 +1,14 @@
+```spice
+* Unity-gain buffer using a PMOS-input 5T OTA
+* Nodes: IN = buffer input, OUT = buffer output, VBP = PMOS tail-bias, VDD = positive supply, 0 = ground
+
+MP1 n1  IN  ntail VDD PMOS W=20u L=1u
+MP2 OUT OUT ntail VDD PMOS W=20u L=1u
+MP3 ntail VBP VDD   VDD PMOS W=40u L=1u
+
+MN1 n1  n1  0 0 NMOS W=10u L=1u
+MN2 OUT n1  0 0 NMOS W=10u L=1u
+
+.MODEL NMOS NMOS LEVEL=1 VTO=0.7 KP=120u LAMBDA=0.02
+.MODEL PMOS PMOS LEVEL=1 VTO=-0.7 KP=50u  LAMBDA=0.02
+```

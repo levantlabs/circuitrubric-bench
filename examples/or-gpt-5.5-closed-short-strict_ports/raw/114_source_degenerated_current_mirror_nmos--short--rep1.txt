@@ -1,0 +1,9 @@
+```spice
+MREF nref nref ns_ref 0 NMOS W=10u L=1u
+MOUT out  nref ns_out 0 NMOS W=10u L=1u
+
+RSREF ns_ref 0 100
+RSOUT ns_out 0 100
+
+.MODEL NMOS NMOS LEVEL=1 VTO=0.7 KP=200u LAMBDA=0.02
+```

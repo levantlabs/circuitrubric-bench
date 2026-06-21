@@ -1,0 +1,12 @@
+* 3-stage inverter ring oscillator (6T).
+* Three CMOS inverters chained in a loop: vout -> v1 -> v2 -> vout.
+* The odd number of inversions makes the loop unstable and forces oscillation.
+M1 v1   vout 0   0   NMOS W=10u L=1u
+M2 v1   vout vdd vdd PMOS W=20u L=1u
+M3 v2   v1   0   0   NMOS W=10u L=1u
+M4 v2   v1   vdd vdd PMOS W=20u L=1u
+M5 vout v2   0   0   NMOS W=10u L=1u
+M6 vout v2   vdd vdd PMOS W=20u L=1u
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.MODEL PMOS PMOS (LEVEL=1 VTO=-1 KP=1.0e-4 LAMBDA=0.02)
+.END

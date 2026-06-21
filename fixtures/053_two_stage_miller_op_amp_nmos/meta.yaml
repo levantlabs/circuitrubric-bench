@@ -1,0 +1,6 @@
+id: "053_two_stage_miller_op_amp_nmos"
+category: "Amplifier"
+family: "two_stage_miller_op_amp"
+variant: "nmos_inputs"
+source: "hand_authored"
+attribution: null

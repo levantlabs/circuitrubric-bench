@@ -1,0 +1,7 @@
+```spice
+* PMOS source follower with resistor load
+M1 0 IN OUT VDD PMOS W=10u L=1u
+RLOAD VDD OUT 10k
+
+.MODEL PMOS PMOS (LEVEL=1 VTO=-0.7 KP=50u LAMBDA=0.02)
+```

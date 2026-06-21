@@ -1,0 +1,6 @@
+id: "101_two_stage_diff_amp_nmos_no_cmfb_no_comp"
+category: "Amplifier"
+family: "two_stage_diff"
+variant: "nmos_input_pmos_cs_no_cmfb_no_comp"
+source: "hand_authored"
+attribution: null

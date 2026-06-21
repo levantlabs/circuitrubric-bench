@@ -1,0 +1,12 @@
+```spice
+* NMOS Source Follower with Current-Source Bias and Resistive Load
+* Active Devices: M1 (Driver), M2 (Bias Current Source)
+* Load: Rload
+
+M1 drain=OUT gate=IN source=GND bulk=GND model=MOSNMOS W=10u L=1u
+M2 drain=BiasNode gate=BiasNode source=GND bulk=GND model=MOSPMOS W=10u L=1u
+Rload OUT VDD value=1k
+
+.MODEL MOSNMOS NMOS (LEVEL=1 VTO=0.4 KP=100u GAMMA=0.5 LAMBDA=0.05)
+.MODEL MOSPMOS PMOS (LEVEL=1 VTO=-0.4 KP=50u GAMMA=0.5 LAMBDA=0.05)
+```

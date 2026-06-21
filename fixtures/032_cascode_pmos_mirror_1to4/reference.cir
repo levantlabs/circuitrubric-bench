@@ -1,0 +1,7 @@
+* Cascode PMOS current mirror, 1 to 4. M1/M2 reference stack (1 device each); M3/M4 output stack (M=4 each).
+M1 n1 n1 vdd vdd PMOS W=20u L=1u
+M2 iref iref n1 vdd PMOS W=20u L=1u
+M3 n2 n1 vdd vdd PMOS W=20u L=1u M=4
+M4 iout iref n2 vdd PMOS W=20u L=1u M=4
+.MODEL PMOS PMOS (LEVEL=1 VTO=-1 KP=1.0e-4 LAMBDA=0.02)
+.END

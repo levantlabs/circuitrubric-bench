@@ -1,0 +1,5 @@
+```spice
+M1 drain gate source bulk pmos W=10u L=1u M=1
+R1 source 0 10k
+.MODEL pmos pmos (LEVEL=1 VTO=-0.7 KP=50u GAMMA=0.5 LAMBDA=0.1)
+```

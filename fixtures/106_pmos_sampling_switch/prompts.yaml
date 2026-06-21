@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a PMOS sampling switch with a hold capacitor."
+  - id: verbose
+    text: "Design a PMOS sampling switch with a hold capacitor: a single PMOS pass transistor gated by a clock that charges a hold capacitor at the output, which retains the sampled input voltage."
+  - id: spec
+    text: "Design a PMOS sampling switch with a hold capacitor. Use exactly one transistor and one capacitor: M1 is a PMOS transistor with drain at vout, gate at clk, source at vin, bulk to VDD. Ch is a capacitor between vout and ground."

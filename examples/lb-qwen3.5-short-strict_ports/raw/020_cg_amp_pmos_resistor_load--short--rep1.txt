@@ -1,0 +1,8 @@
+```spice
+* PMOS Common-Gate Amplifier with Resistor Load
+* Input applied to Source, Output at Drain, Gate biased externally (DC coupled)
+
+M1 drain gate source bulk pmos W=10u L=1u
+Rload drain vdd 1Meg
+.MODEL pmos pmos (LEVEL=1 VTO=-0.7 KP=50u GAMMA=0.5 LAMBDA=0.05 CGDO=2f CGSO=2f CGBO=2f)
+```

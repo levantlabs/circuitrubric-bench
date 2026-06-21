@@ -1,0 +1,11 @@
+```spice
+* Two cascaded NMOS common-source amplifiers with resistor loads
+
+M1 n1 in 0 0 NMOS W=10u L=1u
+RD1 VDD n1 10k
+
+M2 out n1 0 0 NMOS W=10u L=1u
+RD2 VDD out 10k
+
+.MODEL NMOS NMOS (LEVEL=1 VTO=0.7 KP=200u LAMBDA=0.02)
+```

@@ -1,0 +1,11 @@
+```spice
+* Improved 4-transistor PMOS Wilson current mirror
+* External reference current is sunk from IREF; mirrored current is sourced at OUT.
+
+MP1 VG    VG    VDD VDD PMOD W=10u L=1u
+MP2 VX    VG    VDD VDD PMOD W=10u L=1u
+MP3 OUT   IREF  VX  VDD PMOD W=10u L=1u
+MP4 IREF  IREF  VG  VDD PMOD W=10u L=1u
+
+.MODEL PMOD PMOS (LEVEL=1 VTO=-0.7 KP=50u LAMBDA=0.02)
+```

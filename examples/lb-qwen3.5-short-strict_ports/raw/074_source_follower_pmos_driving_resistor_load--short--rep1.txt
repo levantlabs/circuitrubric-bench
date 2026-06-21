@@ -1,0 +1,12 @@
+```spice
+* PMOS Source Follower with Current-Source Bias and Resistive Load
+* Active Devices: M1 (PMOS Amplifier), M2 (NMOS Current Source Load)
+* Load: Rload (Resistive)
+
+M1 drain=OUT gate=IN source=GND bulk=GND model=PMOS W=10u L=1u
+M2 drain=OUT gate=BIAS node=VSS bulk=VSS model=NMOS W=10u L=1u
+Rload OUT VDD 10k
+
+.MODEL PMOS pmos (LEVEL=1 VTO=-0.7 KP=50u CGDO=0f CGSO=0f CGBO=0f)
+.MODEL NMOS nmos (LEVEL=1 VTO=0.7 KP=100u CGDO=0f CGSO=0f CGBO=0f)
+```

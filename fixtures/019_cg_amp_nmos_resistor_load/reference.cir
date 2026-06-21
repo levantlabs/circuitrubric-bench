@@ -1,0 +1,5 @@
+* NMOS common-gate amplifier with resistor load.
+M1 vout vbias vin 0 NMOS W=10u L=1u
+R1 vout vdd 10k
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.END

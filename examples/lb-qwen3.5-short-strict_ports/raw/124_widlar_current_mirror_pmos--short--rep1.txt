@@ -1,0 +1,14 @@
+```spice
+* PMOS Widlar Current Source
+* Topology: Two PMOS transistors (M1, M2). 
+* M1 is the reference branch with a resistor R1 in series with the source to ground.
+* M2 is the output branch with a resistor R2 (Widlar resistor) in series with the source to ground.
+* Gates are tied together. Sources are connected via resistors to ground.
+
+M1 drain=VDD gate=VG source=S1 bulk=S1 model=PMOS W=10u L=1u M=1
+M2 drain=VDD gate=VG source=S2 bulk=S2 model=PMOS W=10u L=1u M=1
+R1 S1 0 1k
+R2 S2 0 100k
+
+.MODEL PMOS P (LEVEL=1 VTO=-0.7 KP=50u GAMMA=0.5 LAMBDA=0.05 CGDO=0 CGSO=0 CGBO=0)
+```

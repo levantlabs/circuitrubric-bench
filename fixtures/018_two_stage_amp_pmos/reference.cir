@@ -1,0 +1,7 @@
+* Two-stage PMOS amplifier: cascaded common-source stages with resistor loads.
+M1 n1 vin vdd vdd PMOS W=10u L=1u
+R1 n1 0 10k
+M2 vout n1 vdd vdd PMOS W=10u L=1u
+R2 vout 0 10k
+.MODEL PMOS PMOS (LEVEL=1 VTO=-1 KP=1.0e-4 LAMBDA=0.02)
+.END

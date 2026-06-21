@@ -1,0 +1,12 @@
+```spice
+* Stage 1: NMOS Common Source Amplifier
+M1 out1 in1 gnd gnd nmos W=10u L=1u
+Rload1 out1 vdd 10k
+
+* Stage 2: NMOS Common Source Amplifier (DC coupled to Stage 1)
+M2 out2 out1 gnd gnd nmos W=10u L=1u
+Rload2 out2 vdd 10k
+
+* Device Models
+.model nmos nmos (level=1 VTO=0.7 KP=100u GAMMA=0.5 LAMBDA=0.05)
+```

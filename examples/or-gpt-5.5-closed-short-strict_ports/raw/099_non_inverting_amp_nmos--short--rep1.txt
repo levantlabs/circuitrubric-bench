@@ -1,0 +1,15 @@
+```spice
+* Non-inverting amplifier: NMOS-input 5T OTA with resistor-divider feedback
+
+M1 nmir vin  ntail 0   NMOS W=20u L=1u
+M2 vout vfb  ntail 0   NMOS W=20u L=1u
+M3 nmir nmir vdd   vdd PMOS W=40u L=1u
+M4 vout nmir vdd   vdd PMOS W=40u L=1u
+M5 ntail vbiasn 0  0   NMOS W=10u L=1u
+
+RF vout vfb 100k
+RG vfb  0   100k
+
+.MODEL NMOS NMOS (LEVEL=1 VTO=0.7 KP=200u LAMBDA=0.02)
+.MODEL PMOS PMOS (LEVEL=1 VTO=-0.7 KP=100u LAMBDA=0.02)
+```

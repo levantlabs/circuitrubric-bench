@@ -1,0 +1,11 @@
+```spice
+* Cascoded NMOS Common-Source Amplifier with Resistor Load
+* Topology: Input -> M1 (CS) -> Node X -> M2 (Cascode) -> VDD via Rload
+* Note: Bulk terminals are tied to sources for NMOS devices.
+
+M1 drain=drain_M1 gate=input source=source_M1 bulk=bulk_M1 model=nmos W=10u L=1u
+M2 drain=VDD gate=gate_M2 source=drain_M1 bulk=bulk_M2 model=nmos W=10u L=1u
+Rload drain_M1 VDD 10k
+
+.model nmos nmos (level=1)
+```

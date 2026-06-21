@@ -1,0 +1,5 @@
+ ```spice
+M1 OUT IN GND GND nmos W=10u L=0.18u
+RD VDD OUT 10k
+.MODEL nmos NMOS (LEVEL=1 KP=200u VTO=0.5 LAMBDA=0.01)
+```

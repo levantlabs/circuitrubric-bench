@@ -1,0 +1,13 @@
+groups:
+  - devices: [M1, M2]      # PMOS input pair matched
+    ratio_W: [1, 1]
+    ratio_L: [1, 1]
+  - devices: [M3, M4]      # PMOS cascode pair matched
+    ratio_W: [1, 1]
+    ratio_L: [1, 1]
+  - devices: [M5, M6]      # NMOS top mirror pair matched (drains at outputs)
+    ratio_W: [1, 1]
+    ratio_L: [1, 1]
+  - devices: [M7, M8]      # NMOS bottom mirror pair matched (sources to ground)
+    ratio_W: [1, 1]
+    ratio_L: [1, 1]

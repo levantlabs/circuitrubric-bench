@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a 4-transistor cross-coupled inverter latch."
+  - id: verbose
+    text: "Design a 4-transistor cross-coupled inverter latch: two CMOS inverters connected back-to-back so each inverter's output drives the other's input, forming a bistable storage pair."
+  - id: spec
+    text: "Design a 4-transistor cross-coupled inverter latch. Use exactly four transistors: M1 is an NMOS with drain at q, gate at qb, source to ground, bulk to ground. M2 is an NMOS with drain at qb, gate at q, source to ground, bulk to ground. M3 is a PMOS with drain at q, gate at qb, source at VDD, bulk to VDD. M4 is a PMOS with drain at qb, gate at q, source at VDD, bulk to VDD."

@@ -1,0 +1,6 @@
+id: "100_non_inverting_amp_pmos"
+category: "Feedback"
+family: "non_inverting_amp"
+variant: "pmos_input_5t_ota_resistor_divider"
+source: "hand_authored"
+attribution: null

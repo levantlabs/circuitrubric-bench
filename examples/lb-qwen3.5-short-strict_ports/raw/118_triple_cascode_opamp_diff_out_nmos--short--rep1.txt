@@ -1,0 +1,50 @@
+```spice
+* NMOS-input Triple-Cascode OpAmp (Differential Output, No CMFB)
+* Topology: Differential Pair -> Cascode Stage -> Active Cascode Stage
+* Loads: PMOS Current Sources for each half of the differential output
+
+* --- Bias Currents (External/Implicit) ---
+* We define the tail current source and active loads as ideal current sources 
+* connected to the appropriate nodes. In a full netlist, these would be VCCS or 
+* MOSFETs with large W/L. Here we use simple current sources for clarity of topology.
+
+* Tail Current Source (NMOS input pair)
+I_TAIL 0 N1 1u
+
+* Active Loads (PMOS Current Sources) - Sourcing from VDD to the differential outputs
+* Left Half Load
+M_LOAD_L drain_left gate_load source_vdd bulk_vdd PMOS_W=50u PMOS_L=0.5u M=1
+* Right Half Load
+M_LOAD_R drain_right gate_load source_vdd bulk_vdd PMOS_W=50u PMOS_L=0.5u M=1
+
+* --- Input Stage: Differential Pair (NMOS) ---
+* Left Input Device
+M_IN_L drain_left gate_in_p n1 n1 NMOS_W=20u NMOS_L=0.5u M=1
+* Right Input Device
+M_IN_R drain_right gate_in_n n1 n1 NMOS_W=20u NMOS_L=0.5u M=1
+
+* --- First Cascode Stage (NMOS) ---
+* Left Cascode
+M_CAS_L cas_left drain_left gate_cas_p n1 n1 NMOS_W=20u NMOS_L=0.5u M=1
+* Right Cascode
+M_CAS_R cas_right drain_right gate_cas_n n1 n1 NMOS_W=20u NMOS_L=0.5u M=1
+
+* --- Second (Active) Cascode Stage (NMOS) ---
+* Left Active Cascode
+M_AC_L out_left cas_left gate_ac_p n1 n1 NMOS_W=20u NMOS_L=0.5u M=1
+* Right Active Cascode
+M_AC_R out_right cas_right gate_ac_n n1 n1 NMOS_W=20u NMOS_L=0.5u M=1
+
+* --- Gate Bias Nodes (External Drive) ---
+* These nodes are driven by external bias circuits not included in the netlist.
+gate_in_p 0 0
+gate_in_n 0 0
+gate_cas_p 0 0
+gate_cas_n 0 0
+gate_ac_p 0 0
+gate_ac_n 0 0
+
+* --- Power Rails (External) ---
+source_vdd vdd 0
+bulk_vdd vdd 0
+```

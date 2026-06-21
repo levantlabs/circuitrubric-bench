@@ -1,0 +1,5 @@
+ ```spice
+M1 Vout Vbias Vin VDD PMOS W=20u L=0.5u
+RD Vout 0 10k
+.MODEL PMOS PMOS (VTO=-0.7 KP=50u LAMBDA=0.02)
+```

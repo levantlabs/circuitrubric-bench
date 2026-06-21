@@ -1,0 +1,7 @@
+prompts:
+  - id: short
+    text: "Design a 5-stage CMOS inverter-based ring oscillator."
+  - id: verbose
+    text: "Design a 5-stage CMOS inverter ring oscillator: five CMOS inverters connected in a loop, with the last stage's output fed back to the first stage's input to sustain oscillation."
+  - id: spec
+    text: "Design a 5-stage CMOS inverter-based ring oscillator. Use exactly ten transistors arranged as five CMOS inverters in a loop. Stage 1 inverter (input vout, output v1): M1 is an NMOS transistor with drain at v1, gate at vout, source to ground, bulk to ground; M2 is a PMOS transistor with drain at v1, gate at vout, source at VDD, bulk to VDD. Stage 2 (input v1, output v2): M3 is an NMOS transistor with drain at v2, gate at v1, source to ground, bulk to ground; M4 is a PMOS transistor with drain at v2, gate at v1, source at VDD, bulk to VDD. Stage 3 (input v2, output v3): M5 is an NMOS transistor with drain at v3, gate at v2, source to ground, bulk to ground; M6 is a PMOS transistor with drain at v3, gate at v2, source at VDD, bulk to VDD. Stage 4 (input v3, output v4): M7 is an NMOS transistor with drain at v4, gate at v3, source to ground, bulk to ground; M8 is a PMOS transistor with drain at v4, gate at v3, source at VDD, bulk to VDD. Stage 5 (input v4, output vout): M9 is an NMOS transistor with drain at vout, gate at v4, source to ground, bulk to ground; M10 is a PMOS transistor with drain at vout, gate at v4, source at VDD, bulk to VDD."

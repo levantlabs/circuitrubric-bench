@@ -1,0 +1,9 @@
+```spice
+* PMOS Common-Source Amplifier with Resistor Load
+* Active devices only: PMOS amplifying device, NMOS current-source load (default opposite polarity)
+* No bias networks, capacitors, or simulation directives included.
+
+M1 drain gate source bulk pmos W=10u L=1u
+M2 drain gate source bulk nmos W=10u L=1u
+Rload drain VDD 1Meg
+```

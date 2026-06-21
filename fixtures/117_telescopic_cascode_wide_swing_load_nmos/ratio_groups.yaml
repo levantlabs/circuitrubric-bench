@@ -1,0 +1,13 @@
+groups:
+  - devices: [M1, M2]      # matched NMOS input pair
+    ratio_W: [1, 1]
+    ratio_L: [1, 1]
+  - devices: [M3, M4]      # matched NMOS cascode pair
+    ratio_W: [1, 1]
+    ratio_L: [1, 1]
+  - devices: [M5, M6]      # matched PMOS cascode pair
+    ratio_W: [1, 1]
+    ratio_L: [1, 1]
+  - devices: [M7, M8]      # matched PMOS mirror pair (Sooch)
+    ratio_W: [1, 1]
+    ratio_L: [1, 1]

@@ -1,0 +1,12 @@
+```spice
+* PMOS common-source stage with resistor load, DC-coupled to PMOS source follower
+* Nodes: in = input, n1 = interstage node, out = output, vbiasp = PMOS current-source bias, vdd = supply
+
+MCS1   n1    in      vdd   vdd   PMOS  W=20u L=1u
+RLOAD1 n1    0       50k
+
+MSF1   0     n1      out   vdd   PMOS  W=40u L=1u
+MIBIAS out   vbiasp  vdd   vdd   PMOS  W=10u L=1u
+
+.MODEL PMOS PMOS LEVEL=1 VTO=-0.7 KP=50u LAMBDA=0.02
+```

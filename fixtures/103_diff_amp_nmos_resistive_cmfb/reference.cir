@@ -1,0 +1,12 @@
+* NMOS differential amplifier with PMOS current-source loads and resistive CMFB.
+* R1/R2 sense the common mode at vcm; vcm directly drives the PMOS load gates.
+M1 voutn vinp  ntail 0   NMOS W=20u L=1u
+M2 voutp vinn  ntail 0   NMOS W=20u L=1u
+M3 voutn vcm   vdd   vdd PMOS W=40u L=1u
+M4 voutp vcm   vdd   vdd PMOS W=40u L=1u
+M5 ntail vbias 0     0   NMOS W=40u L=1u
+R1 voutn vcm   50k
+R2 voutp vcm   50k
+.MODEL NMOS NMOS (LEVEL=1 VTO=1 KP=1.0e-4 LAMBDA=0.02)
+.MODEL PMOS PMOS (LEVEL=1 VTO=-1 KP=1.0e-4 LAMBDA=0.02)
+.END

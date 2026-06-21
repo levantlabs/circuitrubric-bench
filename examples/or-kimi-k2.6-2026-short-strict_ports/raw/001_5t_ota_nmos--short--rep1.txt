@@ -1,0 +1,11 @@
+```spice
+* 5T OTA with NMOS inputs
+M1  d1  inp  tail  gnd  NMOS  W=10u  L=1u
+M2  out inn  tail  gnd  NMOS  W=10u  L=1u
+M3  d1  d1   vdd   vdd  PMOS  W=20u  L=1u
+M4  out d1   vdd   vdd  PMOS  W=20u  L=1u
+M5  tail vb  gnd   gnd  NMOS  W=20u  L=1u
+
+.MODEL NMOS NMOS (LEVEL=1  KP=200u  VTO=0.5  LAMBDA=0.02)
+.MODEL PMOS PMOS (LEVEL=1  KP=100u  VTO=-0.5 LAMBDA=0.02)
+```

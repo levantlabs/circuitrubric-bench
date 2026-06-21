@@ -1,0 +1,36 @@
+```spice
+* Folded-Cascode OTA: PMOS Inputs, NMOS Cascode, PMOS Current Source Load
+* Topology: PMOS differential pair (inputs) -> NMOS cascode devices -> Single ended output node
+* Loads: PMOS current source at VDD, NMOS cascode devices sinking to ground
+
+* --- Active Devices ---
+
+* Input Differential Pair (PMOS)
+M1 out_in1 in1 in2 bulk_p M_P1
+M2 out_in2 in1 in2 bulk_p M_P2
+
+* Cascode Devices (NMOS) - Sinking current from the PMOS pair to ground
+* Note: In a folded cascode, the cascode devices are usually NMOS if the input pair is PMOS.
+* They connect between the output of the input pair and the tail current source (or virtual ground).
+* Assuming a standard topology where the 'tail' is an NMOS current sink at the bottom.
+M3 out_cas1 out_in1 in2 bulk_n M_N1
+M4 out_cas2 out_in2 in2 bulk_n M_N2
+
+* Tail Current Source (NMOS) - Sinking current for the folded structure
+M5 tail_node out_cas1 out_cas2 bulk_n M_N_tail
+
+* Active Load / Bias Current Source (PMOS) - Sourcing current from VDD to the output node
+M6 out_load out_cas1 out_cas2 bulk_p M_P_load
+
+* --- Model Cards ---
+
+* PMOS Models
+M_P1 NMOS L=0.5u W=10u
+M_P2 NMOS L=0.5u W=10u
+M_P_load NMOS L=0.5u W=10u
+
+* NMOS Models
+M_N1 NMOS L=0.5u W=10u
+M_N2 NMOS L=0.5u W=10u
+M_N_tail NMOS L=0.5u W=10u
+```

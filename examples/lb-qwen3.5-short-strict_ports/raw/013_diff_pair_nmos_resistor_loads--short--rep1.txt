@@ -1,0 +1,15 @@
+```spice
+* NMOS Differential Pair with Resistor Loads
+* Active Devices: M1, M2 (Input Pair), M3, M4 (Active Bias Current Source)
+* Loads: R1, R2 (Resistors)
+* Bias: VDD, VSS, VBias
+
+M1 out1 in1 in2 vdd NMOS W=10u L=1u
+M2 out2 in2 in1 vdd NMOS W=10u L=1u
+M3 tail in2 in2 vss PMOS W=10u L=1u
+R1 out1 out1 1Meg
+R2 out2 out2 1Meg
+
+.MODEL NMOS NMOS (LEVEL=1 VTO=0.7 KP=100u GAMMA=0.5 LAMBDA=0.05)
+.MODEL PMOS PMOS (LEVEL=1 VTO=-0.7 KP=50u GAMMA=0.5 LAMBDA=0.05)
+```

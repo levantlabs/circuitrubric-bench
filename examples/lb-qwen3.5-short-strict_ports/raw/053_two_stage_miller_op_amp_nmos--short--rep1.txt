@@ -1,0 +1,23 @@
+```spice
+* Two-Stage Miller-Compensated Op-Amp (NMOS Input, Single-Ended Output)
+* Topology: Differential Pair (NMOS) -> Active Load (PMOS Current Mirror) -> Common Gate/Source Follower? 
+* Correction for Standard 2-Stage: Diff Pair -> Inverting Gain Stage (Common Source with PMOS Load) -> Second CS Stage (NMOS Input?) 
+* Wait, standard 2-stage usually has NMOS input pair. The first stage is a differential pair with active load. 
+* The second stage is a Common Source amplifier (usually NMOS input if we want high gain, but often the output of stage 1 drives an NMOS CS).
+* Let's stick to the classic: 
+* Stage 1: NMOS Differential Pair (M1, M2) with PMOS Current Mirror Load (M3, M4). Output at drain of M2/M4.
+* Stage 2: Common Source Amplifier (M5 - NMOS) loaded by a PMOS current source (M6). 
+* Compensation: Miller Capacitor (Ccomp) from output of Stage 2 to input of Stage 2 (gate of M5).
+
+* Device Parameters (Example values for simulation)
+M1 out1 in1 in2 0 nmos_wl
+M2 out1 in2 in1 0 nmos_wl
+M3 out1 vdd out1 0 pmos_wl
+M4 out2 vdd out2 0 pmos_wl
+M5 out2 out1 0 nmos_wl
+M6 out2 vdd out2 0 pmos_wl
+
+* Models
+.model nmos_wl nmos (level=1)
+.model pmos_wl pmos (level=1)
+```

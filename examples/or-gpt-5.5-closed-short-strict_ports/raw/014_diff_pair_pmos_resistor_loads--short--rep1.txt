@@ -1,0 +1,12 @@
+```spice
+* PMOS differential pair with resistor loads
+
+M1 outp inp stail VDD PMOS W=20u L=1u
+M2 outn inn stail VDD PMOS W=20u L=1u
+Mtail stail vbiasp VDD VDD PMOS W=40u L=1u
+
+RLOADP outp 0 10k
+RLOADN outn 0 10k
+
+.MODEL PMOS PMOS LEVEL=1 VTO=-0.7 KP=50u LAMBDA=0.02
+```

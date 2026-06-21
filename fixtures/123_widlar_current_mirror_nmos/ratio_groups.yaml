@@ -1,0 +1,4 @@
+groups:
+  - devices: [M1, M2]      # matched mirror pair (current ratio set by R1, not sizing)
+    ratio_W: [1, 1]
+    ratio_L: [1, 1]

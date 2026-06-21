@@ -1,0 +1,6 @@
+id: "073_source_follower_nmos_driving_resistor_load"
+category: "Amplifier"
+family: "source_follower"
+variant: "nmos_current_source_bias_resistor_load"
+source: "hand_authored"
+attribution: null

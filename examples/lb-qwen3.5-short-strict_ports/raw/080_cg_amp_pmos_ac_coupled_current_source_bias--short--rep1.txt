@@ -1,0 +1,11 @@
+```spice
+* PMOS Common-Gate Amplifier with Resistor Load and Current-Source Bias
+* Note: Input coupling capacitor and gate bias network are omitted per instructions.
+* The amplifier is DC-coupled to the current source; AC coupling is assumed at the input port externally.
+
+M1 drain gate source bulk PMOS_WL
+M2 drain_gate_current_source source gate bulk PMOS_CS
+R_load drain VDD 10k
+.MODEL PMOS_WL PMOS (LEVEL=1 VTO=-0.7 KP=50u GAMMA=0.5 LAMBDA=0.1)
+.MODEL PMOS_CS PMOS (LEVEL=1 VTO=-0.7 KP=50u GAMMA=0.5 LAMBDA=0.1)
+```

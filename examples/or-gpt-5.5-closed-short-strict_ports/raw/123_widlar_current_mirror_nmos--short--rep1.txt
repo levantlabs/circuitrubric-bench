@@ -1,0 +1,11 @@
+```spice
+* NMOS Widlar current source
+* External reference current is applied into node VBIAS.
+* Output current is sunk from node OUT.
+
+MREF VBIAS VBIAS 0 0 NMOS W=10u L=1u
+MOUT OUT   VBIAS NS 0 NMOS W=10u L=1u
+RWID NS 0 10k
+
+.MODEL NMOS NMOS LEVEL=1 VTO=0.7 KP=200u LAMBDA=0.02
+```
