@@ -15,8 +15,8 @@ url: "https://github.com/levantlabs/circuitrubric-bench"
 license:
   - Apache-2.0
   - CC-BY-4.0
-version: "0.1.0"
-date-released: "2026-06-20"
+version: "0.2.0"
+date-released: "2026-06-23"
 keywords:
   - benchmark
   - large language models
