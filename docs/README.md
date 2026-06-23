@@ -2,8 +2,8 @@
 
 > Written with Claude; verified against the code and run data.
 
-Docs are in two tiers: **`docs/`** (stable, hand-authored — what the benchmark is and how to use
-it) and **`docs/results/`** (generated/empirical — regenerated from runs, dated, model-set-dependent).
+Docs are in two tiers: **`docs/`** (stable, hand-authored: what the benchmark is and how to use
+it) and **`docs/results/`** (generated/empirical: regenerated from runs, dated, model-set-dependent).
 The project [`README`](../README.md) is the top-level summary; this is the map.
 
 ## Start here
@@ -14,7 +14,7 @@ The project [`README`](../README.md) is the top-level summary; this is the map.
   [`results/leaderboard.md`](results/leaderboard.md) and [`results/cost.md`](results/cost.md).
 - **Contributing** → [`../CONTRIBUTING.md`](../CONTRIBUTING.md), `scripts/validate_fixtures.py`
   (fixture checks), and [`code-guide.md`](code-guide.md) (developer map of the package).
-- **See real model outputs** → [`../examples/`](../examples/) — sample run dirs (closed-frontier,
+- **See real model outputs** → [`../examples/`](../examples/): sample run dirs (closed-frontier,
   open-frontier, local) with the actual netlists and grades.
 
 ## Reference (`docs/`)
@@ -23,22 +23,23 @@ The project [`README`](../README.md) is the top-level summary; this is the map.
 |---|---|
 | [`methodology.md`](methodology.md) | How grading works: graph-isomorphism, the 6-level credit ladder, the near-FULL diagnostics, the prompt axes. |
 | [`reproducing.md`](reproducing.md) | Re-run the benchmark over hosted/open models (OpenRouter, etc.) and tabulate results. |
-| [`reasoning-control.md`](reasoning-control.md) | The `--think` / `--reasoning` flags per model family, and the empty-output (reasoning-runaway) failure mode. |
+| [`reasoning-control.md`](reasoning-control.md) | The `--think` / `--reasoning` / `--effort` flags per model family, and the empty-output (reasoning-runaway) failure mode. |
 | [`code-guide.md`](code-guide.md) | Developer map of the `circuitrubric` package + `scripts/`: data structures, the grading pipeline, how to extend. |
 | [`CATALOG.md`](CATALOG.md) | The 125-fixture corpus by category / family / variant. |
 | [`full_corpus.md`](full_corpus.md) | Every fixture rendered (metadata, prompts, reference netlist, ratio groups). |
 
-## Results (`docs/results/` — generated, dated)
+## Results (`docs/results/`, generated and dated)
 
 | doc | what |
 |---|---|
-| [`findings.md`](results/findings.md) | Curated highlights — the cases where structural grading reveals what pass/fail can't. Entry point to the results. |
+| [`findings.md`](results/findings.md) | Curated highlights: the cases where structural grading reveals what pass/fail can't. Entry point to the results. |
 | [`leaderboard.md`](results/leaderboard.md) | Full per-(prompt × system-prompt) leaderboard + per-tier summary + run coverage. |
-| [`clean_design_leaderboard.md`](results/clean_design_leaderboard.md) | The no-leak design ranking — `short` tier, `topology_ports` / `strict_ports` only (excludes the answer-leaking `conventions`). |
+| [`clean_design_leaderboard.md`](results/clean_design_leaderboard.md) | The no-leak design ranking: `short` tier, `topology_ports` / `strict_ports` only (excludes the answer-leaking `conventions`). |
 | [`fixture_difficulty.md`](results/fixture_difficulty.md) | Per-fixture difficulty across tiers, and which system prompt helps the hardest fixtures. |
+| [`fixture_success_matrix.md`](results/fixture_success_matrix.md) | Per-fixture × per-model check-mark matrix (`short` tier): which of the **19 strongest (frontier) model-settings** designs each fixture (FULL / topology-correct), per system prompt and combined. |
 | [`cost.md`](results/cost.md) | Speed / test-time-compute: tokens and latency per call, beside accuracy. |
 | [`variance.md`](results/variance.md) | glm-5.1 vs glm-5.2 multi-rep comparison + run-to-run determinism. |
-| [`reasoning-ablation.md`](results/reasoning-ablation.md) | Reasoning on/off A/B — the single biggest lever, with worked examples. |
+| [`reasoning-ablation.md`](results/reasoning-ablation.md) | Reasoning on/off and effort levels: a major lever on FULL%, with worked examples. |
 | [`reproducibility.md`](results/reproducibility.md) | Why `temperature=0` isn't deterministic on hosted APIs, and what we do about it. |
 | [`all_results.csv`](results/all_results.csv) | Per-run backing data (one row per run, full metric set). Regenerate the same schema on your own runs with `scripts/aggregate_runs.py --csv` to compare against ours. |
 

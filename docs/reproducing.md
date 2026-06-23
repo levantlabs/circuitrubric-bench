@@ -1,7 +1,7 @@
 # Reproducing the baselines
 
 How to re-run CircuitRubric over hosted/open models and get comparable numbers. The
-generation path is the shipped `circuitrubric run` / `run-all` CLI — no extra code needed.
+generation path is the shipped `circuitrubric run` / `run-all` CLI; no extra code needed.
 
 For *what* the scores mean see [`methodology.md`](methodology.md); for run-to-run variance
 see [`reproducibility.md`](results/reproducibility.md).
@@ -13,7 +13,7 @@ pip install -e ".[openai]"          # openai SDK; add [anthropic]/[ollama] as ne
 export OPENROUTER_API_KEY=sk-or-...
 ```
 
-OpenRouter is **not a special backend** — it's an OpenAI-compatible endpoint, so you use the
+OpenRouter is **not a special backend**: it's an OpenAI-compatible endpoint, so you use the
 shipped `openai` backend pointed at its base URL. The same pattern works for OpenAI, vLLM,
 Together, or any `/v1/chat/completions` server (just change `base_url` / `api_key_env`).
 
@@ -38,7 +38,7 @@ list and tabulates FULL% per run:
 bash scripts/openrouter_sweep.sh        # reads models.openrouter.yaml, writes results/
 ```
 
-Or call the CLI directly — one invocation per system prompt:
+Or call the CLI directly, one invocation per system prompt:
 
 ```bash
 circuitrubric run-all --models models.openrouter.yaml \
@@ -53,8 +53,12 @@ Knobs that matter (these are the choices behind the published numbers):
 | `--prompt-ids` | `short` / `verbose` / `spec` | request tier: design → architecture → full wiring. `short` is the discriminator. |
 | `--system-prompt-id` | `topology_ports`, `strict_ports` | the no-leak design prompts. (`conventions` pre-resolves some named topologies; the full 8-level ladder is in [`../system_prompts.yaml`](../system_prompts.yaml).) |
 | `--max-tokens` | **20000** | reasoning models exhaust a small budget on hidden reasoning and emit **empty** content; 20k is the standard budget. The CLI default (2000) is far too low for them. |
-| `--temperature` | `0.0` (omit for some) | greedy. A few reasoning models reject an explicit temperature — omit the flag for those (as we do for the Claude models). |
+| `--temperature` | `0.0` (omit for some) | greedy. A few reasoning models reject an explicit temperature, so omit the flag for those (as we do for the Claude models). |
+| `--effort` / `--reasoning` / `--think` | per model | reasoning posture (model-side lever): `--effort` (Claude, also enables adaptive thinking), `--reasoning` (OpenRouter), `--think` (ollama). Shifts FULL% materially; see [`reasoning-control.md`](reasoning-control.md). |
 | `--reps` | `3` for error bars | temp=0 is **not** deterministic on hosted APIs; see below. |
+
+The reasoning flag works on both `run` and `run-all`; on `run-all` it sets the posture for the whole
+sweep, and a per-row `effort:` / `reasoning:` / `think:` in the models file overrides it.
 
 ## 4. Read the results
 

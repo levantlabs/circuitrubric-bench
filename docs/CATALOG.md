@@ -1,12 +1,12 @@
-# CircuitRubric — Topology Catalog
+# CircuitRubric: Topology Catalog
 
 > Hand-maintained coverage map; cleaned up, verified against the fixtures, and formatted with Claude.
 
 The named analog topologies the benchmark covers, grouped by circuit function/family.
 
 For the full
-read-through of every shipped fixture — metadata, prompts, reference netlist, and ratio
-groups — see [`full_corpus.md`](full_corpus.md) (regenerate with `python scripts/full_corpus.py`).
+read-through of every shipped fixture (metadata, prompts, reference netlist, and ratio
+groups), see [`full_corpus.md`](full_corpus.md) (regenerate with `python scripts/full_corpus.py`).
 
 Scope: MOS-native (Layer 1 = generic `level=1` MOSFETs, no PDK). BJT-only topologies are excluded; those with clean MOS analogs (e.g., Wilson, Sooch wide-swing) are listed under their MOS form.
 
@@ -78,7 +78,7 @@ SampledData 5, Feedback 4, Memory 2, Bias 2, Mixer 1. See the
 | Cascode 1:2                                           | ✓ 029 | ✓ 030 |                                               |
 | Cascode 1:4                                           | ✓ 031 | ✓ 032 |                                               |
 | Cascode 1:8                                           | ✓ 041 | ✓ 042 |                                               |
-| Wide-swing (high-swing) cascode 1:1 — multi-reference | ✓ 033 | ✓ 034 | Both 5-T Sooch and 4-T external-bias accepted |
+| Wide-swing (high-swing) cascode 1:1, multi-reference | ✓ 033 | ✓ 034 | Both 5-T Sooch and 4-T external-bias accepted |
 | Wilson (generic, multi-reference)                     | ✓ 035 | ✓ 036 | 3-T or 4-T accepted                           |
 | 3-T Wilson (strict)                                   | ✓ 037 | ✓ 038 |                                               |
 | 4-T improved Wilson (strict)                          | ✓ 039 | ✓ 040 |                                               |
@@ -99,6 +99,9 @@ SampledData 5, Feedback 4, Memory 2, Bias 2, Mixer 1. See the
 
 ## Oscillators
 
+*Functional grouping (8 fixtures). `064`/`065` are `Digital`-category in `meta.yaml`, so the
+**Oscillator** category count is 6 (`110`–`113`, `120`, `125`); see the category-table note below.*
+
 | Topology                                           | Fixture     | Notes                                             |
 | -------------------------------------------------- | ----------- | ------------------------------------------------- |
 | Ring oscillator, 3-stage (CMOS inverter chain)     | ✓ 064       | Inverter chain                                    |
@@ -112,11 +115,11 @@ SampledData 5, Feedback 4, Memory 2, Bias 2, Mixer 1. See the
 
 | Topology                                             | Fixture | Notes                                  |
 | ---------------------------------------------------- | ------- | -------------------------------------- |
-| Basic S/H — NMOS switch + hold cap                   | ✓ 105   |                                        |
-| Basic S/H — PMOS switch + hold cap                   | ✓ 106   |                                        |
-| Basic S/H — CMOS transmission-gate switch + hold cap | ✓ 107   |                                        |
-| Bottom-plate / dummy-switch S/H — NMOS               | ✓ 108   | Dummy switch cancels clock feedthrough |
-| Bottom-plate / dummy-switch S/H — PMOS               | ✓ 109   |                                        |
+| Basic S/H: NMOS switch + hold cap                   | ✓ 105   |                                        |
+| Basic S/H: PMOS switch + hold cap                   | ✓ 106   |                                        |
+| Basic S/H: CMOS transmission-gate switch + hold cap | ✓ 107   |                                        |
+| Bottom-plate / dummy-switch S/H: NMOS               | ✓ 108   | Dummy switch cancels clock feedthrough |
+| Bottom-plate / dummy-switch S/H: PMOS               | ✓ 109   |                                        |
 
 
 ## Digital primitives / mixed-signal building blocks
@@ -165,16 +168,18 @@ Shipped fixtures by category (from each fixture's `meta.yaml`; authoritative, su
 | **Total**     | **125**  |
 
 Note: the functional grouping above is a topology coverage map and does not line up
-one-to-one with the `meta.yaml` `category` field (e.g., folded-/telescopic-cascode OTAs are
-filed under `Amplifier`, while the 5T OTA is `OTA`; feedback configs span both `Feedback`
-and `Amplifier`). The category table here is the authoritative shipped count; the section
-tables list the named topologies the corpus covers.
+one-to-one with the `meta.yaml` `category` field. For example: folded-/telescopic-cascode OTAs are
+filed under `Amplifier` while the 5T OTA is `OTA`; feedback configs span both `Feedback` and
+`Amplifier`; the **Oscillators** section lists 8 but `064`/`065` (inverter-chain ring oscillators) are
+`Digital`, so the **Oscillator category is 6**; and the two **Memory** fixtures (`063` latch, `066`
+SRAM) appear in the *Comparators and latches* and *Digital primitives* sections. The category table
+here is the authoritative shipped count; the section tables list the named topologies the corpus covers.
 
 ---
 
 ## Future tasks
 
-- **Optional-device annotation** — beyond multi-reference (`reference_alt_N.cir`), support "device
+- **Optional-device annotation**: beyond multi-reference (`reference_alt_N.cir`), support "device
   may or may not be present" (e.g. an optional decoupling cap); needs new graph-iso logic.
-- **PDK layers** (sky130, etc.) — "Layer 2," deferred.
+- **PDK layers** (sky130, etc.): "Layer 2," deferred.
 

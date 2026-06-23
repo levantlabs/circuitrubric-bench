@@ -103,11 +103,18 @@ def metrics(run_dir):
     tps = [(r.get("usage") or {}).get("output_tokens", 0) / (r["latency_ms"] / 1000)
            for r in rows if r.get("latency_ms") and (r.get("usage") or {}).get("output_tokens")]
     pids = cfg.get("prompt_ids") or sorted({r.get("prompt_id") for r in rows})
+    # reasoning config: anthropic uses `effort`; openai/OpenRouter uses a `reasoning` object.
+    # Flatten the latter to a short string (effort level / "off" / "").
+    rz = cfg.get("reasoning")
+    reasoning_str = ("" if rz is None
+                     else "off" if isinstance(rz, dict) and rz.get("enabled") is False
+                     else rz.get("effort", "") if isinstance(rz, dict) else str(rz))
     return {
         "id": d.name, "model": cfg.get("model"), "backend": cfg.get("backend_id"),
         "fixture_prompt": ",".join(p for p in pids if p) if pids else "?",
         "system_prompt": SPMAP.get(cfg.get("system_prompt", ""), cfg.get("system_prompt", "?")),
-        "temperature": cfg.get("temperature"), "max_tokens": cfg.get("max_tokens"), "n": n,
+        "temperature": cfg.get("temperature"), "max_tokens": cfg.get("max_tokens"),
+        "effort": cfg.get("effort") or "", "reasoning": reasoning_str, "n": n,
         **{k: c.get(k, 0) for k in ORDER}, "xfail": xfail, "empty": empty,
         "full_pct": round(100 * full / n, 1),
         "full_ign_src_pct": round(100 * n_ign / n, 1),
@@ -124,6 +131,7 @@ def metrics(run_dir):
     }
 
 CSV_COLS = ["id", "model", "backend", "fixture_prompt", "system_prompt", "temperature", "max_tokens",
+            "effort", "reasoning",
             "n", *ORDER, "xfail", "empty", "full_pct", "full_ign_src_pct", "sd_equiv_pct",
             "functional_full_pct", "full_emitted_pct", "topo_ok_pct", "recognized_pct",
             "malformed_term", "mean_latency_s", "out_tok_per_s", "in_tokens", "out_tokens"]

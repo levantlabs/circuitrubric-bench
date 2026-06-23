@@ -62,7 +62,10 @@ class AnthropicBackend:
 
     backend_id = "anthropic"
 
-    def __init__(self, client: Any = None, max_retries: int = 2):
+    def __init__(self, client: Any = None, max_retries: int = 2, effort: Optional[str] = None):
+        # effort: Opus/Sonnet 4.6+ reasoning-effort control via output_config.effort,
+        # one of low/medium/high/xhigh/max. None omits the kwarg (API default = high).
+        self.effort = effort
         if client is not None:
             self._client = client
             return
@@ -95,6 +98,15 @@ class AnthropicBackend:
         # temperature=None must omit the kwarg (some models reject it).
         if temperature is not None:
             kwargs["temperature"] = temperature
+        # effort=None omits output_config (API default effort = high).
+        # On Opus/Sonnet 4.6+, effort tunes reasoning DEPTH but only takes effect when
+        # extended thinking is enabled — effort alone leaves the model in direct-answer
+        # mode (measured: text-only, no thinking block). So when an explicit effort is
+        # requested we also enable adaptive thinking (the only thinking mode on 4.8;
+        # budget_tokens is rejected). This mirrors what the Claude Code effort selector does.
+        if self.effort is not None:
+            kwargs["output_config"] = {"effort": self.effort}
+            kwargs["thinking"] = {"type": "adaptive"}
         t0 = time.perf_counter()
         msg = self._client.messages.create(**kwargs)
         latency_ms = int((time.perf_counter() - t0) * 1000)
@@ -307,10 +319,11 @@ def make_backend(
     max_retries: int = 2,
     think: Any = False,
     reasoning: Any = None,
+    effort: Optional[str] = None,
 ) -> Backend:
     """Construct a backend by id. Raises ValueError for unknown ids."""
     if backend_id == "anthropic":
-        return AnthropicBackend(max_retries=max_retries)
+        return AnthropicBackend(max_retries=max_retries, effort=effort)
     if backend_id == "openai":
         return OpenAICompatibleBackend(
             base_url=base_url,

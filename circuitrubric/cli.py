@@ -180,6 +180,7 @@ def cmd_run(args):
         api_key_env=args.api_key_env,
         think=_parse_think(args.think),
         reasoning=_parse_reasoning(args.reasoning),
+        effort=args.effort,
         dry_run=args.dry_run,
     )
     summary_path = run_benchmark(config)
@@ -208,6 +209,13 @@ def cmd_run_all(args):
     for i, row in enumerate(models):
         if not (isinstance(row, dict) and row.get("backend") and row.get("model")):
             raise SystemExit(f"ERROR: {models_path} row {i} needs at least 'backend' and 'model'")
+    # optional per-row reasoning overrides — parse the same way as the CLI flags
+    # (`effort` stays a raw level string for the anthropic backend)
+    for row in models:
+        if "think" in row:
+            row["think"] = _parse_think(str(row["think"]))
+        if "reasoning" in row:
+            row["reasoning"] = _parse_reasoning(str(row["reasoning"]))
 
     fixtures_dir = Path(args.fixtures_dir)
     if args.topology_ids:
@@ -239,6 +247,9 @@ def cmd_run_all(args):
         output_dir=Path(args.output_dir),
         timestamp=timestamp,
         temperature=args.temperature,
+        think=_parse_think(args.think),
+        reasoning=_parse_reasoning(args.reasoning),
+        effort=args.effort,
     )
     print("\n=== CircuitRubric leaderboard ===")
     print(format_combined_table(results))
@@ -291,10 +302,14 @@ def main(argv=None):
                     help="ollama reasoning control: true/false (qwen3-style) or a level "
                          "low/medium/high (REQUIRED for gpt-oss — it ignores the bool). "
                          "Default: thinking off.")
+    pr.add_argument("--effort", default=None,
+                    choices=["low", "medium", "high", "xhigh", "max"],
+                    help="anthropic reasoning-effort (output_config.effort) for Opus/Sonnet "
+                         "4.6+: low/medium/high/xhigh/max. Default: API default (high).")
     pr.add_argument("--reasoning", default=None,
-                    choices=("off", "low", "medium", "high"),
+                    choices=("off", "low", "medium", "high", "xhigh"),
                     help="openai/OpenRouter reasoning control: off disables thinking, "
-                         "low/medium/high sets effort. Default: provider default.")
+                         "low/medium/high/xhigh sets effort. Default: provider default.")
     pr.add_argument("--system-prompt-id", default=None,
                     help="which system prompt to use (default: the file's default_id)")
     pr.add_argument("--system-prompts", default=str(_DEFAULT_SYSTEM_PROMPTS),
@@ -319,6 +334,18 @@ def main(argv=None):
     pall.add_argument("--reps", type=int, default=1)
     pall.add_argument("--temperature", type=float, default=None)
     pall.add_argument("--max-tokens", type=int, default=2000)
+    pall.add_argument("--think", default=None,
+                      help="ollama reasoning control applied to every model in the sweep "
+                           "(true/false or a level low/medium/high). Per-row `think:` in the "
+                           "models file overrides this. Default: thinking off.")
+    pall.add_argument("--reasoning", default=None,
+                      choices=("off", "low", "medium", "high", "xhigh"),
+                      help="openai/OpenRouter reasoning effort applied to every model in the sweep. "
+                           "Per-row `reasoning:` overrides. Default: provider default.")
+    pall.add_argument("--effort", default=None,
+                      choices=["low", "medium", "high", "xhigh", "max"],
+                      help="anthropic reasoning-effort applied to every Claude model in the sweep "
+                           "(enables adaptive thinking). Per-row `effort:` overrides. Default: off.")
     pall.add_argument("--system-prompt-id", default=None)
     pall.add_argument("--system-prompts", default=str(_DEFAULT_SYSTEM_PROMPTS))
     pall.add_argument("--system-prompt", default=None)

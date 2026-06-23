@@ -35,3 +35,8 @@
 - {backend: openai, base_url: "https://openrouter.ai/api/v1", api_key_env: OPENROUTER_API_KEY, model: "z-ai/glm-5.1",               label: glm-5.1}
 - {backend: openai, base_url: "https://openrouter.ai/api/v1", api_key_env: OPENROUTER_API_KEY, model: "moonshotai/kimi-k2.6",       label: kimi-k2.6}
 - {backend: openai, base_url: "https://openrouter.ai/api/v1", api_key_env: OPENROUTER_API_KEY, model: "qwen/qwen3.7-max",           label: qwen3.7-max}
+# Google (proprietary; default reasoning = thinkingLevel high). Gemini-3 prefers temperature=1.0
+# per Google, but temp=0 is fine on this benchmark (see docs/results/reproducibility.md).
+- {backend: openai, base_url: "https://openrouter.ai/api/v1", api_key_env: OPENROUTER_API_KEY, model: "google/gemini-3.1-pro-preview", label: gemini-3.1-pro}
+- {backend: openai, base_url: "https://openrouter.ai/api/v1", api_key_env: OPENROUTER_API_KEY, model: "google/gemini-3.5-flash",        label: gemini-3.5-flash}
+- {backend: openai, base_url: "https://openrouter.ai/api/v1", api_key_env: OPENROUTER_API_KEY, model: "google/gemma-4-31b-it",          label: gemma-4-31b}

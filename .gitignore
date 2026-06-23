@@ -26,6 +26,7 @@ out/
 
 # Local sweep config (copy of models.example.yaml with the user's model choices)
 models.yaml
+models.openrouter.yaml
 
 # Ad-hoc experiment drivers / scratch analysis (kept local, not part of the corpus)
 experiments/
@@ -39,3 +40,13 @@ GEMINI.md
 .cursor/
 .cursorrules
 *.local.md
+models.gemini.yaml
+results_gemini/
+results_gemini_run.log
+models.gemini-pro.yaml
+results_gemini_strict/
+results_gemini_conventions/
+results_gemini_med/
+results_gemini*
+models.gemini*.yaml
+models.gemma.yaml

@@ -67,6 +67,7 @@ _CONFIG_DRIFT_FIELDS = (
     "max_tokens",
     "fixtures_dir",
     "system_prompt",
+    "effort",
 )
 
 
@@ -87,6 +88,7 @@ class RunConfig:
     api_key_env: Optional[str] = None
     think: Any = False   # ollama: bool (qwen3-style) or level str "low"/"medium"/"high" (gpt-oss)
     reasoning: Any = None  # openai/OpenRouter reasoning control, e.g. {"enabled": False} / {"effort": "low"}
+    effort: Optional[str] = None  # anthropic output_config.effort: low/medium/high/xhigh/max (None = API default high)
     dry_run: bool = False
 
 
@@ -274,6 +276,7 @@ def _load_or_check_config(config_path: Path, config: RunConfig) -> dict:
         "max_tokens": config.max_tokens,
         "think": config.think,            # ollama reasoning control (bool / level str)
         "reasoning": config.reasoning,    # openai/OpenRouter reasoning control (dict)
+        "effort": config.effort,          # anthropic output_config.effort (level str / None)
         "system_prompt": config.system_prompt,
         "fixtures_dir": str(config.fixtures_dir),
         "topology_ids": list(config.topology_ids),
@@ -359,6 +362,7 @@ def run_benchmark(config: RunConfig, backend: Optional[Backend] = None) -> Path:
             api_key_env=config.api_key_env,
             think=config.think,
             reasoning=config.reasoning,
+            effort=config.effort,
         )
 
     with summary_path.open("a") as summary_f:
@@ -437,6 +441,9 @@ def run_sweep(
     output_dir: Path,
     timestamp: str,
     temperature: Optional[float] = None,
+    think: Any = False,
+    reasoning: Any = None,
+    effort: Optional[str] = None,
     backend_factory=make_backend,
 ) -> list[dict]:
     """Run the corpus through each model in ``models`` and grade.
@@ -454,6 +461,10 @@ def run_sweep(
         model = row["model"]
         label = row.get("label") or model
         run_id = f"{timestamp}-{_slug(label)}"
+        # reasoning posture: per-row override (think/reasoning/effort keys) else the sweep default
+        row_think = row.get("think", think)
+        row_reasoning = row.get("reasoning", reasoning)
+        row_effort = row.get("effort", effort)
         config = RunConfig(
             fixtures_dir=fixtures_dir,
             topology_ids=topology_ids,
@@ -468,8 +479,16 @@ def run_sweep(
             backend_id=backend_id,
             base_url=row.get("base_url"),
             api_key_env=row.get("api_key_env"),
+            think=row_think,
+            reasoning=row_reasoning,
+            effort=row_effort,
         )
-        backend = backend_factory(backend_id, config.base_url, config.api_key_env)
+        # forward reasoning kwargs only when set, so a 3-arg test factory still works
+        fkw = {}
+        if row_think is not False: fkw["think"] = row_think
+        if row_reasoning is not None: fkw["reasoning"] = row_reasoning
+        if row_effort is not None: fkw["effort"] = row_effort
+        backend = backend_factory(backend_id, config.base_url, config.api_key_env, **fkw)
         summary_path = run_benchmark(config, backend=backend)
         results.append({
             "label": label, "model": model, "backend": backend_id,
